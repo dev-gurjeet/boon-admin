@@ -48,7 +48,7 @@ const RootRoutes = () => {
       } else {
         localToken = false;
       }
-    } catch (error) {}
+    } catch (error) { }
   }
   useEffect(() => {
     if (login_Data) {
