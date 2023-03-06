@@ -18,8 +18,27 @@ import { CustomPagination } from "../components/styledComponent";
 import { getAllBookings } from "../redux/commonReducer";
 import { getAllcontractorJobs } from "../redux/ContractorReducer";
 import { clearupdatejob, updateJobPrice } from "../redux/JobReducer";
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { makeStyles } from "@mui/styles";
+import { styled } from '@mui/material/styles';
 import { THEME } from "../utils/constants";
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableBody-root": {
+      "& .MuiTableCell-root": {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+      }
+    }
+  }
+});
 const Booking = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [state, setState] = useState({
     dialog: false,
@@ -59,7 +78,7 @@ const Booking = () => {
       const totalPrice = Math.floor(
         (Number(state.price ? state.price : state.originalPrice) *
           Number(state.percentage)) /
-          100
+        100
       );
 
       const body = {
@@ -76,7 +95,7 @@ const Booking = () => {
       const totalPrice = Math.floor(
         (Number(state.price ? state.price : state.originalPrice) *
           Number(state.percentage)) /
-          100
+        100
       );
       const body = {
         jobId: state.id,
@@ -93,6 +112,15 @@ const Booking = () => {
     const body = {
       jobId: state.id,
       status: "REJECTED",
+    };
+    dispatch(updateJobPrice(body));
+    setState({ ...state, anchor: null });
+  };
+  
+  const handleCanceled = () => {
+    const body = {
+      jobId: state.id,
+      status: "CANCELLED",
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
@@ -126,6 +154,15 @@ const Booking = () => {
       setState({ ...state, page: getAllcontractorJobs_Data?.currentPage });
     }
   }, [getAllcontractorJobs_Data]);
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));  
   return (
     <div>
       <Dialog
@@ -264,37 +301,49 @@ const Booking = () => {
             Contractor Jobs
           </Typography>
         </Box>
-        <BookingTableTableHeading />
-        <Divider sx={{ my: 1 }} />
-        {getAllcontractorJobs_isLoading ? (
-          <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-          </Stack>
-        ) : (
-          getAllcontractorJobs_Data?.data?.map((item, itemIndex) => (
-            <Box key={itemIndex}>
-              <BookingTableItem
-                address={item?.jobName}
-                company={item?.companyName}
-                id={
-                  (getAllcontractorJobs_Data?.currentPage - 1) * 10 +
-                  itemIndex +
-                  1
-                }
-                jobid={item?._id}
-                phone={item?.phone}
-                price={item?.price}
-                status={item?.status}
-                state={state}
-                setState={setState}
-                handleRejected={handleRejected}
-                modifiedPrice={item?.modifiedPrice}
-                adminCommision={item?.adminCommision}
-              />
-              <Divider sx={{ my: 1 }} />
-            </Box>
-          ))
-        )}
+
+
+        <TableContainer component={Paper}>
+          <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
+            <BookingTableTableHeading />
+
+            <TableBody>
+              {/* <Divider sx={{ my: 1 }} /> */}
+              {getAllcontractorJobs_isLoading ? (
+                <StyledTableCell align="center" colSpan="7">
+                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                  </Stack>
+                </StyledTableCell>
+              ) : (
+                getAllcontractorJobs_Data?.data?.map((item, itemIndex) => (
+                  // <Box key={itemIndex}>
+                  <BookingTableItem
+                    address={item?.jobName}
+                    company={item?.companyName}
+                    id={
+                      (getAllcontractorJobs_Data?.currentPage - 1) * 10 +
+                      itemIndex +
+                      1
+                    }
+                    jobid={item?._id}
+                    phone={item?.phone}
+                    price={item?.price}
+                    status={item?.status}
+                    state={state}
+                    setState={setState}
+                    handleRejected={handleRejected}
+                    handleCanceled={handleCanceled}
+                    modifiedPrice={item?.modifiedPrice}
+                    adminCommision={item?.adminCommision}
+                  />
+                  //   <Divider sx={{ my: 1 }} />
+                  // </Box>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
       <Stack direction="row" justifyContent="flex-end" sx={{ px: 5, mb: 2 }}>
         <CustomPagination

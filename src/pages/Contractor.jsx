@@ -13,9 +13,37 @@ import DashboarTableItem from "../components/DashboarTableItem";
 import { CustomPagination } from "../components/styledComponent";
 import { clearUpdateuser } from "../redux/commonReducer";
 import { getAllContractors } from "../redux/ContractorReducer";
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import Paper from '@mui/material/Paper';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { makeStyles } from "@mui/styles";
+import { styled } from '@mui/material/styles';
 import { THEME } from "../utils/constants";
 import { dahboardTable } from "../utils/dummyData";
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableBody-root": {
+      "& .MuiTableCell-root": {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+      }
+    }
+  }
+});
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 const Contractor = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [state, setState] = useState(1);
   const {
@@ -86,29 +114,37 @@ const Contractor = () => {
             Contractors
           </Typography>
         </Stack>
-        <DashboardTableHeading />
-        <Divider sx={{ mt: 0.5 }} />
-        {getContractors_isLoading || updateUser_isLoading ? (
-          <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-          </Stack>
-        ) : (
-          getContractors_Data?.data?.map((item, itemIndex) => (
-            <Box key={itemIndex} sx={{ py: 1 }}>
-              <DashboarTableItem
-                id={(getContractors_Data?.currentPage - 1) * 10 + itemIndex + 1}
-                dbId={item?._id}
-                address={item?.address?.formattedAddress}
-                email={item?.email}
-                name={item?.firstName}
-                phone={item?.phoneNumber}
-                img={item?.profile_pic}
-                checked={item?.isActive}
-              />
-              <Divider sx={{ mt: 0.5 }} />
-            </Box>
-          ))
-        )}
+        <TableContainer component={Paper}>
+          <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
+            <DashboardTableHeading />
+            {/* <Divider sx={{ mt: 0.5 }} /> */}
+            <TableBody>
+              {getContractors_isLoading || updateUser_isLoading ? (
+                <StyledTableCell align="center" colSpan="7">
+                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                  </Stack>
+                </StyledTableCell>
+              ) : (
+                getContractors_Data?.data?.map((item, itemIndex) => (
+                  // <Box key={itemIndex} sx={{ py: 1 }}>
+                  <DashboarTableItem
+                    id={(getContractors_Data?.currentPage - 1) * 10 + itemIndex + 1}
+                    dbId={item?._id}
+                    address={item?.address?.formattedAddress}
+                    email={item?.email}
+                    name={item?.firstName}
+                    phone={item?.phoneNumber}
+                    img={item?.profile_pic}
+                    checked={item?.isActive}
+                  />
+                  // <Divider sx={{ mt: 0.5 }} />
+                  // </Box>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
       <Stack direction="row" justifyContent="flex-end" sx={{ px: 5, mb: 2 }}>
         <CustomPagination
