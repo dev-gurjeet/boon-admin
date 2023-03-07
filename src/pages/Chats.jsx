@@ -131,8 +131,8 @@ const LeftMessage = ({ text, img, firstName, img2, imageType }) => {
           ) : (
             <Box
               sx={{
-                background: "#fff",
-                border: "1px solid #AEAEAE",
+                background: "rgb(0,0,0,0.1)",
+                // border: "1px solid #AEAEAE",
                 borderRadius: "5px",
                 py: 1,
                 px: 1,
@@ -154,7 +154,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
           {img2 ? (
             imageType?.split("/")[0] === "image" ? (
               <Box
-                sx={{ backgroundColor: "#f5f5f5", p: 1, borderRadius: "5px" }}
+                sx={{ backgroundColor: "#0A3444", p: 1, borderRadius: "5px" }}
               >
                 <img
                   src={img2}
@@ -165,7 +165,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
                   }}
                 />
                 <IconButton onClick={() => DownloadFile(img2)}>
-                  <Download sx={{ color: THEME.COLORS.primary }} />
+                  <Download sx={{ color: '#f5f5f5' }} />
                 </IconButton>
               </Box>
             ) : imageType?.split("/")[0] === "video" ? (
@@ -190,7 +190,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
                     />
 
                     <IconButton onClick={() => DownloadFile(img2)}>
-                      <Download sx={{ color: THEME.COLORS.primary }} />
+                      <Download sx={{ color: "#f5f5f5" }} />
                     </IconButton>
                   </Box>
                 </Stack>
@@ -512,7 +512,7 @@ const Chats = () => {
         <Typography sx={{ fontSize: "18px", fontWeight: 500, pb: 1.5 }}>
           Chat
         </Typography>
-        <Grid container columnSpacing={1.5} sx={{ height: "100%" }}>
+        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: 'rgba(0,0,0,0.06)', padding: '10px' }}>
           <Grid item xs={4} sx={{ height: "100%" }}>
             {/* Left side Section */}
 
@@ -524,7 +524,7 @@ const Chats = () => {
                 sx={{ pb: 1 }}
               >
                 <Typography variant="subtitle1" fontWeight={600}>
-                  Inbox
+                  {state.role}
                 </Typography>
                 <FilterListIcon
                   onClick={(e) => setState({ ...state, anchor: e.target })}
@@ -578,17 +578,6 @@ const Chats = () => {
                 mt: "3%",
               }}
             >
-              <Typography
-                sx={{
-                  fontWeight: 600,
-                  py: 1,
-                  textTransform: "capitalize",
-                  px: 2,
-                }}
-                variant="subtitle1"
-              >
-                {state.role}
-              </Typography>
               {getChatUsers_isLoading ? (
                 <Stack direction="row" justifyContent="center" sx={{ py: 2 }}>
                   <CircularProgress sx={{ color: THEME.COLORS.primary }} />
@@ -601,11 +590,12 @@ const Chats = () => {
                         cursor: "pointer",
                         px: 2,
                         backgroundColor:
-                          state.userId === item?.userId && THEME.COLORS.primary,
+                          state.userId === item?.userId ? THEME.COLORS.primary : 'rgba(0,0,0,0.06)',
                         py: 1,
+                        color: state.userId !== item?.userId ? THEME.COLORS.primary : 'rgba(0,0,0,0.06)',
                         "&:hover": {
                           backgroundColor:
-                            state.userId !== item?.userId && "rgba(0,0,0,0.06)",
+                            state.userId !== item?.userId && "rgba(0,0,0,0)",
                         },
                       }}
                     >
@@ -661,11 +651,11 @@ const Chats = () => {
                                   color:
                                     state.userId === item?.userId
                                       ? item?.messageRead
-                                        ? "rgba(0,0,0,0.5)"
+                                        ? "rgba(255,255,255,0.5)"
                                         : "#fff"
                                       : item?.messageRead
-                                      ? "rgba(0,0,0,0.5)"
-                                      : THEME.COLORS.primary,
+                                        ? "rgba(0,0,0,0.5)"
+                                        : THEME.COLORS.primary,
                                 }}
                               >
                                 {item?.lastMessage}
@@ -697,7 +687,7 @@ const Chats = () => {
                 <Box sx={{ height: "98%" }}>
                   <Box
                     sx={{
-                      backgroundColor: "#fff",
+                      backgroundColor: 'rgba(0,0,0,0.06)',
                       px: 2,
                       py: 1,
                       boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -743,7 +733,7 @@ const Chats = () => {
                         </Box>
                         <Box>
                           <p>
-                            {state.userFirstname} {state.userLastname}
+                            {state.userFirstname}  {state.userLastname}
                           </p>
                           {/* <p>Web Designer</p> */}
                         </Box>
@@ -782,6 +772,7 @@ const Chats = () => {
                           width: "100%",
                           overflowY: "auto",
                           height: "88%",
+                          backgroundColor: 'rgba(0,0,0,0.06)'
                         }}
                       >
                         {/*  message */}
@@ -823,7 +814,7 @@ const Chats = () => {
                           )}
                         {showData?.map((item, itemIndex) => (
                           <Box key={itemIndex}>
-                            {item?.senderId === state.userId ? (
+                            {item?.senderId == state.userId ? (
                               <LeftMessage
                                 text={item?.message}
                                 firstName={item?.senderDetails?.firstName}
@@ -944,7 +935,7 @@ const Chats = () => {
                   justifyContent: "center",
                 }}
               >
-                <Typography variant="h3">Click on User to Chat</Typography>
+                <Typography variant="p">To begin chatting, click on the user you want to talk to.</Typography>
               </Box>
             )}
           </Grid>
