@@ -1,15 +1,14 @@
 import { Box, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import React from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { blue } from "@mui/material/colors";
+import { blue, green, red } from "@mui/material/colors";
 import { PATH } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 const textCss = {
   color: "#202020",
-
   fontWeight: 400,
   letterSpacing: "1px",
-  textTransform: "capitalize",
+
   fontSize: "14px",
 };
 const textCsswithDeco = {
@@ -29,146 +28,64 @@ const textCsswithDeco = {
   overflow: "hidden",
   textOverflow: "ellipsis",
 };
-const BookingTableItem = ({
+const BookingDetailTableItem = ({
   id,
-  price,
-  phone,
-  address,
   jobid,
-  company,
   status,
+  workerId,
+  name,
+  email,
   state,
   setState,
-  handleRejected,
-  modifiedPrice,
-  adminCommision,
+  handleReject,
+  handleAccept,
+  handleReassignClick,
 }) => {
   const navigate = useNavigate();
   const open = Boolean(state.anchor);
   const handleClick = (event) => {
-    setState({
-      ...state,
-      anchor: event.currentTarget,
-      id: jobid,
-      originalPrice: price,
-    });
+    setState({ ...state, anchor: event.currentTarget, id: jobid });
   };
   const handleClose = () => {
     setState({ ...state, anchor: null });
   };
-  const handleCloseModify = () => {
-    setState({ ...state, anchor: null, dialog: true });
-  };
+
   return (
     <Stack direction="row" alignItems="center">
-      {/* <Box sx={{ flex: 0.2 }}>
+      <Box sx={{ flex: 0.3 }}>
         <Typography style={textCss}>#{id}</Typography>
-      </Box> */}
-      <Stack sx={{ flex: 0.5 }} direction="row" alignItems="center" gap={0.7}>
-        <Typography
-          sx={textCsswithDeco}
-          onClick={() => navigate(`${PATH.BookingDetail}/${jobid}`)}
-        >
-          #{jobid?.slice(0, 6)}
-        </Typography>
-      </Stack>
-      <Box sx={{ flex: 1 }}>
-        <Typography style={textCss}>{company}</Typography>
       </Box>
-      <Box sx={{ flex: 0.4 }}>
-        <Typography style={textCss}>${price}</Typography>
-      </Box>
-      <Box sx={{ flex: 1 }}>
-        <Typography style={textCss}>{address}</Typography>
-      </Box>
-      <Box sx={{ flex: 0.5 }}>
-        <Typography style={textCss}>
-          ${modifiedPrice ? modifiedPrice : 0}
-        </Typography>
-      </Box>
-      <Box sx={{ flex: 0.7 }}>
-        <Typography style={textCss}>
-          ${Number(adminCommision ? adminCommision : 0)}
-        </Typography>
-      </Box>
-      <Box sx={{ flex: 0.4 }}>
-        {status === "APPROVED" && (
-          <Typography
-            sx={{
-              color: "#0CCF2B",
-              fontFamily: "Roboto",
-              fontSize: "16px",
-              fontWeight: 400,
-            }}
-          >
-            Approved
-          </Typography>
-        )}
-        {status === "COMPLETED" && (
-          <Typography
-            sx={{
-              color: "#0CCF2B",
-              fontFamily: "Roboto",
-              fontSize: "16px",
-              fontWeight: 400,
-            }}
-          >
-            Completed
-          </Typography>
-        )}
-        {status === "IN_PROGRESS" && (
-          <Typography
-            sx={{
-              color: "primary.main",
-              fontFamily: "Roboto",
-              fontSize: "16px",
-              fontWeight: 400,
-            }}
-          >
-            In Progress
-          </Typography>
-        )}
-        {status === "CANCELLED" && (
-          <Typography
-            sx={{
-              color: "#FF4545",
-              fontFamily: "Roboto",
-              fontSize: "16px",
-              fontWeight: 400,
-            }}
-          >
-            Cancelled
-          </Typography>
-        )}
-        {status === "REJECTED" && (
-          <Typography
-            sx={{
-              color: "#FF4545",
-              fontFamily: "Roboto",
-              fontSize: "16px",
-              fontWeight: 400,
-            }}
-          >
-            Rejected
-          </Typography>
-        )}
 
-        {modifiedPrice && status === "PENDING" && (
-          <Typography
-            sx={{
-              color: "#000",
-              fontFamily: "Roboto",
-              fontSize: "16px",
-              fontWeight: 400,
-            }}
-          >
-            Modified
-          </Typography>
-        )}
-        {status === "PENDING" && !modifiedPrice && (
+      <Box sx={{ flex: 1 }}>
+        <Typography
+          style={textCsswithDeco}
+          onClick={() => navigate(`${PATH.WorkerDetail}/${workerId}`)}
+        >
+          #{workerId?.slice(0, 7)}
+        </Typography>
+      </Box>
+      <Box sx={{ flex: 1 }}>
+        <Typography
+          style={{
+            color: "#202020",
+            fontWeight: 400,
+            letterSpacing: "1px",
+            textTransform: "capitalize",
+            fontSize: "14px",
+          }}
+        >
+          {name}
+        </Typography>
+      </Box>
+      <Box sx={{ flex: 1 }}>
+        <Typography style={textCss}>{email}</Typography>
+      </Box>
+      <Box sx={{ flex: 0.5, position: "relative" }}>
+        {status === "PENDING" && (
           <>
             <Stack
               direction="row"
+              gap={0.4}
               onClick={handleClick}
               sx={{ cursor: "pointer" }}
             >
@@ -194,11 +111,57 @@ const BookingTableItem = ({
                   "aria-labelledby": "basic-button",
                 }}
               >
-                {/* <MenuItem onClick={handleClose}>Accept</MenuItem> */}
-                <MenuItem onClick={handleRejected}>Reject</MenuItem>
-                <MenuItem onClick={handleCloseModify}>Modify</MenuItem>
+                <MenuItem onClick={handleAccept}>Accept</MenuItem>
+                <MenuItem onClick={handleReject}>Reject</MenuItem>
               </Menu>
             </Box>
+          </>
+        )}
+        {status === "REJECTED" && (
+          <>
+            <Typography
+              sx={{
+                fontFamily: "Roboto",
+                fontSize: "16px",
+                fontWeight: 400,
+                color: red[600],
+              }}
+            >
+              Rejected
+            </Typography>
+          </>
+        )}
+        {status === "APPROVED" && (
+          <>
+            <Typography
+              sx={{
+                fontFamily: "Roboto",
+                fontSize: "16px",
+                fontWeight: 400,
+                color: green[500],
+              }}
+            >
+              Approved
+            </Typography>
+          </>
+        )}
+        {status === "NOT_APPROVED" && (
+          <>
+            <Typography
+              onClick={() => handleReassignClick(workerId)}
+              sx={{
+                fontSize: "14px",
+                fontWeight: 400,
+                color: blue[500],
+                cursor: "pointer",
+                textDecoration: "underline",
+                "&:hover": {
+                  color: blue[900],
+                },
+              }}
+            >
+              Reassign
+            </Typography>
           </>
         )}
       </Box>
@@ -206,4 +169,4 @@ const BookingTableItem = ({
   );
 };
 
-export default BookingTableItem;
+export default BookingDetailTableItem;
