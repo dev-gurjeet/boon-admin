@@ -118,10 +118,9 @@ const DashboardWorker = () => {
             <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
               <WorkerTableHeading />
               <TableBody>{
-
                 getWorker_Data?.data?.map((item, itemIndex) => (
                   // <Box key={itemIndex}>
-                  <WorkerTableItem  key={itemIndex}
+                  <WorkerTableItem key={itemIndex}
                     handleActiveInActive={handleActiveInActive}
                     id={(getWorker_Data?.currentPage - 1) * 10 + itemIndex + 1}
                     dbId={item?._id}

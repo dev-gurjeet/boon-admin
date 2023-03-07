@@ -1,6 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import { THEME } from "../utils/constants";
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { styled } from '@mui/material/styles';
 const TextCss = {
   color: THEME.COLORS.tableHeadText,
 
@@ -9,6 +13,28 @@ const TextCss = {
   textTransform: "uppercase",
 };
 const BookingTableTableHeading = () => {
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#0a3444',
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  return (
+    <TableHead>
+      <TableRow>
+        <StyledTableCell>Job id</StyledTableCell>
+        <StyledTableCell align="left">Company Name</StyledTableCell>
+        <StyledTableCell align="center">Price</StyledTableCell>
+        <StyledTableCell align="center">Job Name</StyledTableCell>
+        <StyledTableCell align="center">Mad. P</StyledTableCell>
+        <StyledTableCell align="right">Commission</StyledTableCell>
+        <StyledTableCell align="center">Status</StyledTableCell>
+      </TableRow>
+    </TableHead>
+  )
   return (
     <div>
       <Stack direction="row" alignItems="center">
