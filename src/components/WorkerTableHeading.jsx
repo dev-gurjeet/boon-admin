@@ -30,7 +30,8 @@ const WorkerTableHeading = () => {
         <StyledTableCell align="center">Phone</StyledTableCell>
         {/* <StyledTableCell align="center">Address</StyledTableCell> */}
         <StyledTableCell align="center">Category</StyledTableCell>
-        <StyledTableCell align="right">Experience</StyledTableCell>
+        <StyledTableCell align="center">Experience</StyledTableCell>
+        <StyledTableCell align="center">Missed Jobs</StyledTableCell>
         <StyledTableCell align="center">Action</StyledTableCell>
         <StyledTableCell align="center ">Suspended</StyledTableCell>
       </TableRow>

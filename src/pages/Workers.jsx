@@ -140,6 +140,7 @@ const Workers = () => {
                     img={item?.profile_pic}
                     checked={item?.isActive}
                     categories={item?.categories}
+                    totalJobsMissed={item?.totalJobsMissed}
                   />
                   // <Divider sx={{ mt: 0.5 }} />
                   // </Box>
