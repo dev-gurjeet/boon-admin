@@ -29,3 +29,6 @@ a {
 .makeStyles-table-6 .MuiTableBody-root .MuiTableCell-root {
   border-color: #0a3444 !important;
 }
+.css-rx050-MuiTableCell-root, .css-uihxpp-MuiTableCell-root, .css-ptm6ww-MuiTableCell-root, .css-pvn2r4-MuiTypography-root{
+  color: #d3d3d3 !important;
+}

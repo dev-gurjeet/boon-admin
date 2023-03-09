@@ -15,8 +15,9 @@ const TextCss = {
 const WorkerTableHeading = () => {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
       [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#0a3444',
+        backgroundColor: THEME.COLORS.backgroundSecondary,
         color: theme.palette.common.white,
+        borderColor: THEME.COLORS.secondary + " !important"
       },
       [`&.${tableCellClasses.body}`]: {
         fontSize: 14,

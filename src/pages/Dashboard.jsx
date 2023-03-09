@@ -77,77 +77,80 @@ const Dashboard = ({ path, active, name, icon }) => {
           number={dashboardCount_Data?.data?.totalContractors}
         />
       </Stack>
-      <Box
-        sx={{
-          backgroundColor: "#0f1c24",
-          px: 2,
-          py: 1,
-          boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
-          borderRadius: "5px",
-          my: 2,
-        }}
-      >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ mb: 5, mt: 1 }}
-        >
-          <Typography
-            sx={{color: "#d3d3d3", fontSize: "18px", fontWeight: 500 }}
-            variant="h5"
-          >
-            {state.menu ? "Total Workers" : "Total Contractors"}
-          </Typography>
-          <Stack
-            direction="row"
-            alignItems="center"
-            gap={0.7}
-            sx={{ cursor: "pointer" ,
-            ":hover": {
-              backgroundColor: active ? THEME.COLORS.white : THEME.COLORS.text,
-              color: THEME.COLORS.dark
-            }}}
-          // onClick={(e) => setState({ ...state, anchor: e.target })}
-          >
-            <ToggleButtonGroup
-              color="secondary"
-              value={state.menu}
-              // exclusive
-              // onChange={(e, change) => handleToggle(change)}
-              aria-label="Platform"
-            >
-              <ToggleButton style={!state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' }: {}} value="0" onClick={handleCloseContractor}>Contractors</ToggleButton>
-              <ToggleButton style={state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' }: {}} value="1" onClick={handleCloseWorker}>Workers</ToggleButton>
-            </ToggleButtonGroup>
-            {/* <Typography
-              sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}
-            >
-              {state.menu ? "Worker" : "Contractor"}
-            </Typography>
-            <KeyboardArrowDownIcon
-              sx={{ color: THEME.COLORS.primary, mb: "-5px" }}
-            /> */}
-          </Stack>
-        </Stack>
-        <Menu
-          id="basic-menu"
-          // anchorEl={state.anchor}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem onClick={handleCloseContractor}>Contractor</MenuItem>
-          <MenuItem onClick={handleCloseWorker}>Worker</MenuItem>
-        </Menu>
-        <Box sx={{ marginTop: "-30px" }}>
-          {state.menu ? <DashboardWorker /> : <DashboardContractor />}
-        </Box>
-      </Box>
+
     </div>
   );
+  return (<Box
+    sx={{
+      backgroundColor: "#0f1c24",
+      px: 2,
+      py: 1,
+      boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
+      borderRadius: "5px",
+      my: 2,
+    }}
+  >
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      sx={{ mb: 5, mt: 1 }}
+    >
+      <Typography
+        sx={{ color: "#d3d3d3", fontSize: "18px", fontWeight: 500 }}
+        variant="h5"
+      >
+        {state.menu ? "Total Workers" : "Total Contractors"}
+      </Typography>
+      <Stack
+        direction="row"
+        alignItems="center"
+        gap={0.7}
+        sx={{
+          cursor: "pointer",
+          ":hover": {
+            backgroundColor: active ? THEME.COLORS.white : THEME.COLORS.text,
+            color: THEME.COLORS.dark
+          }
+        }}
+      // onClick={(e) => setState({ ...state, anchor: e.target })}
+      >
+        <ToggleButtonGroup
+          color="secondary"
+          value={state.menu}
+          // exclusive
+          // onChange={(e, change) => handleToggle(change)}
+          aria-label="Platform"
+        >
+          <ToggleButton style={!state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' } : {}} value="0" onClick={handleCloseContractor}>Contractors</ToggleButton>
+          <ToggleButton style={state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' } : {}} value="1" onClick={handleCloseWorker}>Workers</ToggleButton>
+        </ToggleButtonGroup>
+        {/* <Typography
+          sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}
+        >
+          {state.menu ? "Worker" : "Contractor"}
+        </Typography>
+        <KeyboardArrowDownIcon
+          sx={{ color: THEME.COLORS.primary, mb: "-5px" }}
+        /> */}
+      </Stack>
+    </Stack>
+    <Menu
+      id="basic-menu"
+      // anchorEl={state.anchor}
+      open={open}
+      onClose={handleClose}
+      MenuListProps={{
+        "aria-labelledby": "basic-button",
+      }}
+    >
+      <MenuItem onClick={handleCloseContractor}>Contractor</MenuItem>
+      <MenuItem onClick={handleCloseWorker}>Worker</MenuItem>
+    </Menu>
+    <Box sx={{ marginTop: "-30px" }}>
+      {state.menu ? <DashboardWorker /> : <DashboardContractor />}
+    </Box>
+  </Box>)
 };
 
 export default memo(Dashboard);

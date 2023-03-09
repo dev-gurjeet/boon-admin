@@ -117,6 +117,8 @@ const WorkerTableItem = ({
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      borderColor: THEME.COLORS.secondary + " !important",
+      color: THEME.COLORS.text
     },
   }));
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
