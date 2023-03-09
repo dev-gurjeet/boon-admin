@@ -81,8 +81,8 @@ const Navbar = () => {
           alt="logo"
           src={IMAGES.logo}
           style={{
-            height: "140px",
-            width: "145px",
+            height: "auto",
+            width: "150px",
             objectFit: "contain",
           }}
         />

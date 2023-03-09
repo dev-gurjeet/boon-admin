@@ -1,4 +1,4 @@
-import logo from "../assets/images/boon-logo.png";
+import logo from "../assets/images/boon-logo-croped.png";
 import shortLogo from "../assets/images/boon-logo.png";
 import notiIcon from "../assets/images/notiIcon.png";
 import adminImage from "../assets/images/admin.png";
