@@ -14,8 +14,28 @@ import WorkerTableHeading from "../components/WorkerTableHeading";
 import WorkerTableItem from "../components/WorkerTableItem";
 import { clearUpdateuser } from "../redux/commonReducer";
 import { getAllActiveWorker } from "../redux/WorkerReducer";
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { makeStyles } from "@mui/styles";
+import { styled } from '@mui/material/styles';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableBody-root": {
+      "& .MuiTableCell-root": {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+      }
+    }
+  }
+});
 
 const ActiveWorkers = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const {
     getAllActiveWorker_isLoading,
@@ -70,6 +90,17 @@ const ActiveWorkers = () => {
       setWorkerData(filteredData);
     }
   }, [getAllActiveWorker_Data]);
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
   return (
     <div>
       <Box
@@ -93,35 +124,44 @@ const ActiveWorkers = () => {
             Active Workers
           </Typography>
         </Stack>
-        <WorkerTableHeading />
-        <Divider sx={{ mt: 0.5 }} />
-        {getAllActiveWorker_isLoading || updateUser_isLoading ? (
-          <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-          </Stack>
-        ) : (
-          workerData?.map((item, itemIndex) => (
-            <Box key={itemIndex}>
-              <WorkerTableItem
-                id={
-                  (getAllActiveWorker_Data?.currentPage - 1) * 10 +
-                  itemIndex +
-                  1
-                }
-                dbId={item?._id}
-                address={item?.address?.formattedAddress}
-                jobid={item?.jobid}
-                name={item?.firstName}
-                phone={item?.phoneNumber}
-                totalHours={item?.totalHours}
-                img={item?.profile_pic}
-                checked={item?.isActive}
-                categories={item?.categories}
-              />
-              <Divider sx={{ mt: 0.5 }} />
-            </Box>
-          ))
-        )}
+
+        <TableContainer component={Paper}>
+          <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
+            <WorkerTableHeading />
+            <TableBody>
+              {/* <Divider sx={{ mt: 0.5 }} /> */}
+              {getAllActiveWorker_isLoading || updateUser_isLoading ? (
+                <StyledTableCell align="center" colSpan="8">
+                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                  </Stack>
+                </StyledTableCell>
+              ) : (
+                workerData?.map((item, itemIndex) => (
+                  // <Box key={itemIndex}>
+                    <WorkerTableItem
+                      id={
+                        (getAllActiveWorker_Data?.currentPage - 1) * 10 +
+                        itemIndex +
+                        1
+                      }
+                      dbId={item?._id}
+                      address={item?.address?.formattedAddress}
+                      jobid={item?.jobid}
+                      name={item?.firstName}
+                      phone={item?.phoneNumber}
+                      totalHours={item?.totalHours}
+                      img={item?.profile_pic}
+                      checked={item?.isActive}
+                      categories={item?.categories}
+                    />
+                    // <Divider sx={{ mt: 0.5 }} />
+                  // </Box>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
       <Stack direction="row" justifyContent="flex-end" sx={{ px: 5, mb: 2 }}>
         <CustomPagination
