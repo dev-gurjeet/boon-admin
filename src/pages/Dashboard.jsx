@@ -44,7 +44,7 @@ const Dashboard = ({ path, active, name, icon }) => {
       <Stack direction="row" justifyContent="space-between">
         <DashboardCard
           icon={
-            <Person sx={{ color: THEME.COLORS.primary, fontSize: "40px" }} />
+            <Person sx={{ color: THEME.COLORS.text, fontSize: "40px" }} />
           }
           name="Total Customer"
           number={dashboardCount_Data?.data?.totalCustomers}
@@ -52,7 +52,7 @@ const Dashboard = ({ path, active, name, icon }) => {
         <DashboardCard
           icon={
             <MiscellaneousServicesIcon
-              sx={{ color: THEME.COLORS.primary, fontSize: "40px" }}
+              sx={{ color: THEME.COLORS.text, fontSize: "40px" }}
             />
           }
           name="Total Workers"
@@ -61,7 +61,7 @@ const Dashboard = ({ path, active, name, icon }) => {
         <DashboardCard
           icon={
             <CalendarMonthIcon
-              sx={{ color: THEME.COLORS.primary, fontSize: "40px" }}
+              sx={{ color: THEME.COLORS.text, fontSize: "40px" }}
             />
           }
           name="Total Booking"
@@ -70,7 +70,7 @@ const Dashboard = ({ path, active, name, icon }) => {
         <DashboardCard
           icon={
             <SupervisorAccountIcon
-              sx={{ color: THEME.COLORS.primary, fontSize: "40px" }}
+              sx={{ color: THEME.COLORS.text, fontSize: "40px" }}
             />
           }
           name="Total Contractor"
