@@ -10,7 +10,7 @@ const DashboardCard = ({ icon, name, number }) => {
       alignItems="center"
       sx={{
         backgroundColor: "#0f1c24",
-        boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
+        boxShadow: "0.5px 3px 10px #0a3444",
         height: "100px",
         width: "250px",
       }}

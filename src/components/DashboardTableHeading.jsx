@@ -7,7 +7,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 
 const TextCss = {
-  color: THEME.COLORS.tableHeadText,
+  color: THEME.COLORS.text,
   fontFamily: "Roboto",
   fontWeight: 550,
   letterSpacing: "1px",
