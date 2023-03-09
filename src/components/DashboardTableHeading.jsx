@@ -7,7 +7,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 
 const TextCss = {
-  color: THEME.COLORS.tableHeadText,
+  color: THEME.COLORS.text,
   fontFamily: "Roboto",
   fontWeight: 550,
   letterSpacing: "1px",
@@ -16,8 +16,8 @@ const TextCss = {
 const DashboardTableHeading = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#0a3444',
-      color: theme.palette.common.white,
+      backgroundColor: '#1B2C34',
+      color: THEME.COLORS.text,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,

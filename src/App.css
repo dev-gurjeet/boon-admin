@@ -8,8 +8,24 @@
   --primary: #8ec447;
 }
 body {
-  background-color: #f3f6f9;
+  background-color: #1b2c34;
 }
 a {
   text-decoration: none;
+}
+.css-1enotpu-MuiTableRow-root:nth-of-type(odd) {
+  background-color: #0f1c24 !important;
+  color: #d3d3d3 !important;
+}
+
+.css-1enotpu-MuiTableRow-root:nth-of-type(even) {
+  background-color: #1b2c34 !important;
+  color: #d3d3d3 !important;
+}
+.makeStyles-table-1 .MuiTableBody-root .MuiTableCell-root {
+  color: #d3d3d3;
+}
+
+.makeStyles-table-6 .MuiTableBody-root .MuiTableCell-root {
+  border-color: #0a3444 !important;
 }
