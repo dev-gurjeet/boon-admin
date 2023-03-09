@@ -71,7 +71,8 @@ const Navbar = () => {
         top: 0,
         zIndex: 500,
         width: "100%",
-        backgroundColor: THEME.COLORS.white,
+        backgroundColor: THEME.COLORS.backgroundPrimary,
+        color: THEME.COLORS.text,
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.04)",
         px: "5%",
       }}
@@ -96,7 +97,7 @@ const Navbar = () => {
             // onClick={() => navigate(PATH.Notification)}
           >
             <NotificationsIcon
-              sx={{ color: "rgba(0,0,0,0.6)", fontSize: "1.8rem" }}
+              sx={{ color: THEME.COLORS.text, fontSize: "1.8rem" }}
             />
           </Badge>
         </Link>
@@ -107,7 +108,7 @@ const Navbar = () => {
           onClick={() => navigate(PATH.Profile)}
           sx={{ cursor: "pointer" }}
         >
-          <PersonIcon sx={{ color: THEME.COLORS.primary, fontSize: "2rem" }} />
+          <PersonIcon sx={{ color: THEME.COLORS.text, fontSize: "2rem" }} />
           <Box>
             <p style={{ fontWeight: 500, fontSize: "18px" }}>
               {getProfile_Data?.data?.firstName}{" "}

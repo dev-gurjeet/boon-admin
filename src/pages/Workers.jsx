@@ -96,7 +96,8 @@ const Workers = () => {
     <div>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
+          color: THEME.COLORS.text,
           px: 2,
           py: 1,
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -111,7 +112,7 @@ const Workers = () => {
           alignItems="center"
           sx={{ mb: 5, mt: 1 }}
         >
-          <Typography sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}>
+          <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
             Workers
           </Typography>
         </Stack>
