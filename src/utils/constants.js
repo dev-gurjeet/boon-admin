@@ -18,6 +18,8 @@ export const THEME = {
     black: "#000",
     dark: "#0b1e25",
     authBackground: "#1B70F0",
+    backgroundPrimary: '#0F1C24',
+    backgroundSecondary: '#1B2C34'
   },
 };
 export const PATH = {

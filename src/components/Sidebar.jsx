@@ -39,14 +39,14 @@ const CustomLink = ({ path, active, name, icon }) => {
         sx={{
           py: 1.3,
           px: 3,
-          backgroundColor: active ? THEME.COLORS.dark : THEME.COLORS.white,
-          color: active ? THEME.COLORS.white : THEME.COLORS.dark,
+          backgroundColor: active ? THEME.COLORS.secondary : THEME.COLORS.backgroundPrimary,
+          color: THEME.COLORS.white,
           borderWidth: 1,
           borderBottomStyle: 'solid',
           borderBottomColor: THEME.COLORS.horizontalLine,
           ":hover": {
-            backgroundColor: active ? THEME.COLORS.white : THEME.COLORS.text,
-            color: THEME.COLORS.dark
+            backgroundColor: active ? THEME.COLORS.secondary : THEME.COLORS.primary,
+            color: THEME.COLORS.white
           }
         }}
       >
@@ -84,12 +84,12 @@ const Sidebar = () => {
       window.removeEventListener('resize', handleWindowSizeChange);
     }
   }, []);
-  
+
   return (
     <>
       {width > 768 && <Box
         sx={{
-          backgroundColor: THEME.COLORS.white,
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           height: "100%",
           pt: 1,
         }}
@@ -191,20 +191,28 @@ const Sidebar = () => {
             py: 1.3,
             bakckgroundColor: "#fff",
             cursor: "pointer",
+            ":hover": {
+              backgroundColor: THEME.COLORS.primary,
+              color: THEME.COLORS.white
+            }
           }}
         >
-          <Logout sx={{ mb: "-5px" }} />
+          <Logout sx={{
+            mb: "-5px",
+            color: "#fff"
+          }} />
           <Typography
             sx={{
               fontWeight: 400,
               fontSize: "16px",
+              color: "#fff"
             }}
           >
             Logout
           </Typography>
         </Stack>
-      </Box> 
-       
+      </Box>
+
       }
     </>
   );
