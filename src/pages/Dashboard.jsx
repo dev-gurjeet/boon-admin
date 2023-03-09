@@ -18,7 +18,7 @@ import DashboardWorker from "./DashboardWorker";
 import DashboardContractor from "./DashboardContranctor";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-const Dashboard = () => {
+const Dashboard = ({ path, active, name, icon }) => {
   const dispatch = useDispatch();
   const { dashboardCount_Data } = useSelector((store) => store.commonStore);
   const [state, setState] = useState({
@@ -79,7 +79,7 @@ const Dashboard = () => {
       </Stack>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: "#0f1c24",
           px: 2,
           py: 1,
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -94,7 +94,7 @@ const Dashboard = () => {
           sx={{ mb: 5, mt: 1 }}
         >
           <Typography
-            sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}
+            sx={{color: "#d3d3d3", fontSize: "18px", fontWeight: 500 }}
             variant="h5"
           >
             {state.menu ? "Total Workers" : "Total Contractors"}
@@ -103,7 +103,11 @@ const Dashboard = () => {
             direction="row"
             alignItems="center"
             gap={0.7}
-            sx={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer" ,
+            ":hover": {
+              backgroundColor: active ? THEME.COLORS.white : THEME.COLORS.text,
+              color: THEME.COLORS.dark
+            }}}
           // onClick={(e) => setState({ ...state, anchor: e.target })}
           >
             <ToggleButtonGroup
@@ -113,8 +117,8 @@ const Dashboard = () => {
               // onChange={(e, change) => handleToggle(change)}
               aria-label="Platform"
             >
-              <ToggleButton style={!state.menu ? { backgroundColor: "#0a3444", color: '#fff' }: {}} value="0" onClick={handleCloseContractor}>Contractors</ToggleButton>
-              <ToggleButton style={state.menu ? { backgroundColor: "#0a3444", color: '#fff' }: {}} value="1" onClick={handleCloseWorker}>Workers</ToggleButton>
+              <ToggleButton style={!state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' }: {}} value="0" onClick={handleCloseContractor}>Contractors</ToggleButton>
+              <ToggleButton style={state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' }: {}} value="1" onClick={handleCloseWorker}>Workers</ToggleButton>
             </ToggleButtonGroup>
             {/* <Typography
               sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}

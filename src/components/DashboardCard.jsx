@@ -9,7 +9,7 @@ const DashboardCard = ({ icon, name, number }) => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        backgroundColor: "#fff",
+        backgroundColor: "#0f1c24",
         boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
         height: "100px",
         width: "250px",
@@ -21,7 +21,7 @@ const DashboardCard = ({ icon, name, number }) => {
           sx={{
             height: "50px",
             width: "2px",
-            backgroundColor: THEME.COLORS.horizontalLine,
+            backgroundColor: THEME.COLORS.text,
           }}
         ></Box>
         <Box>
@@ -37,7 +37,7 @@ const DashboardCard = ({ icon, name, number }) => {
           <Typography
             sx={{
               fontSize: "30px",
-              color: "#000",
+              color: "#ffffff",
               fontWeight: 600,
               textAlign: "center",
             }}

@@ -39,14 +39,14 @@ const CustomLink = ({ path, active, name, icon }) => {
         sx={{
           py: 1.3,
           px: 3,
-          backgroundColor: active ? THEME.COLORS.primary : THEME.COLORS.white,
-          color: active ? THEME.COLORS.white : THEME.COLORS.black,
+          backgroundColor: active ? THEME.COLORS.dark : THEME.COLORS.white,
+          color: active ? THEME.COLORS.white : THEME.COLORS.dark,
           borderWidth: 1,
           borderBottomStyle: 'solid',
           borderBottomColor: THEME.COLORS.horizontalLine,
           ":hover": {
-            backgroundColor: active ? THEME.COLORS.primary : THEME.COLORS.secondary,
-            color: THEME.COLORS.white
+            backgroundColor: active ? THEME.COLORS.white : THEME.COLORS.text,
+            color: THEME.COLORS.dark
           }
         }}
       >
