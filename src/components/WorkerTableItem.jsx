@@ -185,7 +185,7 @@ const WorkerTableItem = ({
                 textOverflow: "ellipsis",
                 cursor: "pointer",
               }}
-              onClick={() => navigate(`${PATH.ContractorDetail}/${dbId}`)}
+              onClick={() => navigate(`${PATH.WorkerDetail}/${dbId}`)}
             >
               {name}
             </Typography>

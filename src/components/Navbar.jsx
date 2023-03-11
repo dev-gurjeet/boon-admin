@@ -80,7 +80,7 @@ const Navbar = () => {
       <Box>
         <img
           alt="logo"
-          src={IMAGES.logo}
+          src={IMAGES.whiteLogo}
           style={{
             height: "auto",
             width: "150px",

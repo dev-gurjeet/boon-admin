@@ -1,4 +1,5 @@
 import logo from "../assets/images/boon-logo-croped.png";
+import whiteLogo from "../assets/images/boon-white.png";
 import shortLogo from "../assets/images/boon-logo.png";
 import notiIcon from "../assets/images/notiIcon.png";
 import adminImage from "../assets/images/admin.png";
@@ -48,4 +49,5 @@ export const IMAGES = {
   notiIcon,
   placeholderImage,
   pdfImage,
+  whiteLogo
 };

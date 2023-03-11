@@ -91,7 +91,6 @@ const Sidebar = () => {
         sx={{
           backgroundColor: THEME.COLORS.backgroundPrimary,
           height: "100%",
-          pt: 1,
         }}
       >
         <CustomLink
