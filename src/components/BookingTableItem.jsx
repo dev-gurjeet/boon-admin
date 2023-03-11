@@ -64,7 +64,7 @@ const BookingTableItem = ({
     setState({ ...state, anchor: null });
   };
   const handleCloseModify = () => {
-    setState({ ...state, anchor: null, dialog: true });
+    setState({ ...state, dialog: true, id: jobid });
   };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
