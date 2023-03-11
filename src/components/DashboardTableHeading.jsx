@@ -16,8 +16,9 @@ const TextCss = {
 const DashboardTableHeading = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#1B2C34',
+      backgroundColor: THEME.COLORS.primary,
       color: THEME.COLORS.text,
+      borderColor: '#333 !important'
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,

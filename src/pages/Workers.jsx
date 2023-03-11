@@ -89,6 +89,19 @@ const Workers = () => {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      borderColor: '#333 !important'
+    },
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
     },
   }));
 
@@ -122,11 +135,14 @@ const Workers = () => {
             <WorkerTableHeading />
             <TableBody>
               {getWorker_isLoading || updateUser_isLoading ? (
-                <StyledTableCell align="center" colSpan="7">
-                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-                  </Stack>
-                </StyledTableCell>
+
+                <StyledTableRow>
+                  <StyledTableCell align="center" colSpan="8">
+                    <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                      <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
+                    </Stack>
+                  </StyledTableCell>
+                </StyledTableRow>
               ) : (
                 getWorker_Data?.data?.map((item, itemIndex) => (
                   // <Box key={itemIndex}>

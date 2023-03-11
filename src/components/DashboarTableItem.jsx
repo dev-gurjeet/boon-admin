@@ -60,7 +60,7 @@ const IOSSwitch = styled((props) => (
   },
   "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    backgroundColor:  "#39393D",
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,
@@ -101,15 +101,21 @@ const DashboarTableItem = ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      borderColor: '#333 !important'
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      color: THEME.COLORS.text,
+      borderColor: '#333 !important'
     },
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -124,68 +130,67 @@ const DashboarTableItem = ({
     <>
       <StyledTableRow key={id}>
         <StyledTableCell align="left">#{id}</StyledTableCell>
-        <StyledTableCell  align="right">
-         <Stack sx={{ flex: 0.7 }} direction="row" alignItems="center" gap={1}>
-           {img ? (
-             <Box>
-               <img
-                 onClick={() => setState({ ...state, isOpen: true })}
-                 src={img}
-                 alt="personimage"
-                 style={{
-                   height: "30px",
-                   width: "30px",
-                   objectFit: "cover",
-                   borderRadius: "50%",
-                   cursor: "pointer",
-                 }}
-               />
-             </Box>
-           ) : (
-             <Stack
-               direction="row"
-               alignItems="center"
-               justifyContent="center"
-               sx={{
-                 height: "30px",
-                 width: "30px",
-                 borderRadius: "50%",
-                 backgroundColor: "primary.main",
-               }}
-             >
-               <Typography
-                 sx={{
-                   color: "#fff",
-                   textTransform: "capitalize",
-                   fontWeight: 600,
-                   fontSize: "20px",
-                 }}
-               >
-                 {name ? name?.slice(0, 1) : "B"}
-               </Typography>
-             </Stack>
-           )}
-           <Typography
-             style={{
-               color: "#202020",
-               fontWeight: 400,
-               letterSpacing: "1px",
-               fontSize: "14px",
-               wordWrap: "wrap",
-               textOverflow: "ellipsis",
-               cursor: "pointer",
-             }}
-             onClick={() => navigate(`${PATH.ContractorDetail}/${dbId}`)}
-           >
-             {name}
-           </Typography>
-         </Stack>
-      </StyledTableCell>
-      <StyledTableCell align="center">{phone && "+1"} {phone}</StyledTableCell>
-      <StyledTableCell align="center">{address?.slice(0, 25)}</StyledTableCell>
-      <StyledTableCell align="center">{email?.slice(0, 25)}</StyledTableCell>
-      <StyledTableCell align="center"><IOSSwitch onClick={handleActiveInactive} checked={checked} /></StyledTableCell> 
-    </StyledTableRow>
+        <StyledTableCell align="right">
+          <Stack sx={{ flex: 0.7 }} direction="row" alignItems="center" gap={1}>
+            {img ? (
+              <Box>
+                <img
+                  onClick={() => setState({ ...state, isOpen: true })}
+                  src={img}
+                  alt="personimage"
+                  style={{
+                    height: "30px",
+                    width: "30px",
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                  }}
+                />
+              </Box>
+            ) : (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                sx={{
+                  height: "30px",
+                  width: "30px",
+                  borderRadius: "50%",
+                  backgroundColor: "primary.main",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    textTransform: "capitalize",
+                    fontWeight: 600,
+                    fontSize: "20px",
+                  }}
+                >
+                  {name ? name?.slice(0, 1) : "B"}
+                </Typography>
+              </Stack>
+            )}
+            <Typography
+              style={{
+                fontWeight: 400,
+                letterSpacing: "1px",
+                fontSize: "14px",
+                wordWrap: "wrap",
+                textOverflow: "ellipsis",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate(`${PATH.ContractorDetail}/${dbId}`)}
+            >
+              {name}
+            </Typography>
+          </Stack>
+        </StyledTableCell>
+        <StyledTableCell align="center">{phone && "+1"} {phone}</StyledTableCell>
+        <StyledTableCell align="center">{address?.slice(0, 25)}</StyledTableCell>
+        <StyledTableCell align="center">{email?.slice(0, 25)}</StyledTableCell>
+        <StyledTableCell align="center"><IOSSwitch onClick={handleActiveInactive} checked={checked} /></StyledTableCell>
+      </StyledTableRow>
     </>
   )
   // return (

@@ -9,10 +9,12 @@ export const CustomPagination = styled(Pagination)(() => ({
     // fontSize: "19px !important",
   },
   "& .MuiPaginationItem-root": {
-    border: `1px solid ${THEME.COLORS.primary} !important`,
+    border: `1px solid ${THEME.COLORS.text} !important`,
     fontSize: "19px !important",
+    color: THEME.COLORS.text
   },
   "& .MuiPaginationItem-text": {
+    color: '#fff'
     // fontSize: "19px !important",
   },
 }));

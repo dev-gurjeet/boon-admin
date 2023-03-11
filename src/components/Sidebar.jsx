@@ -43,7 +43,7 @@ const CustomLink = ({ path, active, name, icon }) => {
           color: THEME.COLORS.white,
           borderWidth: 1,
           borderBottomStyle: 'solid',
-          borderBottomColor: THEME.COLORS.horizontalLine,
+          borderBottomColor: '#333 !important',
           ":hover": {
             backgroundColor: active ? THEME.COLORS.secondary : THEME.COLORS.primary,
             color: THEME.COLORS.white

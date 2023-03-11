@@ -51,7 +51,7 @@ const IOSSwitch = styled((props) => (
   },
   "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    backgroundColor:  "#39393D",
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,
@@ -117,13 +117,16 @@ const WorkerTableItem = ({
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      borderColor: THEME.COLORS.secondary + " !important",
+      borderColor: "#333 !important",
       color: THEME.COLORS.text
     },
   }));
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -177,7 +180,6 @@ const WorkerTableItem = ({
             )}
             <Typography
               style={{
-                color: "#202020",
                 fontWeight: 400,
                 letterSpacing: "1px",
                 fontSize: "14px",

@@ -21,6 +21,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
 import { THEME } from "../utils/constants";
+import TableRow from '@mui/material/TableRow';
 import { dahboardTable } from "../utils/dummyData";
 const useStyles = makeStyles({
   table: {
@@ -40,6 +41,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    borderColor: '#333 !important'
   },
 }));
 const Contractor = () => {
@@ -91,11 +93,23 @@ const Contractor = () => {
   useEffect(() => {
     setState(getContractors_Data?.currentPage);
   }, [getContractors_Data]);
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
   return (
     <div>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           px: 2,
           py: 1,
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -110,7 +124,7 @@ const Contractor = () => {
           alignItems="center"
           sx={{ mb: 5, mt: 1 }}
         >
-          <Typography sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}>
+          <Typography sx={{ color: THEME.COLORS.text, fontSize: "18px", fontWeight: 500 }}>
             Contractors
           </Typography>
         </Stack>
@@ -118,13 +132,15 @@ const Contractor = () => {
           <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
             <DashboardTableHeading />
             {/* <Divider sx={{ mt: 0.5 }} /> */}
-            <TableBody>
+            <TableBody sx={{borderColor: '#333 !important'}}>
               {getContractors_isLoading || updateUser_isLoading ? (
-                <StyledTableCell align="center" colSpan="7">
-                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-                  </Stack>
-                </StyledTableCell>
+                <StyledTableRow>
+                  <StyledTableCell align="center" colSpan="6">
+                    <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                      <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
+                    </Stack>
+                  </StyledTableCell>
+                </StyledTableRow>
               ) : (
                 getContractors_Data?.data?.map((item, itemIndex) => (
                   // <Box key={itemIndex} sx={{ py: 1 }}>

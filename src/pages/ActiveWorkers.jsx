@@ -98,6 +98,19 @@ const ActiveWorkers = () => {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      borderColor: '#333 !important'
+    },
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
     },
   }));
 
@@ -105,7 +118,7 @@ const ActiveWorkers = () => {
     <div>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           px: 2,
           py: 1,
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -120,7 +133,7 @@ const ActiveWorkers = () => {
           alignItems="center"
           sx={{ mb: 5, mt: 1 }}
         >
-          <Typography sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}>
+          <Typography sx={{ color: THEME.COLORS.text, fontSize: "18px", fontWeight: 500 }}>
             Active Workers
           </Typography>
         </Stack>
@@ -131,31 +144,33 @@ const ActiveWorkers = () => {
             <TableBody>
               {/* <Divider sx={{ mt: 0.5 }} /> */}
               {getAllActiveWorker_isLoading || updateUser_isLoading ? (
-                <StyledTableCell align="center" colSpan="8">
-                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-                  </Stack>
-                </StyledTableCell>
+                <StyledTableRow>
+                  <StyledTableCell align="center" colSpan="8">
+                    <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                      <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
+                    </Stack>
+                  </StyledTableCell>
+                </StyledTableRow>
               ) : (
                 workerData?.map((item, itemIndex) => (
                   // <Box key={itemIndex}>
-                    <WorkerTableItem
-                      id={
-                        (getAllActiveWorker_Data?.currentPage - 1) * 10 +
-                        itemIndex +
-                        1
-                      }
-                      dbId={item?._id}
-                      address={item?.address?.formattedAddress}
-                      jobid={item?.jobid}
-                      name={item?.firstName}
-                      phone={item?.phoneNumber}
-                      totalHours={item?.totalHours}
-                      img={item?.profile_pic}
-                      checked={item?.isActive}
-                      categories={item?.categories}
-                    />
-                    // <Divider sx={{ mt: 0.5 }} />
+                  <WorkerTableItem
+                    id={
+                      (getAllActiveWorker_Data?.currentPage - 1) * 10 +
+                      itemIndex +
+                      1
+                    }
+                    dbId={item?._id}
+                    address={item?.address?.formattedAddress}
+                    jobid={item?.jobid}
+                    name={item?.firstName}
+                    phone={item?.phoneNumber}
+                    totalHours={item?.totalHours}
+                    img={item?.profile_pic}
+                    checked={item?.isActive}
+                    categories={item?.categories}
+                  />
+                  // <Divider sx={{ mt: 0.5 }} />
                   // </Box>
                 ))
               )}
