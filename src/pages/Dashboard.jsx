@@ -196,8 +196,8 @@ const Dashboard = ({ path, active, name, icon }) => {
           display: "flex",
           justifyContent: "space-evenly"
         }}>
-        <Chart options={pieChart.options} series={pieChart.series} type="pie" width="250" height="250" minHeight="250"  />
-        <Chart options={lineChart.options} series={lineChart.series} type="area" width="450" height="250"/>
+        <Chart options={pieChart.options} series={pieChart.series} type="pie" width="450" height="250" minHeight="auto"  />
+        <Chart options={lineChart.options} series={lineChart.series} type="area" width="450" height="auto"/>
       </Box>
       <Box
         sx={{

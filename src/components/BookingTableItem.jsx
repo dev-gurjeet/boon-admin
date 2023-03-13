@@ -1,16 +1,16 @@
 import { Box, Menu, MenuItem, Stack, Typography, styled } from "@mui/material";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { blue } from "@mui/material/colors";
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { PATH } from "../utils/constants";
+import { PATH, THEME } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 const textCss = {
-  color: "#202020",
+  color: THEME.COLORS.text,
 
   fontWeight: 400,
   letterSpacing: "1px",
@@ -73,11 +73,16 @@ const BookingTableItem = ({
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      borderColor: "#333 !important",
+      color: THEME.COLORS.text
     },
   }));
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -193,13 +198,13 @@ const BookingTableItem = ({
               onChange={(e) => {
                 setStatusVal(e.target.value);
                 handleClick(e)
-                if(e.target.value == "Reject"){
+                if (e.target.value == "Reject") {
                   handleRejected()
                 }
-                else if(e.target.value == "Modify"){
+                else if (e.target.value == "Modify") {
                   handleCloseModify()
                 }
-                else if(e.target.value == "Cancel"){
+                else if (e.target.value == "Cancel") {
                   handleCanceled()
                 }
               }}

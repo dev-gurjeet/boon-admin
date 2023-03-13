@@ -116,7 +116,7 @@ const Booking = () => {
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
   };
-  
+
   const handleCanceled = () => {
     const body = {
       jobId: state.id,
@@ -161,8 +161,22 @@ const Booking = () => {
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      borderColor: '#333 !important'
     },
-  }));  
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
   return (
     <div>
       <Dialog
@@ -287,7 +301,7 @@ const Booking = () => {
 
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           px: 2,
           py: 1,
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -297,7 +311,7 @@ const Booking = () => {
         }}
       >
         <Box sx={{ mb: 5, mt: 1 }}>
-          <Typography sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}>
+          <Typography sx={{ color: THEME.COLORS.text, fontSize: "18px", fontWeight: 500 }}>
             Contractor Jobs
           </Typography>
         </Box>
@@ -310,11 +324,13 @@ const Booking = () => {
             <TableBody>
               {/* <Divider sx={{ my: 1 }} /> */}
               {getAllcontractorJobs_isLoading ? (
-                <StyledTableCell align="center" colSpan="7">
-                  <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                    <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
-                  </Stack>
-                </StyledTableCell>
+                <StyledTableRow>
+                  <StyledTableCell align="center" colSpan="7">
+                    <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+                      <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                    </Stack>
+                  </StyledTableCell>
+                </StyledTableRow>
               ) : (
                 getAllcontractorJobs_Data?.data?.map((item, itemIndex) => (
                   // <Box key={itemIndex}>

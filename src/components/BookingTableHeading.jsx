@@ -15,8 +15,9 @@ const TextCss = {
 const BookingTableTableHeading = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#0a3444',
+      backgroundColor: THEME.COLORS.primary,
       color: theme.palette.common.white,
+      borderColor: "#333 !important",
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
