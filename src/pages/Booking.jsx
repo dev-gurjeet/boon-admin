@@ -108,18 +108,18 @@ const Booking = () => {
     }
   };
 
-  const handleRejected = () => {
+  const handleRejected = (id) => {
     const body = {
-      jobId: state.id,
+      jobId: id,
       status: "REJECTED",
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
   };
   
-  const handleCanceled = () => {
+  const handleCanceled = (id) => {
     const body = {
-      jobId: state.id,
+      jobId: id,
       status: "CANCELLED",
     };
     dispatch(updateJobPrice(body));

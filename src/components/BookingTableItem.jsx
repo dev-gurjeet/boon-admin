@@ -194,13 +194,13 @@ const BookingTableItem = ({
                 setStatusVal(e.target.value);
                 handleClick(e)
                 if(e.target.value == "Reject"){
-                  handleRejected()
+                  handleRejected(jobid)
                 }
                 else if(e.target.value == "Modify"){
                   handleCloseModify()
                 }
                 else if(e.target.value == "Cancel"){
-                  handleCanceled()
+                  handleCanceled(jobid)
                 }
               }}
             >

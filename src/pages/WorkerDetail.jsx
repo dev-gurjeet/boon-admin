@@ -90,7 +90,15 @@ const WorkerDetail = () => {
       dispatch(clearWorkeDetail());
     };
   }, []);
-
+  function isValidHttpUrl(string) {
+    let url;
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
   return (
     <>
       {state.isOpen && (
@@ -100,8 +108,8 @@ const WorkerDetail = () => {
             nextSrc={state.images[(state.photoIndex + 1) % state.images.length]}
             prevSrc={
               state.images[
-                (state.photoIndex + state.images.length - 1) %
-                  state.images.length
+              (state.photoIndex + state.images.length - 1) %
+              state.images.length
               ]
             }
             onCloseRequest={() => setState({ ...state, isOpen: false })}
@@ -132,8 +140,8 @@ const WorkerDetail = () => {
             }
             prevSrc={
               state.images1[
-                (state.photoIndex1 + state.images1.length - 1) %
-                  state.images1.length
+              (state.photoIndex1 + state.images1.length - 1) %
+              state.images1.length
               ]
             }
             onCloseRequest={() => setState({ ...state, isOpen1: false })}
@@ -533,7 +541,7 @@ const WorkerDetail = () => {
           ) : (
             <>
               <Stack direction="row" gap={3}>
-                <Typography
+                {/* <Typography
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.detailText,
@@ -543,30 +551,75 @@ const WorkerDetail = () => {
                   }}
                 >
                   License Document
-                </Typography>
+                </Typography> */}
                 <Stack gap={2} direction="row" alignItems="center">
                   {workerDetail_Data?.data?.isDocumentApproved !==
                     "PENDING" && (
-                    <>
-                      {workerDetail_Data?.data?.isDocumentApproved ===
-                      "APPROVED" ? (
-                        <Stack direction="row" gap={0.5}>
-                          <CheckCircleOutlineIcon
-                            sx={{
-                              color: THEME.COLORS.primary,
-                              fontWeight: 700,
-                            }}
-                          />
-                          <Typography
-                            sx={{
-                              color: THEME.COLORS.primary,
-                              fontWeight: 700,
-                            }}
-                          >
-                            Document Verified
-                          </Typography>
-                        </Stack>
-                      ) : (
+                      <>
+                        {workerDetail_Data?.data?.isDocumentApproved ===
+                          "APPROVED" ? (
+                          <Stack direction="row" gap={0.5}>
+                            <CheckCircleOutlineIcon
+                              sx={{
+                                color: THEME.COLORS.primary,
+                                fontWeight: 700,
+                              }}
+                            />
+                            <Typography
+                              sx={{
+                                color: THEME.COLORS.primary,
+                                fontWeight: 700,
+                              }}
+                            >
+                              Document Verified
+                            </Typography>
+                          </Stack>
+                        ) : (
+                          <Box>
+                            <Button
+                              onClick={handleApprove}
+                              sx={{
+                                backgroundColor: THEME.COLORS.primary,
+                                "&:hover": {
+                                  backgroundColor: THEME.COLORS.primary,
+                                },
+                              }}
+                              size="small"
+                              variant="contained"
+                            >
+                              verify
+                            </Button>
+                          </Box>
+                        )}
+                        {workerDetail_Data?.data?.isDocumentApproved ===
+                          "REJECTED" ? (
+                          <Stack direction="row" gap={0.5}>
+                            <HighlightOffIcon
+                              color="error"
+                              sx={{ fontWeight: 700 }}
+                            />
+                            <Typography color="error" sx={{ fontWeight: 700 }}>
+                              Document Rejected
+                            </Typography>
+                          </Stack>
+                        ) : (
+                          <Box>
+                            <Button
+                              onClick={handleRejected}
+                              color="error"
+                              size="small"
+                              variant="contained"
+                            >
+                              Reject
+                            </Button>
+                          </Box>
+                        )}
+                      </>
+                    )}
+
+                  {workerDetail_Data?.data?.isDocumentApproved ===
+                    "PENDING" && (
+                      <Stack direction="row" gap={2}>
                         <Box>
                           <Button
                             onClick={handleApprove}
@@ -582,19 +635,6 @@ const WorkerDetail = () => {
                             verify
                           </Button>
                         </Box>
-                      )}
-                      {workerDetail_Data?.data?.isDocumentApproved ===
-                      "REJECTED" ? (
-                        <Stack direction="row" gap={0.5}>
-                          <HighlightOffIcon
-                            color="error"
-                            sx={{ fontWeight: 700 }}
-                          />
-                          <Typography color="error" sx={{ fontWeight: 700 }}>
-                            Document Rejected
-                          </Typography>
-                        </Stack>
-                      ) : (
                         <Box>
                           <Button
                             onClick={handleRejected}
@@ -605,45 +645,13 @@ const WorkerDetail = () => {
                             Reject
                           </Button>
                         </Box>
-                      )}
-                    </>
-                  )}
-
-                  {workerDetail_Data?.data?.isDocumentApproved ===
-                    "PENDING" && (
-                    <Stack direction="row" gap={2}>
-                      <Box>
-                        <Button
-                          onClick={handleApprove}
-                          sx={{
-                            backgroundColor: THEME.COLORS.primary,
-                            "&:hover": {
-                              backgroundColor: THEME.COLORS.primary,
-                            },
-                          }}
-                          size="small"
-                          variant="contained"
-                        >
-                          verify
-                        </Button>
-                      </Box>
-                      <Box>
-                        <Button
-                          onClick={handleRejected}
-                          color="error"
-                          size="small"
-                          variant="contained"
-                        >
-                          Reject
-                        </Button>
-                      </Box>
-                    </Stack>
-                  )}
+                      </Stack>
+                    )}
                 </Stack>
               </Stack>
               {/* license Document */}
 
-              <Grid spacing={3} container>
+              {/* <Grid spacing={3} container>
                 {workerDetail_Data?.data?.license?.map((res, resIndex) => (
                   <Grid sx={{ width: "200px" }} item xs={4}>
                     <img
@@ -665,7 +673,7 @@ const WorkerDetail = () => {
                     <Typography sx={{ color: "#000" }}>{res?.name}</Typography>
                   </Grid>
                 ))}
-              </Grid>
+              </Grid> */}
               {/* other Document */}
               <Box sx={{ flex: 1, my: 1 }}>
                 <Typography
@@ -682,24 +690,26 @@ const WorkerDetail = () => {
                 <Grid spacing={3} container>
                   {workerDetail_Data?.data?.documents?.map((res, resIndex) => (
                     <Grid sx={{ width: "200px" }} item xs={4}>
-                      <img
-                        style={{
-                          height: "150px",
-                          objectFit: "contain",
-                          cursor: "zoom-in",
-                        }}
-                        src={res?.link ? res.link : IMAGES.placeholderImage}
-                        alt="document"
-                        onClick={() => {
-                          state["photoIndex"] = resIndex;
-                          setState({
-                            ...state,
-                            isOpen: true,
-                          });
-                        }}
-                      />
+                      {isValidHttpUrl(res.link) &&
+                        <img
+                          style={{
+                            height: "150px",
+                            objectFit: "contain",
+                            cursor: "zoom-in",
+                          }}
+                          src={res?.link ? res.link : IMAGES.placeholderImage}
+                          alt="document"
+                          onClick={() => {
+                            state["photoIndex"] = resIndex;
+                            setState({
+                              ...state,
+                              isOpen: true,
+                            });
+                          }}
+                        />
+                      }
                       <Typography sx={{ color: "#000" }}>
-                        {res?.name}
+                        {res?.name} {!isValidHttpUrl(res.link) && `- ${res.link}`}
                       </Typography>
                     </Grid>
                   ))}

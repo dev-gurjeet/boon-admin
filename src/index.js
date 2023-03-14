@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 window.onbeforeunload = () => {
   const lk = localStorage.getItem("boonKeepedLogin");
   if (!Boolean(lk)) {
-    localStorage.removeItem("boonAdmin");
+    // localStorage.removeItem("boonAdmin");
   }
 };
 const root = ReactDOM.createRoot(document.getElementById("root"));
