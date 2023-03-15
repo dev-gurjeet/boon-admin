@@ -34,8 +34,10 @@ const Navbar = () => {
       .off("sendUnreadNotificationCount")
       .on("sendUnreadNotificationCount", (args) => {
         console.log(args, "in second argsss");
-        toast.success("New Notification");
-        playAudio();
+        if (args > 0) {
+          toast.success("New Notification");
+          playAudio();
+        }
         setState(args);
       });
     return () => socket.emit("end");
@@ -93,7 +95,7 @@ const Navbar = () => {
           <Badge
             color="error"
             badgeContent={state}
-            // onClick={() => navigate(PATH.Notification)}
+          // onClick={() => navigate(PATH.Notification)}
           >
             <NotificationsIcon
               sx={{ color: "rgba(0,0,0,0.6)", fontSize: "1.8rem" }}

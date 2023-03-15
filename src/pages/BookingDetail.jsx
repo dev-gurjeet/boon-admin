@@ -300,17 +300,38 @@ const BookingDetail = () => {
             <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
               Contractor Job Detail
             </Typography>
-            <IconButton
-              onClick={() =>
+            <Button
+              variant="contained"
+              size="small"onClick={() =>
                 navigate(
                   `${PATH.jobChat}/${jobid}/${jobDetail_Data?.data[0]?.contractorDetails?._id}`
                 )
               }
             >
-              <SmsIcon
-                sx={{ color: THEME.COLORS.primary, cursor: "pointer" }}
-              />
-            </IconButton>
+              <IconButton>
+                <SmsIcon
+                  sx={{ color: THEME.COLORS.white, cursor: "pointer" }}
+                />
+              </IconButton>
+              Chat with contracter
+            </Button>
+
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() =>
+                navigate(
+                  `${PATH.jobChat}/${jobid}/${jobDetail_Data?.data[0]?.bookingDetails[0]?.workerDetails?._id}`
+                )
+              }
+            >
+              <IconButton>
+                <SmsIcon
+                  sx={{ color: THEME.COLORS.white, cursor: "pointer" }}
+                />
+              </IconButton>
+              Chat with worker
+            </Button>
           </Stack>
           {state.show && (
             <>
@@ -554,7 +575,7 @@ const BookingDetail = () => {
               />
             </Stack>
           ) : !jobDetail_Data?.data[0]?.bookingDetails[0]?.workerDetails
-              ?._id ? (
+            ?._id ? (
             <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
               <Typography>
                 no workers available to this job right now.
