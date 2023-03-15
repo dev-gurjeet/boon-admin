@@ -1,5 +1,5 @@
 import { Box, Menu, MenuItem, Stack, Typography, styled } from "@mui/material";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { blue } from "@mui/material/colors";
 import InputLabel from '@mui/material/InputLabel';
@@ -193,13 +193,13 @@ const BookingTableItem = ({
               onChange={(e) => {
                 setStatusVal(e.target.value);
                 handleClick(e)
-                if(e.target.value == "Reject"){
+                if (e.target.value == "Reject") {
                   handleRejected(jobid)
                 }
-                else if(e.target.value == "Modify"){
+                else if (e.target.value == "Modify") {
                   handleCloseModify()
                 }
-                else if(e.target.value == "Cancel"){
+                else if (e.target.value == "Cancel") {
                   handleCanceled(jobid)
                 }
               }}
