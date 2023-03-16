@@ -108,18 +108,18 @@ const Booking = () => {
     }
   };
 
-  const handleRejected = () => {
+  const handleRejected = (id) => {
     const body = {
-      jobId: state.id,
+      jobId: id,
       status: "REJECTED",
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
   };
 
-  const handleCanceled = () => {
+  const handleCanceled = (id) => {
     const body = {
-      jobId: state.id,
+      jobId: id,
       status: "CANCELLED",
     };
     dispatch(updateJobPrice(body));
@@ -279,7 +279,7 @@ const Booking = () => {
               Cancel
             </Button>
             {updateJobPrice_isLoading ? (
-              <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+              <CircularProgress sx={{ color: THEME.COLORS.text }} />
             ) : (
               <Button
                 size="small"
@@ -327,7 +327,7 @@ const Booking = () => {
                 <StyledTableRow>
                   <StyledTableCell align="center" colSpan="7">
                     <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                      <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                      <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
                     </Stack>
                   </StyledTableCell>
                 </StyledTableRow>

@@ -433,7 +433,7 @@ const Categories = () => {
       </Dialog>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: "#0F1C24",
           px: 2,
           py: 1,
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -442,21 +442,23 @@ const Categories = () => {
           mx: "20%",
         }}
       >
-        <Typography sx={{ color: "#000", fontWeight: 500, fontSize: "18px" }}>
+        <Typography sx={{ color: "#d3d3d3", fontWeight: 500, fontSize: "18px" }}>
           Minimum Job Price
         </Typography>
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 2 ,color:THEME.COLORS.white}}>
           <Typography sx={{ mb: 1 }}>Enter Minimum Price</Typography>
           <TextField
             InputProps={{
               startAdornment: (
                 <InputAdornment>
-                  <Typography sx={{ mr: 1 }}>$</Typography>
+                  <Typography sx={{ mr: 1,color:"#d3d3d3"}}>$</Typography>
                 </InputAdornment>
               ),
             }}
             size="small"
-            sx={{ width: "50%" }}
+            sx={{ width: "50%",backgroundColor:THEME.COLORS.backgroundSecondary,borderRadius:"3px",borderBlockColor:"#fff","&:hover": {
+              borderRadius: "3px",borderBlockColor:"#fff",
+            },input:{color: THEME.COLORS.text}}}
             placeholder="type minimum Price"
             value={state.minimumPrice}
             onChange={(e) =>
@@ -465,18 +467,18 @@ const Categories = () => {
           />
           <Box>
             {saveCommonDetails_isLoading || getCommonDetails_isLoading ? (
-              <CircularProgress sx={{ color: THEME.COLORS.primary, my: 2 }} />
+              <CircularProgress sx={{ color: THEME.COLORS.text, my: 2 }} />
             ) : (
               <Button
                 onClick={handleUpdateMinimumPrice}
                 sx={{
                   color: "#fff",
                   my: 2,
-                  backgroundColor: THEME.COLORS.primary,
+                  backgroundColor: THEME.COLORS.secondary,
                   textTransform: "capitalize",
                   px: 6,
                   "&:hover": {
-                    backgroundColor: THEME.COLORS.primary,
+                    backgroundColor: THEME.COLORS.secondary,
                   },
                 }}
               >
@@ -493,7 +495,7 @@ const Categories = () => {
               {...provided.droppableProps}
               ref={provided.innerRef}
               sx={{
-                backgroundColor: "#fff",
+                backgroundColor: "#0F1C24",
                 px: 2,
                 py: 1,
                 boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -509,7 +511,7 @@ const Categories = () => {
                 justifyContent="space-between"
               >
                 <Typography
-                  sx={{ color: "#000", fontWeight: 500, fontSize: "18px" }}
+                  sx={{ color: "#d3d3d3", fontWeight: 500, fontSize: "18px" }}
                 >
                   Category
                 </Typography>
@@ -518,10 +520,10 @@ const Categories = () => {
                   variant="contained"
                   size="small"
                   sx={{
-                    backgroundColor: THEME.COLORS.primary,
+                    backgroundColor: THEME.COLORS.secondary,
                     textTransform: "capitalize",
                     "&:hover": {
-                      backgroundColor: THEME.COLORS.primary,
+                      backgroundColor: THEME.COLORS.secondary,
                     },
                   }}
                 >
@@ -531,11 +533,11 @@ const Categories = () => {
 
               <CategoryTableTableHeading />
 
-              <Divider sx={{ my: 1 }} />
+              <Divider sx={{ my: 1 ,borderBottomColor:"#333"}} />
               {getCategory_isLoading || reorderCategory_isLoading ? (
                 <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
                   <CircularProgress
-                    sx={{ color: THEME.COLORS.primary }}
+                    sx={{ color: THEME.COLORS.white }}
                     size={40}
                   />
                 </Stack>
@@ -545,6 +547,7 @@ const Categories = () => {
                     key={itemIndex}
                     draggableId={`${itemIndex}`}
                     index={itemIndex}
+                   
                   >
                     {(provide, snapshot) => (
                       <div
@@ -570,7 +573,7 @@ const Categories = () => {
                           handleDelete={handleDelete}
                           handleEdit={handleEdit}
                         />
-                        <Divider sx={{ my: 1 }} />
+                        <Divider sx={{ my: 1 ,borderBottomColor:"#333"}} />
                       </div>
                     )}
                   </Draggable>

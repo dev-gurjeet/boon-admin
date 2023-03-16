@@ -19,16 +19,34 @@ import {
   contractorDetailById,
   contractorJobById,
 } from "../redux/ContractorReducer";
+import TableBody from '@mui/material/TableBody';
+import BookingTableTableHeading from "../components/BookingTableHeading";
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+// import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import { PATH, THEME } from "../utils/constants";
-import BookingTableHeading from "../components/BookingTableHeading";
+// import BookingTableHeading from "../components/BookingTableHeading";
 import BookingTableItem from "../components/BookingTableItem";
 import { clearupdatejob, updateJobPrice } from "../redux/JobReducer";
 import { toast } from "react-toastify";
 import BackNavigate from "../components/BackNavigate";
 import { memo } from "react";
+import { makeStyles } from "@mui/styles";
 import SmsIcon from "@mui/icons-material/Sms";
 import { CustomPagination } from "../components/styledComponent";
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableBody-root": {
+      "& .MuiTableCell-root": {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+      }
+    }
+  }
+});
 const ContractorDetail = () => {
+  const classes = useStyles();
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -276,7 +294,7 @@ const ContractorDetail = () => {
       <BackNavigate />
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: "#0F1C24",
           border: "1px solid rgba(0, 0, 0, 0.08)",
           boxShadow: "0px 4px 6px rgba(62, 73, 84, 0.04)",
           borderRadius: "6px",
@@ -284,20 +302,21 @@ const ContractorDetail = () => {
           px: 5,
         }}
       >
+     
         <Stack direction="row" gap={2} alignItems="center">
-          <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
+          <Typography sx={{ fontSize: "18px", fontWeight: 500 ,color:THEME.COLORS.text}}>
             Contractor Details
           </Typography>
           <IconButton
             onClick={() => navigate(`${PATH.Chat}?id=${id}&role=CONTRACTOR`)}
           >
-            <SmsIcon sx={{ color: THEME.COLORS.primary, cursor: "pointer" }} />
+            <SmsIcon sx={{ color: THEME.COLORS.secondary, cursor: "pointer" }} />
           </IconButton>
         </Stack>
         <Divider sx={{ my: 2 }} />
         {contractorDetail_isLoading ? (
           <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+            <CircularProgress sx={{ color: THEME.COLORS.white }} size={40} />
           </Stack>
         ) : (
           <>
@@ -306,7 +325,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     Name
                   </Typography>
@@ -314,9 +333,9 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
-                    {contractorDetail_Data?.data?.firstName}{" "}
+                    {contractorDetail_Data?.data?.firstName}
                     {contractorDetail_Data?.data?.lastName}
                   </Typography>
                 </Grid>
@@ -325,7 +344,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     Company Name
                   </Typography>
@@ -333,7 +352,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     {contractorDetail_Data?.data?.companyName}
                   </Typography>
@@ -346,7 +365,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     Email
                   </Typography>
@@ -354,11 +373,11 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: THEME.COLORS.black }}
+                      sx={{ color: THEME.COLORS.white }}
                     >
                       {contractorDetail_Data?.data?.email}
                     </Typography>
@@ -370,7 +389,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     City
                   </Typography>
@@ -378,7 +397,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     {contractorDetail_Data?.data?.address?.subLocality}
                   </Typography>
@@ -391,7 +410,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     Phone
                   </Typography>
@@ -399,11 +418,11 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: THEME.COLORS.black }}
+                      sx={{ color: THEME.COLORS.white }}
                     >
                       +1 {contractorDetail_Data?.data?.phoneNumber}
                     </Typography>
@@ -416,7 +435,7 @@ const ContractorDetail = () => {
                   <Typography
                     variant="subtitle1"
                     sx={{
-                      color: THEME.COLORS.detailText,
+                      color: THEME.COLORS.text,
                     }}
                   >
                     Country
@@ -425,7 +444,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     {contractorDetail_Data?.data?.address?.country}
                   </Typography>
@@ -438,7 +457,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     Address Line 1
                   </Typography>
@@ -446,11 +465,11 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: THEME.COLORS.black }}
+                      sx={{ color: THEME.COLORS.white }}
                     >
                       {contractorDetail_Data?.data?.address?.streetAddress}
                     </Typography>
@@ -463,7 +482,7 @@ const ContractorDetail = () => {
                   <Typography
                     variant="subtitle1"
                     sx={{
-                      color: THEME.COLORS.detailText,
+                      color: THEME.COLORS.text,
                     }}
                   >
                     Address Line 2
@@ -472,7 +491,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     {contractorDetail_Data?.data?.address?.region}
                   </Typography>
@@ -484,7 +503,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText }}
+                    sx={{ color: THEME.COLORS.text }}
                   >
                     Postal Code
                   </Typography>
@@ -492,11 +511,11 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.black }}
+                    sx={{ color: THEME.COLORS.white }}
                   >
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: THEME.COLORS.black }}
+                      sx={{ color: THEME.COLORS.white }}
                     >
                       {contractorDetail_Data?.data?.address?.postalCode}
                     </Typography>
@@ -509,7 +528,7 @@ const ContractorDetail = () => {
       </Box>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: "#0F1C24",
           border: "1px solid rgba(0, 0, 0, 0.08)",
           boxShadow: "0px 4px 6px rgba(62, 73, 84, 0.04)",
           borderRadius: "6px",
@@ -518,15 +537,19 @@ const ContractorDetail = () => {
           mt: 2,
         }}
       >
-        <BookingTableHeading />
-        <Divider sx={{ my: 2 }} />
+         <TableContainer component={Paper}>
+          <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
+            <BookingTableTableHeading />
+
+            <TableBody>
+        {/* <Divider sx={{ my: 2 }} /> */}
         {contractorJobById_isLoading || updateJobDetail_isLoading ? (
           <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+            <CircularProgress sx={{ color: THEME.COLORS.white }} size={40} />
           </Stack>
         ) : (
           contractorJobById_Data?.data?.map((item, itemIndex) => (
-            <Box key={itemIndex}>
+            // <Box key={itemIndex}>
               <BookingTableItem
                 address={item?.jobName}
                 company={item?.companyName}
@@ -541,11 +564,14 @@ const ContractorDetail = () => {
                 modifiedPrice={item?.modifiedPrice}
                 adminCommision={item?.adminCommision}
               />
-              <Divider sx={{ my: 1 }} />
-            </Box>
+            //   <Divider sx={{ my: 1 }} />
+            // </Box>
           ))
-        )}
+        )}    </TableBody>
+        </Table>
+      </TableContainer>
       </Box>
+            
       <Stack direction="row" justifyContent="flex-end" sx={{ px: 5, my: 2 }}>
         <CustomPagination
           count={contractorJobById_Data?.totalPage}
@@ -554,7 +580,8 @@ const ContractorDetail = () => {
           variant="outlined"
           onChange={onChangePage}
         />
-      </Stack>
+        </Stack>
+       
     </>
   );
 };

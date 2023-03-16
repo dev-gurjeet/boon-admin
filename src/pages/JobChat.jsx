@@ -359,7 +359,7 @@ const JobChat = () => {
           )}{" "}
         {showData?.map((item, itemIndex) => (
           <Box key={itemIndex}>
-            {item?.senderId === getProfile_Data?.data?._id ? (
+            {item?.senderId !== getProfile_Data?.data?._id ? (
               <LeftMessageCard
                 text={item?.message}
                 time={moment(item?.createdAt).format("hh:mm a")}

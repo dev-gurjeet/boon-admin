@@ -6,7 +6,7 @@ import RadioButton from "./RadioButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 const textCss = {
-  color: "#202020",
+  color: "#fff",
   fontFamily: "Roboto",
   fontWeight: 400,
   letterSpacing: "1px",
@@ -40,7 +40,7 @@ const CategoryTableItem = ({
       </Box>
       <Stack sx={{ flex: 1 }} direction="row" gap={2}>
         <IconButton onClick={() => handleEdit(dbId, categoryName, image)}>
-          <EditIcon sx={{ color: "#000" }} />
+          <EditIcon sx={{ color: THEME.COLORS.secondary }} />
         </IconButton>
         <IconButton onClick={() => handleDelete(dbId)}>
           <DeleteIcon color="error" />

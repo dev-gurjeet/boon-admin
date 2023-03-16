@@ -44,6 +44,15 @@ const WorkerDetail = () => {
     images: [],
     images1: [],
   });
+  function isValidHttpUrl(string) {
+    let url;
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
   const handleApprove = () => {
     const body = {
       userId: id,
@@ -157,12 +166,12 @@ const WorkerDetail = () => {
       <BackNavigate />
       {workerDetail_isLoading ? (
         <Stack direction="row" justifyContent="center">
-          <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+          <CircularProgress sx={{ color: THEME.COLORS.text }} />
         </Stack>
       ) : (
         <Box
           sx={{
-            backgroundColor: "#fff",
+            backgroundColor: "#0F1C24",
             border: "1px solid rgba(0, 0, 0, 0.08)",
             boxShadow: "0px 4px 6px rgba(62, 73, 84, 0.04)",
             borderRadius: "6px",
@@ -171,19 +180,19 @@ const WorkerDetail = () => {
           }}
         >
           <Stack direction="row" gap={2} alignItems="center">
-            <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
+            <Typography sx={{ fontSize: "18px", fontWeight: 500 ,color:THEME.COLORS.text }}>
               Worker Details
             </Typography>
             <IconButton
               onClick={() => navigate(`${PATH.Chat}?id=${id}&role=WORKER`)}
             >
               <SmsIcon
-                sx={{ color: THEME.COLORS.primary, cursor: "pointer" }}
+                sx={{ color: THEME.COLORS.secondary, cursor: "pointer" }}
               />
             </IconButton>
           </Stack>
 
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: 2 ,borderBottomColor:"#333"}} />
 
           <Stack direction="row" sx={{ my: 2 }}>
             <Box sx={{ flex: 1 }}>
@@ -195,7 +204,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -204,7 +213,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.firstName}{" "}
                   {workerDetail_Data?.data?.lastName}
@@ -219,7 +228,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -228,7 +237,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.email}
                 </Typography>
@@ -242,7 +251,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -251,7 +260,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   +1 {workerDetail_Data?.data?.phoneNumber}
                 </Typography>
@@ -265,7 +274,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -274,7 +283,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.subLocality}
                 </Typography>
@@ -288,7 +297,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -297,7 +306,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.country}
                 </Typography>
@@ -311,7 +320,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -320,7 +329,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.streetAddress}
                 </Typography>
@@ -334,7 +343,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -343,7 +352,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.locality}
                 </Typography>
@@ -357,7 +366,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -366,7 +375,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.postalCode}
                 </Typography>
@@ -383,7 +392,7 @@ const WorkerDetail = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: THEME.COLORS.detailText,
+                        color: THEME.COLORS.text,
                         fontSize: "20px",
                         flex: 1,
                       }}
@@ -393,7 +402,7 @@ const WorkerDetail = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: THEME.COLORS.black,
+                        color: THEME.COLORS.white,
                         flex: 1,
                         fontWeight: 500,
                       }}
@@ -410,7 +419,7 @@ const WorkerDetail = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: THEME.COLORS.detailText,
+                        color: THEME.COLORS.text,
                         fontSize: "20px",
                         flex: 1,
                       }}
@@ -420,7 +429,7 @@ const WorkerDetail = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: THEME.COLORS.black,
+                        color: THEME.COLORS.white,
                         flex: 1,
                         fontWeight: 500,
                       }}
@@ -428,10 +437,10 @@ const WorkerDetail = () => {
                       {res?.experience ? res?.experience : 0}
                     </Typography>
                   </Stack>
-                  <Divider />
+                  <Divider sx={{borderBottomColor:"#333"}} />
                 </Box>
               ))}
-              <Typography variant="h6">Payment Details</Typography>
+              <Typography variant="h6" sx={{color:THEME.COLORS.text}}>Payment Details</Typography>
               <Stack
                 direction="row"
                 sx={{ flex: 1, my: 1 }}
@@ -440,7 +449,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -449,7 +458,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.paymentDetails?.instituteName}
                 </Typography>
@@ -463,7 +472,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -472,7 +481,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.paymentDetails?.accountNumber}
                 </Typography>
@@ -486,7 +495,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -495,7 +504,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.black, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.paymentDetails?.transitNumber}
                 </Typography>
@@ -505,7 +514,7 @@ const WorkerDetail = () => {
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                   }}
@@ -519,6 +528,7 @@ const WorkerDetail = () => {
                       height: "200px",
                       objectFit: "contain",
                       width: "300px",
+                      color:THEME.COLORS.white
                     }}
                     src={workerDetail_Data?.data?.paymentDetails?.image}
                   />
@@ -532,19 +542,9 @@ const WorkerDetail = () => {
             </Stack>
           ) : (
             <>
-              <Stack direction="row" gap={3}>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    color: THEME.COLORS.detailText,
-                    fontSize: "20px",
-                    flex: 1,
-                    mb: 2,
-                  }}
-                >
-                  License Document
-                </Typography>
-                <Stack gap={2} direction="row" alignItems="center">
+              <Stack alignItems={"end"} gap={3} >
+                
+                <Stack gap={2} direction="row" >
                   {workerDetail_Data?.data?.isDocumentApproved !==
                     "PENDING" && (
                     <>
@@ -553,13 +553,13 @@ const WorkerDetail = () => {
                         <Stack direction="row" gap={0.5}>
                           <CheckCircleOutlineIcon
                             sx={{
-                              color: THEME.COLORS.primary,
+                              color: THEME.COLORS.green,
                               fontWeight: 700,
                             }}
                           />
                           <Typography
                             sx={{
-                              color: THEME.COLORS.primary,
+                              color: THEME.COLORS.white,
                               fontWeight: 700,
                             }}
                           >
@@ -651,6 +651,7 @@ const WorkerDetail = () => {
                         height: "150px",
                         objectFit: "contain",
                         cursor: "zoom-in",
+                        color: "#333"
                       }}
                       src={res?.link ? res.link : IMAGES.placeholderImage}
                       alt="document"
@@ -667,11 +668,11 @@ const WorkerDetail = () => {
                 ))}
               </Grid>
               {/* other Document */}
-              <Box sx={{ flex: 1, my: 1 }}>
+              <Box sx={{ flex: 1, my: 5 }}>
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: THEME.COLORS.detailText,
+                    color: THEME.COLORS.text,
                     fontSize: "20px",
                     flex: 1,
                     mb: 2,
@@ -682,24 +683,26 @@ const WorkerDetail = () => {
                 <Grid spacing={3} container>
                   {workerDetail_Data?.data?.documents?.map((res, resIndex) => (
                     <Grid sx={{ width: "200px" }} item xs={4}>
-                      <img
-                        style={{
-                          height: "150px",
-                          objectFit: "contain",
-                          cursor: "zoom-in",
-                        }}
-                        src={res?.link ? res.link : IMAGES.placeholderImage}
-                        alt="document"
-                        onClick={() => {
-                          state["photoIndex"] = resIndex;
-                          setState({
-                            ...state,
-                            isOpen: true,
-                          });
-                        }}
-                      />
-                      <Typography sx={{ color: "#000" }}>
-                        {res?.name}
+                      {isValidHttpUrl(res.link) &&
+                        <img
+                          style={{
+                            height: "150px",
+                            objectFit: "contain",
+                            cursor: "zoom-in",
+                          }}
+                          src={res?.link ? res.link : IMAGES.placeholderImage}
+                          alt="document"
+                          onClick={() => {
+                            state["photoIndex"] = resIndex;
+                            setState({
+                              ...state,
+                              isOpen: true,
+                            });
+                          }}
+                        />
+                      }
+                      <Typography sx={{ color: THEME.COLORS.text }}>
+                        {res?.name} {!isValidHttpUrl(res.link) && `- ${res.link}`}
                       </Typography>
                     </Grid>
                   ))}
