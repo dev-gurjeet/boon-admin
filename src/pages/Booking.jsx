@@ -279,7 +279,7 @@ const Booking = () => {
               Cancel
             </Button>
             {updateJobPrice_isLoading ? (
-              <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+              <CircularProgress sx={{ color: THEME.COLORS.text }} />
             ) : (
               <Button
                 size="small"
@@ -327,7 +327,7 @@ const Booking = () => {
                 <StyledTableRow>
                   <StyledTableCell align="center" colSpan="7">
                     <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                      <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                      <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
                     </Stack>
                   </StyledTableCell>
                 </StyledTableRow>

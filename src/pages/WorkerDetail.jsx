@@ -166,7 +166,7 @@ const WorkerDetail = () => {
       <BackNavigate />
       {workerDetail_isLoading ? (
         <Stack direction="row" justifyContent="center">
-          <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+          <CircularProgress sx={{ color: THEME.COLORS.text }} />
         </Stack>
       ) : (
         <Box
