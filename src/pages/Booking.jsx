@@ -70,39 +70,30 @@ const Booking = () => {
     dispatch(getAllcontractorJobs(body));
   };
   const handleModify = () => {
-    if (!String(state.percentage).trim()) {
-      setState((prev) => ({ ...prev, err: true }));
-      return;
-    }
-    if (state.price && state.percentage) {
-      const totalPrice = Math.floor(
-        (Number(state.price ? state.price : state.originalPrice) *
-          Number(state.percentage)) /
-        100
-      );
-
+    let totalPrice = 0;
+    if (state.price || state.percentage) {
+      if (!state.price) {
+        if (!String(state.percentage).trim()) {
+          setState((prev) => ({ ...prev, err: true }));
+          return;
+        }
+        totalPrice = Math.floor(
+          (Number(state.originalPrice) *
+            Number(state.percentage)) /
+          100
+        );
+      }
+      else {
+        totalPrice = Number(state.originalPrice) - Number(state.price)
+      }
+      console.log("state", state)
       const body = {
         jobId: state.id,
         adminCommision: totalPrice,
-        modifiedPrice:
-          Number(state.price ? state.price : state.originalPrice) -
-          Number(totalPrice),
-        newJobPrice: Number(state.price),
-      };
-      dispatch(updateJobPrice(body));
-    }
-    if (!state.price && state.percentage) {
-      const totalPrice = Math.floor(
-        (Number(state.price ? state.price : state.originalPrice) *
-          Number(state.percentage)) /
-        100
-      );
-      const body = {
-        jobId: state.id,
-        adminCommision: Number(totalPrice),
-        modifiedPrice:
-          Number(state.price ? state.price : state.originalPrice) -
-          Number(totalPrice),
+        modifiedPrice: Number(state.originalPrice) - Number(totalPrice),
+        //   Number(state.price ? state.price : state.originalPrice) -
+        //   Number(totalPrice),
+        newJobPrice: Number(state.originalPrice) - Number(totalPrice),
       };
       dispatch(updateJobPrice(body));
     }
@@ -192,7 +183,7 @@ const Booking = () => {
           })
         }
         PaperProps={{
-          sx: { borderRadius: "10px", width: "350px" },
+          sx: { borderRadius: "10px", width: "350px", backgroundColor: THEME.COLORS.backgroundSecondary, color: THEME.COLORS.text },
         }}
       >
         <Box sx={{ p: 2 }}>
@@ -206,41 +197,46 @@ const Booking = () => {
               <span style={{ fontWeight: 600 }}>${state.originalPrice}</span>
             </Typography>
           </Box>
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ my: 2 }}>
             <Typography variant="body1" sx={{ mb: 1, fontWeight: 400 }}>
-              Enter Modified Price
+              Enter Modified Job Price
             </Typography>
             <TextField
               variant="standard"
               fullWidth
               type="number"
               value={state.price}
+              sx={{ input: { color: THEME.COLORS.text } }}
               onChange={(e) => setState({ ...state, price: e.target.value })}
               InputProps={{
                 startAdornment: (
                   <InputAdornment>
-                    <Typography>$</Typography>
+                    <Typography sx={{ color: THEME.COLORS.text }}>$</Typography>
                   </InputAdornment>
                 ),
               }}
             />
           </Box>
+          <Typography sx={{ textAlign: "center" }}>
+            or
+          </Typography>
           <Box sx={{ mt: 2 }}>
             <Typography variant="body1" sx={{ mb: 1, fontWeight: 400 }}>
-              Enter Percentage
+              Enter Commision Percentage
             </Typography>
             <TextField
               variant="standard"
               fullWidth
               value={state.percentage}
               type="number"
+              sx={{ input: { color: THEME.COLORS.text } }}
               onChange={(e) =>
                 setState({ ...state, percentage: e.target.value, err: false })
               }
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Typography>%</Typography>
+                    <Typography sx={{ color: THEME.COLORS.text }}>%</Typography>
                   </InputAdornment>
                 ),
               }}
@@ -286,9 +282,10 @@ const Booking = () => {
                 onClick={handleModify}
                 variant="contained"
                 sx={{
-                  backgroundColor: THEME.COLORS.primary,
+                  backgroundColor: THEME.COLORS.secondary,
+                  color: THEME.COLORS.text,
                   "&:hover": {
-                    backgroundColor: THEME.COLORS.primary,
+                    backgroundColor: THEME.COLORS.secondary,
                   },
                 }}
               >
