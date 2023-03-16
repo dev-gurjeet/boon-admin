@@ -5,14 +5,14 @@ import { blue, green, red } from "@mui/material/colors";
 import { PATH } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 const textCss = {
-  color: "#202020",
+  color: "#fff",
   fontWeight: 400,
   letterSpacing: "1px",
 
   fontSize: "14px",
 };
 const textCsswithDeco = {
-  color: "#202020",
+  color: "#fff",
 
   fontWeight: 400,
   letterSpacing: "1px",
@@ -67,7 +67,7 @@ const BookingDetailTableItem = ({
       <Box sx={{ flex: 1 }}>
         <Typography
           style={{
-            color: "#202020",
+            color: "#fff",
             fontWeight: 400,
             letterSpacing: "1px",
             textTransform: "capitalize",
