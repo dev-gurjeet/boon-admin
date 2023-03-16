@@ -296,21 +296,42 @@ const BookingDetail = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Stack direction="row" gap={2} alignItems="center">
+         <Stack direction="row" gap={2} alignItems="center">
             <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
               Contractor Job Detail
             </Typography>
-            <IconButton
-              onClick={() =>
+            <Button
+              variant="contained"
+              size="small"onClick={() =>
                 navigate(
                   `${PATH.jobChat}/${jobid}/${jobDetail_Data?.data[0]?.contractorDetails?._id}`
                 )
               }
             >
-              <SmsIcon
-                sx={{ color: THEME.COLORS.primary, cursor: "pointer" }}
-              />
-            </IconButton>
+              <IconButton>
+                <SmsIcon
+                  sx={{ color: THEME.COLORS.white, cursor: "pointer" }}
+                />
+              </IconButton>
+              Chat with contracter
+            </Button>
+
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() =>
+                navigate(
+                  `${PATH.jobChat}/${jobid}/${jobDetail_Data?.data[0]?.bookingDetails[0]?.workerDetails?._id}`
+                )
+              }
+            >
+              <IconButton>
+                <SmsIcon
+                  sx={{ color: THEME.COLORS.white, cursor: "pointer" }}
+                />
+              </IconButton>
+              Chat with worker
+            </Button>
           </Stack>
           {state.show && (
             <>

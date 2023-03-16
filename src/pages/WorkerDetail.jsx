@@ -44,6 +44,15 @@ const WorkerDetail = () => {
     images: [],
     images1: [],
   });
+  function isValidHttpUrl(string) {
+    let url;
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
   const handleApprove = () => {
     const body = {
       userId: id,
@@ -674,25 +683,26 @@ const WorkerDetail = () => {
                 <Grid spacing={3} container>
                   {workerDetail_Data?.data?.documents?.map((res, resIndex) => (
                     <Grid sx={{ width: "200px" }} item xs={4}>
-                      <img
-                        style={{
-                          height: "150px",
-                          objectFit: "contain",
-                          cursor: "zoom-in",
-                          color:"#333"
-                        }}
-                        src={res?.link ? res.link : IMAGES.placeholderImage}
-                        alt="document"
-                        onClick={() => {
-                          state["photoIndex"] = resIndex;
-                          setState({
-                            ...state,
-                            isOpen: true,
-                          });
-                        }}
-                      />
-                      <Typography sx={{ color: "#fff" }}>
-                        {res?.name}
+                      {isValidHttpUrl(res.link) &&
+                        <img
+                          style={{
+                            height: "150px",
+                            objectFit: "contain",
+                            cursor: "zoom-in",
+                          }}
+                          src={res?.link ? res.link : IMAGES.placeholderImage}
+                          alt="document"
+                          onClick={() => {
+                            state["photoIndex"] = resIndex;
+                            setState({
+                              ...state,
+                              isOpen: true,
+                            });
+                          }}
+                        />
+                      }
+                      <Typography sx={{ color: THEME.COLORS.text }}>
+                        {res?.name} {!isValidHttpUrl(res.link) && `- ${res.link}`}
                       </Typography>
                     </Grid>
                   ))}

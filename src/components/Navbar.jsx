@@ -34,8 +34,10 @@ const Navbar = () => {
       .off("sendUnreadNotificationCount")
       .on("sendUnreadNotificationCount", (args) => {
         console.log(args, "in second argsss");
+       if (args > 0) {
         toast.success("New Notification");
         playAudio();
+       }
         setState(args);
       });
     return () => socket.emit("end");
