@@ -229,7 +229,7 @@ const Dashboard = ({ path, active, name, icon }) => {
       sx={{ mb: 5, mt: 1 }}
     >
       <Typography
-        sx={{ color: "#d3d3d3", fontSize: "18px", fontWeight: 500 }}
+        sx={{ color: "#fff", fontSize: "18px", fontWeight: 500 }}
         variant="h5"
       >
         {state.menu ? "Total Workers" : "Total Contractors"}
@@ -254,8 +254,8 @@ const Dashboard = ({ path, active, name, icon }) => {
           // onChange={(e, change) => handleToggle(change)}
           aria-label="Platform"
         >
-          <ToggleButton style={!state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' } : {}} value="0" onClick={handleCloseContractor}>Contractors</ToggleButton>
-          <ToggleButton style={state.menu ? { backgroundColor: "#d3d3d3", color: '#0b1e25' } : {}} value="1" onClick={handleCloseWorker}>Workers</ToggleButton>
+          <ToggleButton style={!state.menu ? { backgroundColor: "#fff", color: '#0b1e25' } : {}} value="0" onClick={handleCloseContractor}>Contractors</ToggleButton>
+          <ToggleButton style={state.menu ? { backgroundColor: "#fff", color: '#0b1e25' } : {}} value="1" onClick={handleCloseWorker}>Workers</ToggleButton>
         </ToggleButtonGroup>
         {/* <Typography
           sx={{ color: "#000", fontSize: "18px", fontWeight: 500 }}

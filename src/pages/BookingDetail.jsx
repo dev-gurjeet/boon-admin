@@ -36,7 +36,7 @@ const ShowingData = ({ title, text }) => {
       <Grid item md={2} sx={{ mt: 2 }}>
         <Typography
           variant="subtitle1"
-          sx={{ color: THEME.COLORS.detailText, fontSize: "17px" }}
+          sx={{ color: THEME.COLORS.text, fontSize: "17px" }}
         >
           {title}
         </Typography>
@@ -45,7 +45,7 @@ const ShowingData = ({ title, text }) => {
         <Typography
           variant="subtitle1"
           sx={{
-            color: THEME.COLORS.black,
+            color: THEME.COLORS.white,
             textOverflow: "ellipsis",
             wordWrap: "normal",
           }}
@@ -208,9 +208,9 @@ const BookingDetail = () => {
           },
         }}
       >
-        <Box sx={{ px: 2 }}>
+        <Box sx={{ px: 2  }}>
           <Typography
-            sx={{ textAlign: "center", mt: 2, mb: 0.5, fontWeight: 600 }}
+            sx={{ textAlign: "center", mt: 2, mb: 0.5, fontWeight: 600}}
           >
             Work History
           </Typography>
@@ -283,7 +283,7 @@ const BookingDetail = () => {
       <BackNavigate />
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           border: "1px solid rgba(0, 0, 0, 0.08)",
           boxShadow: "0px 4px 6px rgba(62, 73, 84, 0.04)",
           borderRadius: "6px",
@@ -297,10 +297,13 @@ const BookingDetail = () => {
           alignItems="center"
         >
          <Stack direction="row" gap={2} alignItems="center">
-            <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
+            <Typography sx={{ fontSize: "18px", fontWeight: 500,color:THEME.COLORS.text }}>
               Contractor Job Detail
             </Typography>
             <Button
+              sx={{backgroundColor:THEME.COLORS.secondary,"&:hover": {
+                backgroundColor: THEME.COLORS.secondary,
+              },}}
               variant="contained"
               size="small"onClick={() =>
                 navigate(
@@ -317,6 +320,9 @@ const BookingDetail = () => {
             </Button>
 
             <Button
+              sx={{backgroundColor:THEME.COLORS.secondary,"&:hover": {
+                backgroundColor: THEME.COLORS.secondary,
+              },}}
               variant="contained"
               size="small"
               onClick={() =>
@@ -337,6 +343,7 @@ const BookingDetail = () => {
             <>
               {state.paid ? (
                 <Button
+                  
                   variant="contained"
                   sx={{
                     backgroundColor: THEME.COLORS.primary,
@@ -364,7 +371,7 @@ const BookingDetail = () => {
         <Divider sx={{ my: 2 }} />
         {jobDetail_isLoading ? (
           <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+            <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
           </Stack>
         ) : (
           jobDetail_Data?.data?.length > 0 && (
@@ -408,7 +415,7 @@ const BookingDetail = () => {
                 />
                 <Grid md={2} sx={{ mt: 2 }}>
                   <Typography
-                    sx={{ color: THEME.COLORS.detailText, fontSize: "17px" }}
+                    sx={{ color: THEME.COLORS.text, fontSize: "17px" }}
                   >
                     Feedback
                   </Typography>
@@ -474,12 +481,15 @@ const BookingDetail = () => {
                 alignItems="center"
                 sx={{ mt: 5 }}
               >
-                <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
+                <Typography sx={{ fontSize: "18px", fontWeight: 500,color:THEME.COLORS.text }}>
                   Work History
                 </Typography>
 
                 <Box>
-                  <Button
+                    <Button
+                      sx={{backgroundColor:THEME.COLORS.secondary,"&:hover": {
+                        backgroundColor: THEME.COLORS.secondary,
+                      },}}
                     variant="contained"
                     size="small"
                     onClick={() => setState({ ...state, showdialog: true })}
@@ -492,7 +502,7 @@ const BookingDetail = () => {
                 <Stack sx={{ flex: 1 }}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.detailText, fontSize: "20px" }}
+                    sx={{ color: THEME.COLORS.text, fontSize: "20px" }}
                   >
                     Mandatory Items
                   </Typography>
@@ -509,7 +519,7 @@ const BookingDetail = () => {
                         <Typography
                           sx={{
                             fontWeight: 500,
-                            color: "#000",
+                            color: THEME.COLORS.text,
                             fontSize: "16px",
                           }}
                           variant="subtitle1"
@@ -519,7 +529,7 @@ const BookingDetail = () => {
                         <Typography
                           sx={{
                             fontWeight: 500,
-                            color: "#000",
+                            color: THEME.COLORS.white,
                             fontSize: "16px",
                           }}
                           variant="subtitle1"
@@ -532,7 +542,7 @@ const BookingDetail = () => {
                 </Stack>
               </Stack>
               <Stack direction="row" gap={5} sx={{ my: 5 }} alignItems="center">
-                <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
+                <Typography sx={{ fontSize: "18px", fontWeight: 500,color:THEME.COLORS.text }}>
                   Is Paid By Contractor
                 </Typography>
                 {jobDetail_Data?.data[0]?.isPaidByContractor ? (
@@ -553,7 +563,7 @@ const BookingDetail = () => {
       {jobDetail_Data?.data?.length > 0 && (
         <Box
           sx={{
-            backgroundColor: "#fff",
+            backgroundColor: THEME.COLORS.backgroundPrimary,
             border: "1px solid rgba(0, 0, 0, 0.08)",
             boxShadow: "0px 4px 6px rgba(62, 73, 84, 0.04)",
             borderRadius: "6px",
@@ -562,7 +572,7 @@ const BookingDetail = () => {
             mt: 2,
           }}
         >
-          <Typography sx={{ mb: 2.5, fontSize: "18px", fontWeight: 500 }}>
+          <Typography sx={{ mb: 2.5, fontSize: "18px", fontWeight: 500 ,color:THEME.COLORS.text}}>
             Worker Request
           </Typography>
           <BookingDetailTableHeading />
@@ -570,13 +580,13 @@ const BookingDetail = () => {
           {jobDetail_isLoading || assignJob_isLoading ? (
             <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
               <CircularProgress
-                sx={{ color: THEME.COLORS.primary }}
+                sx={{ color: THEME.COLORS.text }}
                 size={40}
               />
             </Stack>
           ) : !jobDetail_Data?.data[0]?.bookingDetails[0]?.workerDetails
               ?._id ? (
-            <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
+            <Stack direction="row" justifyContent="center" sx={{ my: 2,color: THEME.COLORS.text }}>
               <Typography>
                 no workers available to this job right now.
               </Typography>
@@ -584,13 +594,13 @@ const BookingDetail = () => {
           ) : jobDetail_isLoading || jobRequest_isLoading ? (
             <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
               <CircularProgress
-                sx={{ color: THEME.COLORS.primary }}
+                sx={{ color: THEME.COLORS.text }}
                 size={40}
               />
             </Stack>
           ) : (
             jobDetail_Data?.data[0]?.bookingDetails?.map((item, itemIndex) => (
-              <Box key={itemIndex}>
+              <Box key={itemIndex} sx={{color: THEME.COLORS.text }} >
                 <BookingDetailTableItem
                   handleReassignClick={handleReassignClick}
                   id={itemIndex + 1}

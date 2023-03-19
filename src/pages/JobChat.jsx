@@ -326,7 +326,7 @@ const JobChat = () => {
             display: "none",
           },
           height: "80vh",
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           overflowY: "scroll",
         }}
         id="chatbox"
@@ -342,7 +342,7 @@ const JobChat = () => {
               <Box
                 onClick={handleMoreChat}
                 sx={{
-                  backgroundColor: "#fff",
+                  backgroundColor: THEME.COLORS.backgroundPrimary,
                   py: 0.6,
                   px: 2,
                   borderRadius: "7px",

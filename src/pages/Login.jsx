@@ -58,7 +58,7 @@ const Login = () => {
       >
         <Stack direction="row" sx={{ height: "90vh", width: "80vw" }}>
           <Stack
-            sx={{ flex: 1, backgroundColor: THEME.COLORS.authBackground }}
+            sx={{ flex: 1, backgroundColor: THEME.COLORS.backgroundPrimary }}
             direction="row"
             alignItems="center"
             justifyContent="center"
@@ -68,7 +68,7 @@ const Login = () => {
               alignItems="center"
               justifyContent="center"
               sx={{
-                backgroundColor: THEME.COLORS.white,
+                backgroundColor: THEME.COLORS.backgroundPrimary,
                 height: "150px",
                 width: "150px",
                 borderRadius: "10px",
@@ -76,7 +76,7 @@ const Login = () => {
             >
               <Box sx={{ height: "140px", width: "140px" }}>
                 <img
-                  src={IMAGES.shortLogo}
+                  src={IMAGES.whiteLogo}
                   alt="shortlogo"
                   style={{
                     height: "100%",

@@ -120,7 +120,6 @@ const LeftMessage = ({ text, img, firstName, img2, imageType }) => {
                         marginRight: "2px",
                       }}
                     />
-
                     <IconButton onClick={() => DownloadFile(img2)}>
                       <Download sx={{ color: THEME.COLORS.primary }} />
                     </IconButton>
@@ -131,7 +130,8 @@ const LeftMessage = ({ text, img, firstName, img2, imageType }) => {
           ) : (
             <Box
               sx={{
-                background: "rgb(0,0,0,0.1)",
+                  background: "rgb(255,255,255,0.1)",
+                color:THEME.COLORS.text,
                 // border: "1px solid #AEAEAE",
                 borderRadius: "5px",
                 py: 1,
@@ -154,7 +154,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
           {img2 ? (
             imageType?.split("/")[0] === "image" ? (
               <Box
-                sx={{ backgroundColor: "#0A3444", p: 1, borderRadius: "5px" }}
+                sx={{ backgroundColor: THEME.COLORS.backgroundPrimary, p: 1, borderRadius: "5px" }}
               >
                 <img
                   src={img2}
@@ -200,7 +200,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
             <Box
               sx={{
                 background: THEME.COLORS.primary,
-                border: "1px solid #AEAEAE",
+                border: "none",
                 borderRadius: "5px",
                 py: 1,
                 px: 1,
@@ -509,10 +509,10 @@ const Chats = () => {
           height: "83vh",
         }}
       >
-        <Typography sx={{ fontSize: "18px", fontWeight: 500, pb: 1.5 }}>
+        <Typography sx={{ fontSize: "18px", fontWeight: 500, pb: 1.5 ,color:THEME.COLORS.text}}>
           Chat
         </Typography>
-        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: 'rgba(0,0,0,0.06)', padding: '10px' }}>
+        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundPrimary, padding: '10px'}}>
           <Grid item xs={4} sx={{ height: "100%" }}>
             {/* Left side Section */}
 
@@ -521,7 +521,7 @@ const Chats = () => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                sx={{ pb: 1 }}
+                sx={{ pb: 1,color:THEME.COLORS.text }}
               >
                 <Typography variant="subtitle1" fontWeight={600}>
                   {state.role}
@@ -551,14 +551,15 @@ const Chats = () => {
                 alignItems="center"
                 gap={1}
                 sx={{
-                  backgroundColor: "#fff",
+                  backgroundColor: THEME.COLORS.backgroundSecondary,
+                  input:{color: THEME.COLORS.white},
                   px: 2,
                   py: 0.2,
                   boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
                   borderRadius: "20px",
                 }}
               >
-                <SearchIcon sx={{ color: "rgba(0,0,0,0.4)" }} />
+                <SearchIcon sx={{ color: THEME.COLORS.text }} />
                 <InputBase
                   fullWidth
                   placeholder="search...."
@@ -570,7 +571,7 @@ const Chats = () => {
 
             <Box
               sx={{
-                backgroundColor: "#fff",
+                backgroundColor: THEME.COLORS.backgroundSecondary,
                 boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
                 borderRadius: "5px",
                 overflowY: "scroll",
@@ -580,7 +581,7 @@ const Chats = () => {
             >
               {getChatUsers_isLoading ? (
                 <Stack direction="row" justifyContent="center" sx={{ py: 2 }}>
-                  <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+                  <CircularProgress sx={{ color: THEME.COLORS.text }} />
                 </Stack>
               ) : (
                 userList.map((item, itemIndex) => (
@@ -590,12 +591,12 @@ const Chats = () => {
                         cursor: "pointer",
                         px: 2,
                         backgroundColor:
-                          state.userId === item?.userId ? THEME.COLORS.primary : 'rgba(0,0,0,0.06)',
+                          state.userId === item?.userId ? THEME.COLORS.secondary : 'rgba(0,0,0,0.06)',
                         py: 1,
-                        color: state.userId !== item?.userId ? THEME.COLORS.primary : 'rgba(0,0,0,0.06)',
+                        color: state.userId !== item?.userId ? THEME.COLORS.text : 'rgba(0,0,0,0.06)',
                         "&:hover": {
                           backgroundColor:
-                            state.userId !== item?.userId && "rgba(0,0,0,0)",
+                            state.userId !== item?.userId && THEME.COLORS.primary,
                         },
                       }}
                     >
@@ -651,11 +652,11 @@ const Chats = () => {
                                   color:
                                     state.userId === item?.userId
                                       ? item?.messageRead
-                                        ? "rgba(255,255,255,0.5)"
+                                        ? THEME.COLORS.white
                                         : "#fff"
                                       : item?.messageRead
-                                        ? "rgba(0,0,0,0.5)"
-                                        : THEME.COLORS.primary,
+                                        ? THEME.COLORS.white
+                                        : THEME.COLORS.text,
                                 }}
                               >
                                 {item?.lastMessage}
@@ -731,7 +732,7 @@ const Chats = () => {
                             </p>
                           )}
                         </Box>
-                        <Box>
+                        <Box sx={{color:THEME.COLORS.text}}>
                           <p>
                             {state.userFirstname}  {state.userLastname}
                           </p>
@@ -740,7 +741,7 @@ const Chats = () => {
                       </Stack>
                       <MoreVertIcon
                         sx={{
-                          color: "#000",
+                          color: THEME.COLORS.text,
                           fontSize: "1.7rem",
                           cursor: "pointer",
                         }}
@@ -758,7 +759,7 @@ const Chats = () => {
                     <Box
                       sx={{
                         position: "relative",
-                        backgroundColor: "#fff",
+                        backgroundColor: THEME.COLORS.backgroundSecondary,
                         boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
                         borderRadius: "5px",
                         height: "100%",
@@ -844,8 +845,9 @@ const Chats = () => {
                             bottom: 10,
                             left: 10,
                             right: 10,
-                            background: "#FFFFFF",
-                            border: "1px solid #7A7A7A",
+                            background: THEME.COLORS.backgroundPrimary,
+                            
+                            border: "none",
                             borderRadius: "3px",
                             py: 0.2,
                             pl: 2,
@@ -860,7 +862,7 @@ const Chats = () => {
                               sx={{ width: "100%" }}
                             >
                               <CircularProgress
-                                sx={{ color: THEME.COLORS.primary }}
+                                sx={{ color: THEME.COLORS.text }}
                               />
                             </Stack>
                           ) : (
@@ -928,7 +930,8 @@ const Chats = () => {
             ) : (
               <Box
                 sx={{
-                  backgroundColor: "#fff",
+                    backgroundColor: THEME.COLORS.backgroundSecondary,
+                  color:THEME.COLORS.text,
                   height: "98%",
                   display: "flex",
                   alignItems: "center",
