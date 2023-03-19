@@ -7,6 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from "react";
 import BackNavigate from "../components/BackNavigate";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +24,12 @@ import {
 } from "../redux/commonReducer";
 import { toast } from "react-toastify";
 import { DownloadFile } from "../utils/Helper";
-
+const useStyles = makeStyles((theme) => ({
+  input: {
+    color: THEME.COLORS.text,
+    backgroundColor: THEME.COLORS.primary,
+  },
+}));
 const LeftMessageCard = ({ text, img, time, imageType }) => {
   return (
     <Stack direction="row" flex={1} sx={{ mx: 1, my: 1 }}>
@@ -189,6 +195,7 @@ const RightMessageCard = ({ text, img, time, imageType }) => {
   );
 };
 const JobChat = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { jobid, contractorId } = useParams();
   const chatel = document.getElementById("chatbox");
@@ -315,25 +322,45 @@ const JobChat = () => {
   return (
     <div style={{ position: "relative" }}>
       {/* message section */}
-      <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundSecondary, padding: '10px'}}>
+      
       <BackNavigate />
+      <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundSecondary, padding: '10px' }}>
+      
       <Box
         sx={{
           pb: 2,
-          pt: 1,
           width: { md: "70%" },
-          m: "auto",
+            m: "auto",
+            borderRadius: "8px",
           msOverflowStyle: "none",
           scrollbarWidth: "none",
           "&::-webkit-scrollbar": {
             display: "none",
           },
-          height: "80vh",
+          height: "60vh",
           backgroundColor: THEME.COLORS.backgroundPrimary,
           overflowY: "scroll",
         }}
         id="chatbox"
-      >
+        >
+          <Box>
+              <Stack
+                direction="row"
+                sx={{
+                  width: { md: "100%" },
+                  backgroundColor: THEME.COLORS.primary,
+                  color: THEME.COLORS.text,
+                  textAlign:"center",
+                  p:"8px"
+                  
+                }}
+              >
+                <Typography variant="subtitle1" fontWeight={600}>
+                  Contractor
+                </Typography>
+                
+              </Stack>
+            </Box>
         {getJobChats_isLoading && (
           <Stack direction="row" justifyContent="center" sx={{ mt: 2 }}>
             <CircularProgress sx={{ color: THEME.COLORS.primary }} />
@@ -395,14 +422,17 @@ const JobChat = () => {
             width: { md: "70%" },
             m: "auto",
 
-            backgroundColor: "rgba(142, 196, 71, 0.3)",
-            borderRadius: "8px",
+            backgroundColor: THEME.COLORS.primary,
+            borderRadius: "10px",
             py: 1,
             px: 2,
           }}
         >
           <InputBase
-            fullWidth
+                fullWidth
+                classes={{
+                  input: classes.input,
+                }}
             placeholder="message..."
             value={message}
             onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
@@ -450,7 +480,9 @@ const JobChat = () => {
               />
             </Box>
           </Stack>
-        </Stack>
+        
+            </Stack>
+        
         )}
         </Grid>
     </div>
