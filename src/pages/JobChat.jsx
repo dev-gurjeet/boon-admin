@@ -390,9 +390,9 @@ const JobChat = () => {
           alignItems="center"
           sx={{
             width: { md: "70%" },
-            m: "auto",
-
-            backgroundColor: "rgba(142, 196, 71, 0.3)",
+            m: "auto",  
+            color: THEME.COLORS.text,
+            backgroundColor: THEME.COLORS.secondary,
             borderRadius: "8px",
             py: 1,
             px: 2,
@@ -401,6 +401,11 @@ const JobChat = () => {
           <InputBase
             fullWidth
             placeholder="message..."
+            inputProps={{
+              style: {
+                color: THEME.COLORS.text
+              }
+            }}
             value={message}
             onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
             onChange={(e) => setMessage(e.target.value)}

@@ -70,34 +70,77 @@ const Booking = () => {
     dispatch(getAllcontractorJobs(body));
   };
   const handleModify = () => {
-    let totalPrice = 0;
-    if (state.price || state.percentage) {
-      if (!state.price) {
-        if (!String(state.percentage).trim()) {
-          setState((prev) => ({ ...prev, err: true }));
-          return;
-        }
-        totalPrice = Math.floor(
-          (Number(state.originalPrice) *
-            Number(state.percentage)) /
-          100
-        );
-      }
-      else {
-        totalPrice = Number(state.originalPrice) - Number(state.price)
-      }
-      console.log("state", state)
+    if (!String(state.percentage).trim()) {
+      setState((prev) => ({ ...prev, err: true }));
+      return;
+    }
+    if (state.price && state.percentage) {
+      const totalPrice = Math.floor(
+        (Number(state.price ? state.price : state.originalPrice) *
+          Number(state.percentage)) /
+        100
+      );
+
       const body = {
         jobId: state.id,
         adminCommision: totalPrice,
-        modifiedPrice: Number(state.originalPrice) - Number(totalPrice),
-        //   Number(state.price ? state.price : state.originalPrice) -
-        //   Number(totalPrice),
-        newJobPrice: Number(state.originalPrice) - Number(totalPrice),
+        modifiedPrice:
+          Number(state.price ? state.price : state.originalPrice) -
+          Number(totalPrice),
+        newJobPrice: Number(state.price),
       };
+      console.log("here",body)
+      return ;
+      dispatch(updateJobPrice(body));
+    }
+    if (!state.price && state.percentage) {
+      const totalPrice = Math.floor(
+        (Number(state.price ? state.price : state.originalPrice) *
+          Number(state.percentage)) /
+        100
+      );
+      const body = {
+        jobId: state.id,
+        adminCommision: Number(totalPrice),
+        modifiedPrice:
+          Number(state.price ? state.price : state.originalPrice) -
+          Number(totalPrice),
+      };
+      console.log("body",body)
+      return 
       dispatch(updateJobPrice(body));
     }
   };
+  // const handleModify = () => {
+  //   let totalPrice = 0;
+  //   if (state.price || state.percentage) {
+  //     if (!state.price) {
+  //       if (!String(state.percentage).trim()) {
+  //         setState((prev) => ({ ...prev, err: true }));
+  //         return;
+  //       }
+  //       totalPrice = Math.floor(
+  //         (Number(state.originalPrice) *
+  //           Number(state.percentage)) /
+  //         100
+  //       );
+  //     }
+  //     else {
+  //       totalPrice = Number(state.originalPrice) - Number(state.price)
+  //     }
+  //     const body = {
+  //       jobId: state.id,
+  //       adminCommision: totalPrice,
+  //       modifiedPrice: Number(state.originalPrice) - Number(totalPrice),
+  //       //   Number(state.price ? state.price : state.originalPrice) -
+  //       //   Number(totalPrice),
+  //       newJobPrice: Number(state.originalPrice) - Number(totalPrice),
+  //     };
+  //     console.log("here", body)
+  //     return
+  //     dispatch(updateJobPrice(body));
+  //   }
+  // };
 
   const handleRejected = (id) => {
     const body = {
@@ -199,7 +242,7 @@ const Booking = () => {
           </Box>
           <Box sx={{ my: 2 }}>
             <Typography variant="body1" sx={{ mb: 1, fontWeight: 400 }}>
-              Enter Modified Job Price
+              Enter New Job Price (optional)
             </Typography>
             <TextField
               variant="standard"
@@ -217,9 +260,6 @@ const Booking = () => {
               }}
             />
           </Box>
-          <Typography sx={{ textAlign: "center" }}>
-            or
-          </Typography>
           <Box sx={{ mt: 2 }}>
             <Typography variant="body1" sx={{ mb: 1, fontWeight: 400 }}>
               Enter Commision Percentage

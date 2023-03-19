@@ -2,7 +2,7 @@ import { Box, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import React from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { blue, green, red } from "@mui/material/colors";
-import { PATH } from "../utils/constants";
+import { PATH, THEME } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 const textCss = {
   color: "#fff",
@@ -12,14 +12,13 @@ const textCss = {
   fontSize: "14px",
 };
 const textCsswithDeco = {
-  color: "#fff",
+  color: THEME.COLORS.secondary,
 
   fontWeight: 400,
   letterSpacing: "1px",
   textTransform: "capitalize",
   fontSize: "14px",
   textDecoration: "underline",
-  color: blue[500],
   cursor: "pointer",
   "&:hover": {
     color: blue[900],

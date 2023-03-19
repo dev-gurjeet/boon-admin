@@ -54,7 +54,7 @@ const CustomLink = ({ path, active, name, icon }) => {
         <Typography
           sx={{
             fontWeight: 400,
-            fontSize: "16px",
+            fontSize: "14px",
           }}
         >
           {name}

@@ -18,14 +18,13 @@ const textCss = {
   fontSize: "14px",
 };
 const textCsswithDeco = {
-  color: "#202020",
+  color: THEME.COLORS.secondary,
 
   fontWeight: 400,
   letterSpacing: "1px",
   textTransform: "capitalize",
   fontSize: "14px",
   textDecoration: "underline",
-  color: blue[500],
   cursor: "pointer",
   "&:hover": {
     color: blue[900],
@@ -192,7 +191,7 @@ const BookingTableItem = ({
         )}
         {status === "PENDING" && !modifiedPrice && (
           <FormControl variant="standard" fullWidth>
-            <InputLabel id="demo-simple-select-label">Pending</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{color: 'yellow'}}>Pending</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
