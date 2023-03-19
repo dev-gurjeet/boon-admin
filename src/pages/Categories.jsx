@@ -442,7 +442,7 @@ const Categories = () => {
           mx: "20%",
         }}
       >
-        <Typography sx={{ color: "#d3d3d3", fontWeight: 500, fontSize: "18px" }}>
+        <Typography sx={{ color: "#fff", fontWeight: 500, fontSize: "18px" }}>
           Minimum Job Price
         </Typography>
         <Box sx={{ mt: 2 ,color:THEME.COLORS.white}}>
@@ -451,7 +451,7 @@ const Categories = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment>
-                  <Typography sx={{ mr: 1,color:"#d3d3d3"}}>$</Typography>
+                  <Typography sx={{ mr: 1,color:"#fff"}}>$</Typography>
                 </InputAdornment>
               ),
             }}
@@ -511,7 +511,7 @@ const Categories = () => {
                 justifyContent="space-between"
               >
                 <Typography
-                  sx={{ color: "#d3d3d3", fontWeight: 500, fontSize: "18px" }}
+                  sx={{ color: "#fff", fontWeight: 500, fontSize: "18px" }}
                 >
                   Category
                 </Typography>

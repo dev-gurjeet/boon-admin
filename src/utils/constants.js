@@ -13,7 +13,7 @@ export const THEME = {
     secondary: "#15aaa1",
     background: "#F3F6F9",
     white: "#fff",
-    text: "#d3d3d3",
+    text: "#fff",
     green: "#42ba96",
     tableHeadText: "#A5A5A5",
     detailText: "#A1A1A1;",

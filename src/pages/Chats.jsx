@@ -154,7 +154,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
           {img2 ? (
             imageType?.split("/")[0] === "image" ? (
               <Box
-                sx={{ backgroundColor: "#0A3444", p: 1, borderRadius: "5px" }}
+                sx={{ backgroundColor: THEME.COLORS.backgroundPrimary, p: 1, borderRadius: "5px" }}
               >
                 <img
                   src={img2}
@@ -512,7 +512,7 @@ const Chats = () => {
         <Typography sx={{ fontSize: "18px", fontWeight: 500, pb: 1.5 ,color:THEME.COLORS.text}}>
           Chat
         </Typography>
-        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundPrimary, padding: '10px' }}>
+        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundPrimary, padding: '10px'}}>
           <Grid item xs={4} sx={{ height: "100%" }}>
             {/* Left side Section */}
 
