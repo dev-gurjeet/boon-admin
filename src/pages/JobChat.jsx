@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import BackNavigate from "../components/BackNavigate";
 import { useDispatch, useSelector } from "react-redux";
 import { Download, Send } from "@mui/icons-material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
@@ -313,7 +314,7 @@ const JobChat = () => {
   return (
     <div style={{ position: "relative" }}>
       {/* message section */}
-
+      <BackNavigate />
       <Box
         sx={{
           pb: 2,
