@@ -10,6 +10,7 @@ import {
   Grid,
   IconButton,
 } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import { useSearchParams } from "react-router-dom";
 import React, { useEffect, useState, memo } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -29,6 +30,12 @@ import { socket } from "../utils/socket";
 import { toast } from "react-toastify";
 import { DownloadFile } from "../utils/Helper";
 import { Download } from "@mui/icons-material";
+const useStyles = makeStyles((theme) => ({
+  input: {
+    color: THEME.COLORS.text,
+    backgroundColor: THEME.COLORS.backgroundPrimary,
+  },
+}));
 
 const LeftMessage = ({ text, img, firstName, img2, imageType }) => {
   return (
@@ -264,6 +271,7 @@ const RightMessage = ({ text, img, firstName, img2, imageType }) => {
   );
 };
 const Chats = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -859,7 +867,9 @@ const Chats = () => {
                             <Stack
                               direction="row"
                               justifyContent="center"
-                              sx={{ width: "100%" }}
+                              sx={{ width: "100%" ,backgroundColor: THEME.COLORS.backgroundSecondary,
+                              InputBase:{color: THEME.COLORS.white},}}
+                              
                             >
                               <CircularProgress
                                 sx={{ color: THEME.COLORS.text }}
@@ -868,7 +878,10 @@ const Chats = () => {
                           ) : (
                             <>
                               <InputBase
-                                placeholder="write message.."
+                                  placeholder="write message.."
+                                  classes={{
+                                    input: classes.input,
+                                  }}
                                 fullWidth
                                 value={message}
                                 onKeyPress={(e) =>
@@ -876,7 +889,8 @@ const Chats = () => {
                                 }
                                 onChange={(e) => setMessage(e.target.value)}
                               />
-                              <Stack direction="row" alignItems="center">
+                                <Stack direction="row" alignItems="center"
+                                >
                                 <IconButton
                                   color="primary"
                                   aria-label="upload picture"
@@ -890,11 +904,12 @@ const Chats = () => {
                                     hidden
                                     accept="image/*,video/*,application/*,audio/*"
                                     type="file"
-                                    onChange={onFileChange}
+                                      onChange={onFileChange}
+                                      
                                   />
                                   <AttachFileIcon
                                     sx={{
-                                      color: "#B4B4B4",
+                                      color: "#fff",
                                       transform: "rotate(30deg)",
                                       cursor: "pointer",
                                     }}

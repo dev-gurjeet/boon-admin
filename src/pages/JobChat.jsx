@@ -4,6 +4,7 @@ import {
   IconButton,
   InputBase,
   Stack,
+  Grid,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -314,6 +315,7 @@ const JobChat = () => {
   return (
     <div style={{ position: "relative" }}>
       {/* message section */}
+      <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundSecondary, padding: '10px'}}>
       <BackNavigate />
       <Box
         sx={{
@@ -454,7 +456,8 @@ const JobChat = () => {
             </Box>
           </Stack>
         </Stack>
-      )}
+        )}
+        </Grid>
     </div>
   );
 };
