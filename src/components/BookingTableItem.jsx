@@ -27,7 +27,7 @@ const textCsswithDeco = {
   textDecoration: "underline",
   cursor: "pointer",
   "&:hover": {
-    color: blue[900],
+    color: THEME.COLORS.secondary,
   },
   whiteSpace: "nowrap",
   overflow: "hidden",

@@ -89,8 +89,6 @@ const Booking = () => {
           Number(totalPrice),
         newJobPrice: Number(state.price),
       };
-      console.log("here",body)
-      return ;
       dispatch(updateJobPrice(body));
     }
     if (!state.price && state.percentage) {
@@ -106,8 +104,6 @@ const Booking = () => {
           Number(state.price ? state.price : state.originalPrice) -
           Number(totalPrice),
       };
-      console.log("body",body)
-      return 
       dispatch(updateJobPrice(body));
     }
   };

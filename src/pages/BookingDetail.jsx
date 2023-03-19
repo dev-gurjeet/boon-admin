@@ -18,6 +18,7 @@ import BackNavigate from "../components/BackNavigate";
 import BookingDetailTableHeading from "../components/BookingDetailTableHeading";
 import BookingDetailTableItem from "../components/BookingDetailTableItem";
 import { clearmarkPaymentDone, markPaymentDone } from "../redux/commonReducer";
+import StarIcon from '@mui/icons-material/Star';
 import {
   assignJob,
   clearAssignJob,
@@ -433,6 +434,7 @@ const BookingDetail = () => {
                 <Grid md={4} sx={{ mt: 2 }}>
                   <Rating
                     readOnly
+                    emptyIcon={<StarIcon style={{ color: THEME.COLORS.text }} fontSize="inherit" />}
                     value={jobDetail_Data?.data[0]?.feedbackDetails?.rating}
                   />
                 </Grid>
