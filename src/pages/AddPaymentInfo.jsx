@@ -136,7 +136,7 @@ const AddPaymentInfo = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#fff",
+        backgroundColor: THEME.COLORS.backgroundPrimary,
         px: 2,
         py: 1,
         boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -152,7 +152,7 @@ const AddPaymentInfo = () => {
       >
         <Typography
           sx={{
-            color: "#000",
+            color: THEME.COLORS.text,
             fontSize: "18px",
             fontWeight: 500,
           }}
@@ -167,11 +167,11 @@ const AddPaymentInfo = () => {
           sx={{ cursor: "pointer" }}
           onClick={(e) => setState({ ...state, anchor: e.target })}
         >
-          <Typography sx={{ color: "#000" }} variant="h6">
+          <Typography sx={{ color: THEME.COLORS.text }} variant="h6">
             {state.menu ? "Direct Transfer" : "E-Transfer"}
           </Typography>
           <KeyboardArrowDownIcon
-            sx={{ color: THEME.COLORS.primary, mb: "-5px" }}
+            sx={{ color: THEME.COLORS.text, mb: "-5px" }}
           />
         </Stack>
       </Stack>
@@ -200,7 +200,7 @@ const AddPaymentInfo = () => {
             <Box sx={{ px: 6 }}>
               <Stack direction="row" gap={20}>
                 <Box sx={{ mt: 4, flex: 1 }}>
-                  <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                  <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                     Payee Name
                   </Typography>
                   <TextField
@@ -211,10 +211,15 @@ const AddPaymentInfo = () => {
                     onChange={(e) =>
                       setState({ ...state, payeeName: e.target.value })
                     }
+                    sx={{
+                      input: {
+                        color: THEME.COLORS.text
+                      }
+                    }}
                   />
                 </Box>
                 <Box sx={{ mt: 4, flex: 1 }}>
-                  <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                  <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                     Payee Email ID
                   </Typography>
                   <TextField
@@ -225,11 +230,16 @@ const AddPaymentInfo = () => {
                     onChange={(e) =>
                       setState({ ...state, payeeEmail: e.target.value })
                     }
+                    sx={{
+                      input: {
+                        color: THEME.COLORS.text
+                      }
+                    }}
                   />
                 </Box>
               </Stack>
               <Box sx={{ mt: 4 }}>
-                <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                   Notes
                 </Typography>
                 <TextField
@@ -240,11 +250,16 @@ const AddPaymentInfo = () => {
                   onChange={(e) =>
                     setState({ ...state, notes: e.target.value })
                   }
+                  sx={{
+                    input: {
+                      color: THEME.COLORS.text
+                    }
+                  }}
                 />
               </Box>
               <Stack direction="row" justifyContent="flex-end" sx={{ py: 4 }}>
                 {saveETransfer_isLoading ? (
-                  <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+                  <CircularProgress sx={{ color: THEME.COLORS.text }} />
                 ) : (
                   <Button
                     onClick={handleSubmitETransfer}
@@ -272,7 +287,7 @@ const AddPaymentInfo = () => {
               <Stack direction="row" gap={20}>
                 <Box sx={{ flex: 1 }}>
                   <Box sx={{ mt: 4 }}>
-                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                       Institute Name
                     </Typography>
                     <TextField
@@ -283,10 +298,14 @@ const AddPaymentInfo = () => {
                       onChange={(e) =>
                         setState({ ...state, institueName: e.target.value })
                       }
+                      sx={{
+                        input:{
+                          color: THEME.COLORS.text                      }
+                      }}
                     />
                   </Box>
                   <Box sx={{ mt: 4 }}>
-                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                       Transit Number
                     </Typography>
                     <TextField
@@ -297,12 +316,16 @@ const AddPaymentInfo = () => {
                       onChange={(e) =>
                         setState({ ...state, TransitNumber: e.target.value })
                       }
+                      sx={{
+                        input:{
+                          color: THEME.COLORS.text                      }
+                      }}
                     />
                   </Box>
                 </Box>
                 <Box sx={{ flex: 1 }}>
                   <Box sx={{ mt: 4 }}>
-                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                       Account Number
                     </Typography>
                     <TextField
@@ -313,10 +336,14 @@ const AddPaymentInfo = () => {
                       onChange={(e) =>
                         setState({ ...state, AccountNumber: e.target.value })
                       }
+                      sx={{
+                        input:{
+                          color: THEME.COLORS.text                      }
+                      }}
                     />
                   </Box>
                   <Box sx={{ mt: 4 }}>
-                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600 }}>
+                    <Typography variant="body1" sx={{ mb: 2, fontWeight: 600, color: THEME.COLORS.text }}>
                       Attachment
                     </Typography>
                     {state.image ? (

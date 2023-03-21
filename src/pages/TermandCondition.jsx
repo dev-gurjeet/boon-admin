@@ -74,7 +74,7 @@ const TermandCondition = () => {
     <div>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           px: 4,
           py: 1,
           pb: 2,
@@ -84,7 +84,7 @@ const TermandCondition = () => {
           m: 2,
         }}
       >
-        <Typography sx={{ my: 2, px: 3, fontSize: "18px", fontWeight: 500 }}>
+        <Typography sx={{ my: 2, px: 3, fontSize: "18px", fontWeight: 500, color: THEME.COLORS.text }}>
           Term and Conditions
         </Typography>
         <Box sx={{ px: 3 }}>
@@ -96,11 +96,12 @@ const TermandCondition = () => {
             fullWidth
             value={state.term}
             onChange={(e) => setState({ ...state, term: e.target.value })}
+            sx={{color: THEME.COLORS.text}}
           />
         </Box>
         <Typography
           variant="h5"
-          sx={{ my: 2, px: 3, fontSize: "18px", fontWeight: 500 }}
+          sx={{ my: 2, px: 3, fontSize: "18px", fontWeight: 500, color: THEME.COLORS.text }}
         >
           About App
         </Typography>
@@ -113,11 +114,12 @@ const TermandCondition = () => {
             fullWidth
             value={state.about}
             onChange={(e) => setState({ ...state, about: e.target.value })}
+            sx={{color: THEME.COLORS.text}}
           />
         </Box>
         <Typography
           variant="h5"
-          sx={{ my: 2, px: 3, fontSize: "18px", fontWeight: 500 }}
+          sx={{ my: 2, px: 3, fontSize: "18px", fontWeight: 500, color: THEME.COLORS.text }}
         >
           Help Center
         </Typography>
@@ -130,11 +132,12 @@ const TermandCondition = () => {
             fullWidth
             value={state.help}
             onChange={(e) => setState({ ...state, help: e.target.value })}
+            sx={{color: THEME.COLORS.text}}
           />
         </Box>
         <Stack direction="row" justifyContent="flex-end" sx={{ my: 2, mx: 3 }}>
           {saveSetting_isLoading ? (
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+            <CircularProgress sx={{ color: THEME.COLORS.text }} />
           ) : (
             <Button
               variant="contained"
