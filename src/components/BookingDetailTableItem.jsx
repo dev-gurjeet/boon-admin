@@ -137,7 +137,7 @@ const BookingDetailTableItem = ({
                 fontFamily: "Roboto",
                 fontSize: "16px",
                 fontWeight: 400,
-                color: green[500],
+                color: THEME.COLORS.text,
               }}
             >
               Approved
@@ -151,7 +151,7 @@ const BookingDetailTableItem = ({
               sx={{
                 fontSize: "14px",
                 fontWeight: 400,
-                color: blue[500],
+                color: THEME.COLORS.text,
                 cursor: "pointer",
                 textDecoration: "underline",
                 "&:hover": {

@@ -137,8 +137,8 @@ const LeftMessage = ({ text, img, firstName, img2, imageType }) => {
           ) : (
             <Box
               sx={{
-                  background: "rgb(255,255,255,0.1)",
-                color:THEME.COLORS.text,
+                background: "rgb(255,255,255,0.1)",
+                color: THEME.COLORS.text,
                 // border: "1px solid #AEAEAE",
                 borderRadius: "5px",
                 py: 1,
@@ -517,10 +517,10 @@ const Chats = () => {
           height: "83vh",
         }}
       >
-        <Typography sx={{ fontSize: "18px", fontWeight: 500, pb: 1.5 ,color:THEME.COLORS.text}}>
+        <Typography sx={{ fontSize: "18px", fontWeight: 500, pb: 1.5, color: THEME.COLORS.text }}>
           Chat
         </Typography>
-        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundPrimary, padding: '10px'}}>
+        <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundPrimary, padding: '10px' }}>
           <Grid item xs={4} sx={{ height: "100%" }}>
             {/* Left side Section */}
 
@@ -529,7 +529,7 @@ const Chats = () => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                sx={{ pb: 1,color:THEME.COLORS.text }}
+                sx={{ pb: 1, color: THEME.COLORS.text }}
               >
                 <Typography variant="subtitle1" fontWeight={600}>
                   {state.role}
@@ -560,7 +560,7 @@ const Chats = () => {
                 gap={1}
                 sx={{
                   backgroundColor: THEME.COLORS.backgroundSecondary,
-                  input:{color: THEME.COLORS.white},
+                  input: { color: THEME.COLORS.white },
                   px: 2,
                   py: 0.2,
                   boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
@@ -644,10 +644,10 @@ const Chats = () => {
                             </Box>
                             <Box>
                               <Typography
-                                variant="subtitle1"
                                 textTransform="capitalize"
                                 sx={{
                                   fontWeight: 600,
+                                  fontSize: '14px',
                                   color:
                                     state.userId === item?.userId && "#fff",
                                 }}
@@ -657,14 +657,16 @@ const Chats = () => {
                               <p
                                 style={{
                                   fontWeight: 500,
-                                  color:
-                                    state.userId === item?.userId
-                                      ? item?.messageRead
-                                        ? THEME.COLORS.white
-                                        : "#fff"
-                                      : item?.messageRead
-                                        ? THEME.COLORS.white
-                                        : THEME.COLORS.text,
+                                  fontSize: '12px',
+                                  color: THEME.COLORS.text,
+                                  // color:
+                                  //   state.userId === item?.userId
+                                  //     ? item?.messageRead
+                                  //       ? THEME.COLORS.white
+                                  //       : "#fff"
+                                  //     : item?.messageRead
+                                  //       ? THEME.COLORS.backgroundPrimary
+                                  //       : THEME.COLORS.tbackgroundPrimaryext,
                                 }}
                               >
                                 {item?.lastMessage}
@@ -740,7 +742,7 @@ const Chats = () => {
                             </p>
                           )}
                         </Box>
-                        <Box sx={{color:THEME.COLORS.text}}>
+                        <Box sx={{ color: THEME.COLORS.text }}>
                           <p>
                             {state.userFirstname}  {state.userLastname}
                           </p>
@@ -854,7 +856,7 @@ const Chats = () => {
                             left: 10,
                             right: 10,
                             background: THEME.COLORS.backgroundPrimary,
-                            
+
                             border: "none",
                             borderRadius: "3px",
                             py: 0.2,
@@ -867,9 +869,11 @@ const Chats = () => {
                             <Stack
                               direction="row"
                               justifyContent="center"
-                              sx={{ width: "100%" ,backgroundColor: THEME.COLORS.backgroundSecondary,
-                              InputBase:{color: THEME.COLORS.white},}}
-                              
+                              sx={{
+                                width: "100%", backgroundColor: THEME.COLORS.backgroundSecondary,
+                                InputBase: { color: THEME.COLORS.white },
+                              }}
+
                             >
                               <CircularProgress
                                 sx={{ color: THEME.COLORS.text }}
@@ -878,10 +882,10 @@ const Chats = () => {
                           ) : (
                             <>
                               <InputBase
-                                  placeholder="write message.."
-                                  classes={{
-                                    input: classes.input,
-                                  }}
+                                placeholder="write message.."
+                                classes={{
+                                  input: classes.input,
+                                }}
                                 fullWidth
                                 value={message}
                                 onKeyPress={(e) =>
@@ -889,8 +893,8 @@ const Chats = () => {
                                 }
                                 onChange={(e) => setMessage(e.target.value)}
                               />
-                                <Stack direction="row" alignItems="center"
-                                >
+                              <Stack direction="row" alignItems="center"
+                              >
                                 <IconButton
                                   color="primary"
                                   aria-label="upload picture"
@@ -904,8 +908,8 @@ const Chats = () => {
                                     hidden
                                     accept="image/*,video/*,application/*,audio/*"
                                     type="file"
-                                      onChange={onFileChange}
-                                      
+                                    onChange={onFileChange}
+
                                   />
                                   <AttachFileIcon
                                     sx={{
@@ -945,8 +949,8 @@ const Chats = () => {
             ) : (
               <Box
                 sx={{
-                    backgroundColor: THEME.COLORS.backgroundSecondary,
-                  color:THEME.COLORS.text,
+                  backgroundColor: THEME.COLORS.backgroundSecondary,
+                  color: THEME.COLORS.text,
                   height: "98%",
                   display: "flex",
                   alignItems: "center",

@@ -40,6 +40,7 @@ export const PATH = {
   Payment: "/payment",
   WorkerDetail: "/worker-detail",
   AddPaymentInfo: "/add-payment-info",
+  PaymentDetail: "/payment-detail",
   Profile: "/profile",
   jobChat: "/job-chat",
 };

@@ -20,6 +20,7 @@ import jwt_decode from "jwt-decode";
 import BookingDetail from "../pages/BookingDetail";
 import Payment from "../pages/Payment";
 import AddPaymentInfo from "../pages/AddPaymentInfo";
+import PaymentDetail from "../pages/PaymentDetail";
 import Profile from "../pages/Profile";
 import { logOut } from "../redux/AuthReducer";
 import { socket } from "../utils/socket";
@@ -99,6 +100,7 @@ const RootRoutes = () => {
               <Route path={PATH.TermCond} element={<TermandCondition />} />
               <Route path={PATH.Payment} element={<Payment />} />
               <Route path={PATH.AddPaymentInfo} element={<AddPaymentInfo />} />
+              <Route path={PATH.PaymentDetail} element={<PaymentDetail />} />
               <Route path={PATH.Profile} element={<Profile />} />
             </Route>
           </Routes>

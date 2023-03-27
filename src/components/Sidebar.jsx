@@ -127,6 +127,17 @@ const Sidebar = () => {
           icon={<MiscellaneousServicesIcon />}
         />
         <CustomLink
+          path={PATH.Bookings}
+          active={
+            PATH.Bookings === location.pathname ||
+              location.pathname.includes(PATH.BookingDetail)
+              ? true
+              : false
+          }
+          name={"Contractor Jobs"}
+          icon={<CalendarMonthIcon />}
+        />
+        <CustomLink
           path={PATH.ActiveWorker}
           active={PATH.ActiveWorker === location.pathname ? true : false}
           name={"Active Workers"}
@@ -137,17 +148,6 @@ const Sidebar = () => {
           active={PATH.Category === location.pathname ? true : false}
           name={"Categories"}
           icon={<CategoryIcon />}
-        />
-        <CustomLink
-          path={PATH.Bookings}
-          active={
-            PATH.Bookings === location.pathname ||
-              location.pathname.includes(PATH.BookingDetail)
-              ? true
-              : false
-          }
-          name={"Contractor Jobs"}
-          icon={<CalendarMonthIcon />}
         />
         <CustomLink
           path={PATH.Chat}
@@ -172,6 +172,12 @@ const Sidebar = () => {
           path={PATH.AddPaymentInfo}
           active={PATH.AddPaymentInfo === location.pathname ? true : false}
           name={"Add Payment Info"}
+          icon={<PaymentsIcon />}
+        />
+        <CustomLink
+          path={PATH.PaymentDetail}
+          active={PATH.PaymentDetail === location.pathname ? true : false}
+          name={"Payment detail"}
           icon={<PaymentsIcon />}
         />
         <CustomLink

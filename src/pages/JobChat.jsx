@@ -399,6 +399,7 @@ const JobChat = () => {
             borderRadius: "8px",
             py: 1,
             px: 2,
+            marginLeft: '16.6%'
           }}
         >
           <InputBase

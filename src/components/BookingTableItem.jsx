@@ -191,7 +191,7 @@ const BookingTableItem = ({
         )}
         {status === "PENDING" && !modifiedPrice && (
           <FormControl variant="standard" fullWidth>
-            <InputLabel id="demo-simple-select-label" sx={{color: 'yellow'}}>Pending</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{color: THEME.COLORS.text}}>Pending</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

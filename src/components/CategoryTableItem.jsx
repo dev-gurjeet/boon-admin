@@ -11,7 +11,7 @@ const textCss = {
   fontWeight: 400,
   letterSpacing: "1px",
   textTransform: "capitalize",
-  fontSize: "16px",
+  fontSize: "12px",
 };
 const CategoryTableItem = ({
   id,
@@ -35,7 +35,7 @@ const CategoryTableItem = ({
       <Box sx={{ flex: 1 }}>
         <img
           src={image}
-          style={{ height: "50px", width: "50px", objectFit: "contain" }}
+          style={{ height: "50px", width: "50px", objectFit: "contain", padding: '5px', border: '1px solid #fff' }}
         />
       </Box>
       <Stack sx={{ flex: 1 }} direction="row" gap={2}>

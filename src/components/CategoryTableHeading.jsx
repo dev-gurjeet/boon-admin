@@ -7,6 +7,7 @@ const TextCss = {
   fontWeight: 550,
   letterSpacing: "1px",
   textTransform: "uppercase",
+  fontSize: '14px'
 };
 const CategoryTableTableHeading = () => {
   return (
