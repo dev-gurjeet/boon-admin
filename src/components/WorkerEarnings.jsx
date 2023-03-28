@@ -9,18 +9,32 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axiosInstance from '../api/axiosInstance';
-import { CircularProgress, Stack } from "@mui/material";
+import { Button, CircularProgress, Stack } from "@mui/material";
 import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import WorkerViewMore from "./workerViewMore";
 
 const WorkerEarnings = () => {
 	let [workers, setWorkers] = useState([]);
 	let [startDate, setStartDate] = useState(dayjs().subtract(7, 'day'));
 	let [endDate, setEndDate] = useState(dayjs());
 	const [isLoading, setIsLoading] = useState(false)
+
+	const [open, setOpen] = React.useState(false);
+	const [data, setData] = useState([])
+
+	const handleClickOpen = (worker) => {
+		setData(worker)
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	useEffect(() => {
 		getWorkerData();
 	}, [])
@@ -49,6 +63,7 @@ const WorkerEarnings = () => {
 	}
 	return (
 		<>
+			<WorkerViewMore open={open} handleClose={handleClose} data={data} />
 			<Stack sx={{ mb: 3 }}>
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
 					<DemoContainer components={['DatePicker']}>
@@ -84,7 +99,9 @@ const WorkerEarnings = () => {
 								<TableCell align="right">{worker?.jobs?.length || 0}</TableCell>
 								<TableCell align="right">{worker.totalMinutes}</TableCell>
 								<TableCell align="right">{worker.totalEarnings}</TableCell>
-								<TableCell align="right">View more...</TableCell>
+								<TableCell align="right">
+									<Button variant="outlined" onClick={() => handleClickOpen(worker)}> View more</Button>
+								</TableCell>
 							</TableRow>
 						)) : <TableRow
 							sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

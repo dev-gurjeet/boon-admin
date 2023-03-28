@@ -23,6 +23,18 @@ export const updateJobPrice = createAsyncThunk(
     }
   }
 );
+export const deleteJob = createAsyncThunk(
+  "deleteJob",
+  async (id) => {
+    try {
+      const { data } = await axiosInstance.delete(`/admin/deleteJob?jobId=${id}`);
+      return { data };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
+  }
+);
 
 export const jobRequest = createAsyncThunk("jobRequest", async (body) => {
   try {
@@ -128,6 +140,22 @@ const jobSlice = createSlice({
       }
     },
     [updateJobPrice.rejected]: (state) => {
+      state.updateJobPrice_isLoading = false;
+    },
+    [deleteJob.pending]: (state) => {
+      state.updateJobPrice_isLoading = true;
+    },
+    [deleteJob.fulfilled]: (state, actions) => {
+      state.updateJobPrice_isLoading = false;
+      const { data, status } = actions.payload;
+      if (status >= 400) {
+        state.updateJobPrice_isError = data;
+      } else {
+        state.updateJobPrice_Data = data;
+        state.updateJobPrice_isError = "";
+      }
+    },
+    [deleteJob.rejected]: (state) => {
       state.updateJobPrice_isLoading = false;
     },
 

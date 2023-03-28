@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import Button from '@mui/material/Button';
 import { THEME } from "../utils/constants";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -15,12 +16,26 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import ContractorViewMore from "./contractorViewMore";
+// import ViewMoreContractorWages from "./ViewMoreContractor";
 
 const ContractorWages = () => {
   const [contractors, setContractors] = useState([]);
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'day'));
   const [endDate, setEndDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false)
+
+  const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState([])
+
+  const handleClickOpen = (worker) => {
+    setData(worker)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     getWorkerData();
@@ -49,6 +64,7 @@ const ContractorWages = () => {
   }
   return (
     <>
+      <ContractorViewMore open={open} handleClose={handleClose} data={data} />
       <Stack sx={{ mb: 3 }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={['DatePicker']}>
@@ -84,7 +100,9 @@ const ContractorWages = () => {
                 <TableCell align="right">{worker?.jobs?.length || 0}</TableCell>
                 <TableCell align="right">{worker.totalMinutes}</TableCell>
                 <TableCell align="right">{worker.totalContractorEarnings.toFixed(2)}</TableCell>
-                <TableCell align="right">View more...</TableCell>
+                <TableCell align="right"><Button variant="outlined" onClick={() => handleClickOpen(worker)}>
+                  View more
+                </Button></TableCell>
               </TableRow>
             )) : <TableRow
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

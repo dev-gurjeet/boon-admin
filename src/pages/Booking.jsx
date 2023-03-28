@@ -17,7 +17,7 @@ import BookingTableItem from "../components/BookingTableItem";
 import { CustomPagination } from "../components/styledComponent";
 import { getAllBookings } from "../redux/commonReducer";
 import { getAllcontractorJobs } from "../redux/ContractorReducer";
-import { clearupdatejob, updateJobPrice } from "../redux/JobReducer";
+import { clearupdatejob, updateJobPrice, deleteJob } from "../redux/JobReducer";
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -155,6 +155,9 @@ const Booking = () => {
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
   };
+  const deleteJobById = (id) => {
+    dispatch(deleteJob(id));
+  }
   useEffect(() => {
     if (updateJobPrice_Data) {
       toast.success("Job Status Updated");
@@ -358,7 +361,7 @@ const Booking = () => {
               {/* <Divider sx={{ my: 1 }} /> */}
               {getAllcontractorJobs_isLoading ? (
                 <StyledTableRow>
-                  <StyledTableCell align="center" colSpan="7">
+                  <StyledTableCell align="center" colSpan="8">
                     <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
                       <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
                     </Stack>
@@ -385,6 +388,7 @@ const Booking = () => {
                     handleCanceled={handleCanceled}
                     modifiedPrice={item?.modifiedPrice}
                     adminCommision={item?.adminCommision}
+                    deleteJob={deleteJobById}
                   />
                   //   <Divider sx={{ my: 1 }} />
                   // </Box>

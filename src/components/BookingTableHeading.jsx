@@ -33,6 +33,7 @@ const BookingTableTableHeading = () => {
         <StyledTableCell align="center">Mad. P</StyledTableCell>
         <StyledTableCell align="right">Commission</StyledTableCell>
         <StyledTableCell align="center">Status</StyledTableCell>
+        <StyledTableCell align="center">Delete</StyledTableCell>
       </TableRow>
     </TableHead>
   )

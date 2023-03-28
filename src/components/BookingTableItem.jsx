@@ -1,4 +1,4 @@
-import { Box, Menu, MenuItem, Stack, Typography, styled } from "@mui/material";
+import { Box, Menu, MenuItem, Stack, Typography, styled, Button } from "@mui/material";
 import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { blue } from "@mui/material/colors";
@@ -9,6 +9,7 @@ import { PATH, THEME } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { StackedLineChartOutlined } from "@mui/icons-material";
 const textCss = {
   color: THEME.COLORS.text,
 
@@ -47,6 +48,7 @@ const BookingTableItem = ({
   handleCanceled,
   modifiedPrice,
   adminCommision,
+  deleteJob
 }) => {
   const navigate = useNavigate();
   const open = Boolean(state.anchor);
@@ -68,6 +70,7 @@ const BookingTableItem = ({
       originalPrice: price,
     });
   };
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -180,7 +183,7 @@ const BookingTableItem = ({
         {modifiedPrice && status === "PENDING" && (
           <Typography
             sx={{
-              color: "#000",
+              color: 'orange',
               fontFamily: "Roboto",
               fontSize: "16px",
               fontWeight: 400,
@@ -191,7 +194,7 @@ const BookingTableItem = ({
         )}
         {status === "PENDING" && !modifiedPrice && (
           <FormControl variant="standard" fullWidth>
-            <InputLabel id="demo-simple-select-label" sx={{color: THEME.COLORS.text}}>Pending</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{ color: THEME.COLORS.text }}>Pending</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -217,6 +220,11 @@ const BookingTableItem = ({
             </Select>
           </FormControl>)
         }
+      </StyledTableCell>
+      <StyledTableCell align="center">
+        <Stack className={`${status !== "APPROVED" && status !== "PENDING" && 'btn-disabled'}`}>
+          <Button variant="contained" color="error" onClick={() => deleteJob(jobid)}>Delete</Button>
+        </Stack>
       </StyledTableCell>
     </StyledTableRow>
   )
