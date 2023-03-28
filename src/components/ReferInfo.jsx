@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { THEME } from "../utils/constants";
 import Autocomplete from '@mui/material/Autocomplete';
-import { CircularProgress, Stack, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, Stack, TextField } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -13,16 +13,49 @@ import axiosInstance from "../api/axiosInstance";
 import { getAllWorker } from "../redux/WorkerReducer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import ReferInfoModal from "./ReferInfoModal";
+import { CustomPagination } from "./styledComponent";
+import { styled } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableBody-root": {
+      "& .MuiTableCell-root": {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+      }
+    }
+  }
+});
+
 const ReferInfo = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const [workers, setWorkers] = useState([])
   const [workersList, setWorkersList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [refferedBy, setRefferedBy] = useState('')
   const [referralTo, setReferralTo] = useState('')
   const [jobId, setJobId] = useState('')
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(10)
 
-  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState([])
 
+  const handleClickOpen = (data) => {
+    setData(data)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const onChangePage = (e, value) => {
+    setPage(value);
+  }
   const { getWorker_isLoading, getWorker_Data, getWorker_isError } =
     useSelector((store) => store.workerStore);
   useEffect(() => {
@@ -35,19 +68,19 @@ const ReferInfo = () => {
     }
   }, [getWorker_Data])
 
-  useEffect(() => { getWorkerData() }, [referralTo, refferedBy])
+  useEffect(() => { getWorkerData() }, [referralTo, refferedBy, page])
   const getWorkerData = async () => {
     try {
       let body = {
-        page: 1,
-        limit: 10,
+        page,
+        limit,
         refferedBy,
         referralTo,
         jobId
       }
       setIsLoading(true);
       const response = await axiosInstance.post("/admin/getAllReferralUsers", body);
-      const { data } = response.data
+      const { data } = response
       if (data)
         setWorkers(data);
       setIsLoading(false)
@@ -57,8 +90,43 @@ const ReferInfo = () => {
       console.log("error", e)
     }
   }
-  console.log("workers", workers)
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: THEME.COLORS.primary,
+      color: theme.palette.common.white,
+      borderColor: "#333 !important",
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      borderColor: '#333 !important',
+      color: theme.palette.common.white
+    },
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
   return (<>
+  <Box sx={{
+				backgroundColor: THEME.COLORS.backgroundPrimary,
+				color: THEME.COLORS.text,
+				px: 2,
+				py: 2,
+				boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
+				borderRadius: "5px",
+				minHeight: "70vh",
+				m: 2,
+			}}>
+    <ReferInfoModal open={open} handleClose={handleClose} data={data} />
     <Stack direction="row" sx={{ mb: 5 }}
       justifyContent="space-evenly">
       <Autocomplete
@@ -67,7 +135,7 @@ const ReferInfo = () => {
         onChange={(e, val) => setRefferedBy(val?.id || '')}
         id="combo-box-demo"
         options={workersList}
-        sx={{ width: 300, color: THEME.COLORS.text }}
+        sx={{ width: 300, color: THEME.COLORS.text, fieldset:{borderColor: THEME.COLORS.text}, button:{color: THEME.COLORS.text} }}
         renderInput={(params) => <TextField {...params} label="Refered by" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
       />
       <Autocomplete
@@ -76,62 +144,64 @@ const ReferInfo = () => {
         options={workersList}
         defaultValue={referralTo}
         onChange={(e, val) => setReferralTo(val?.id || '')}
-        sx={{ width: 300, color: THEME.COLORS.text }}
+        sx={{ width: 300, color: THEME.COLORS.text, fieldset:{borderColor: THEME.COLORS.text}, button:{color: THEME.COLORS.text} }}
         renderInput={(params) => <TextField {...params} label="Refered to" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
       />
       {/* <Autocomplete
         disablePortal
         id="combo-box-demo"
         options={top100Films}
-        sx={{ width: 300, color: THEME.COLORS.text }}
+        sx={{ width: 300, color: THEME.COLORS.text, fieldset:{borderColor: THEME.COLORS.text} }}
         renderInput={(params) => <TextField {...params} label="Job" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
       /> */}
     </Stack>
 
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+      <Table className={classes.table}  sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
-          <TableRow>
-            <TableCell>Referred by</TableCell>
-            <TableCell align="center">Referred to</TableCell>
-            <TableCell align="center">Job</TableCell>
-            <TableCell align="right">View more</TableCell>
-          </TableRow>
+          <StyledTableRow>
+            <StyledTableCell>Referred by</StyledTableCell>
+            <StyledTableCell align="center">Referred to</StyledTableCell>
+            <StyledTableCell align="center">Total referral earning</StyledTableCell>
+            <StyledTableCell align="right">View more</StyledTableCell>
+          </StyledTableRow>
         </TableHead>
         <TableBody>
-          {workers.length ? workers.map((worker) => (
-            worker?.referralTo?.length && worker.referralTo.map((referal) => (
-              <TableRow
-                key={worker._id + referal.referralTo}
+          {workers.data?.length ? workers?.data.map((worker) => (
+              <StyledTableRow
+                key={worker._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{worker?.firstName} {worker?.lastName}</TableCell>
-                <TableCell align="center">{referal?.firstName} {referal?.lastName}</TableCell>
-                <TableCell align="center">{referal?.jobDetails?._id || 'NA'}</TableCell>
-                <TableCell align="right">View more...</TableCell>
-              </TableRow>
-            ))
-          )) : <TableRow
+                <StyledTableCell>{worker?.firstName} {worker?.lastName}</StyledTableCell>
+                <StyledTableCell align="center">{worker?.referralTo?.length}</StyledTableCell>
+                <StyledTableCell align="center">{worker?.totalReferralEarnings}</StyledTableCell>
+                <StyledTableCell align="right">
+                  <Button variant="outlined" onClick={() => handleClickOpen(worker)}> View more</Button>
+                </StyledTableCell>
+              </StyledTableRow>
+          )) : <StyledTableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            <TableCell colSpan="5">
+            <StyledTableCell colSpan="5">
               <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-                <CircularProgress sx={{ color: THEME.COLORS.primary }} size={40} />
+                <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
               </Stack>
-            </TableCell>
-          </TableRow>}
+            </StyledTableCell>
+          </StyledTableRow>}
         </TableBody>
       </Table>
     </TableContainer>
+    </Box>
+    <Stack direction="row" justifyContent="flex-end" sx={{ px: 5, my: 2 }}>
+      <CustomPagination
+        count={workers?.totalPage}
+        defaultPage={page}
+        shape="rounded"
+        variant="outlined"
+        onChange={onChangePage}
+      />
+    </Stack>
   </>)
 }
 
-const top100Films = [
-  { label: 'The Shawshank Redemption', year: 1994 },
-  { label: 'The Godfather', year: 1972 },
-  { label: 'The Godfather: Part II', year: 1974 },
-  { label: 'The Dark Knight', year: 2008 },
-  { label: '12 Angry Men', year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: 'Pulp Fiction', year: 1994 }]
 export default ReferInfo;

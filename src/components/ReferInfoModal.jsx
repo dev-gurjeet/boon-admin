@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell,{tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function WorkerViewMore({ open, handleClose, data = [] }) {
+export default function ReferInfoModal({ open, handleClose, data = [] }) {
   const classes = useStyles();
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -69,37 +69,33 @@ export default function WorkerViewMore({ open, handleClose, data = [] }) {
           },
         }}
       >
-        {/* <DialogTitle>More Info</DialogTitle> */}
+        {/* <DialogTitle><b>{data?.firstName} {data?.lastName}</b> referred the following workers - </DialogTitle> */}
         <DialogContent>
-          <DialogContentText sx={{ pb: 2 }}>
-            <Typography sx={{ color: THEME.COLORS.text }}>
-              Jobs
+          <DialogContentText sx={{pb : 2}}>
+            <Typography sx={{color: THEME.COLORS.text}}>
+              <b>{data?.firstName} {data?.lastName}</b> referred the following workers -
             </Typography>
           </DialogContentText>
           <TableContainer component={Paper}>
             <Table className={classes.table} sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead>
                 <StyledTableRow>
-                  <StyledTableCell>Sr no</StyledTableCell>
-                  <StyledTableCell align="right">Name</StyledTableCell>
-                  <StyledTableCell align="right">Admin Commission</StyledTableCell>
-                  <StyledTableCell align="right">Total Earning</StyledTableCell>
-                  <StyledTableCell align="right">Total Minutes</StyledTableCell>
+                  <StyledTableCell>Name</StyledTableCell>
+                  <StyledTableCell align="center">Sin number</StyledTableCell>
+                  <StyledTableCell align="center">Job name</StyledTableCell>
+                  <StyledTableCell align="right">Earnings</StyledTableCell>
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {data?.jobs?.length && data.jobs.map((job, index) => (
+                {data?.referralTo?.length && data.referralTo.map((item) => (
                   <StyledTableRow
-                    key={job.jobId}
+                    key={item.referralTo}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <StyledTableCell component="th" scope="row">
-                      {index}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{`${job.jobName}`}</StyledTableCell>
-                    <StyledTableCell align="right">{job?.adminCommision || 0}</StyledTableCell>
-                    <StyledTableCell align="right">{job.totalEarnings.toFixed(2)}</StyledTableCell>
-                    <StyledTableCell align="right">{job.totalMinutes}</StyledTableCell>
+                    <StyledTableCell>{item?.firstName} {item?.lastName}</StyledTableCell>
+                    <StyledTableCell align="center">{item?.sinNumber && !item?.sinNumber?.includes('https') && item?.sinNumber}</StyledTableCell>
+                    <StyledTableCell align="center">{item?.jobDetails?.jobName}</StyledTableCell>
+                    <StyledTableCell align="right">{item?.referralEarnings}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>

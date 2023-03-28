@@ -52,11 +52,11 @@ const PaymentDetail = () => {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" textColor='secondary' indicatorColor="secondary"
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" textColor='primary' 
           variant="fullWidth"  >
-          <Tab sx={styles.tabLabel} label="Contractor wages" {...a11yProps(0)} />
-          <Tab sx={styles.tabLabel} label="Worker Earnings" {...a11yProps(1)} />
-          <Tab sx={styles.tabLabel} label="Refer info" {...a11yProps(2)} />
+          <Tab sx={value == 0 ? styles.activeTab : styles.tabLabel} label="Contractor wages" {...a11yProps(0)} />
+          <Tab sx={value == 1 ? styles.activeTab : styles.tabLabel} label="Worker Earnings" {...a11yProps(1)} />
+          <Tab sx={value == 2 ? styles.activeTab : styles.tabLabel} label="Refer info" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -76,5 +76,8 @@ export default memo(PaymentDetail);
 export const styles = {
   tabLabel: {
     color: THEME.COLORS.text
+  },
+  activeTab: {
+    // color: THEME.COLORS.secondary + '!important'
   }
 }

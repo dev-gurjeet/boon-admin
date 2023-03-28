@@ -8,14 +8,52 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell,{tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
+import { THEME } from '../utils/constants';
+import { styled } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
 
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+    "& .MuiTableBody-root": {
+      "& .MuiTableCell-root": {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+      }
+    }
+  }
+});
 export default function ContractorViewMore({ open, handleClose, data = [] }) {
-  console.log("data", data)
+  const classes = useStyles();
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: THEME.COLORS.primary,
+      color: theme.palette.common.white,
+      borderColor: "#333 !important",
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      borderColor: '#333 !important',
+      color: theme.palette.common.white
+    },
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: THEME.COLORS.backgroundSecondary,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: THEME.COLORS.backgroundPrimary,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
   return (
     <React.Fragment>
       <Dialog
@@ -23,44 +61,52 @@ export default function ContractorViewMore({ open, handleClose, data = [] }) {
         maxWidth="lg"
         open={open}
         onClose={handleClose}
+        PaperProps={{
+          style: {
+            backgroundColor: THEME.COLORS.backgroundSecondary,
+            color: THEME.COLORS.text
+          },
+        }}
       >
-        <DialogTitle>More Info</DialogTitle>
+        {/* <DialogTitle>More Info</DialogTitle> */}
         <DialogContent>
-          <DialogContentText>
-            Jobs
+          <DialogContentText sx={{pb : 2}}>
+            <Typography sx={{ color: THEME.COLORS.text }}>
+              Jobs
+            </Typography>
           </DialogContentText>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <Table className={classes.table} sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead>
-                <TableRow>
-                  <TableCell>Sr no</TableCell>
-                  <TableCell align="right">Name</TableCell>
-                  <TableCell align="right">Admin Commission</TableCell>
-                  <TableCell align="right">Total Wages</TableCell>
-                  <TableCell align="right">Total Minutes</TableCell>
-                </TableRow>
+                <StyledTableRow>
+                  <StyledTableCell>Sr no</StyledTableCell>
+                  <StyledTableCell align="right">Name</StyledTableCell>
+                  <StyledTableCell align="right">Admin Commission</StyledTableCell>
+                  <StyledTableCell align="right">Total Wages</StyledTableCell>
+                  <StyledTableCell align="right">Total Minutes</StyledTableCell>
+                </StyledTableRow>
               </TableHead>
               <TableBody>
                 {data?.jobs?.length && data.jobs.map((job, index) => (
-                  <TableRow
+                  <StyledTableRow
                     key={job.jobId}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
-                      {index}
-                    </TableCell>
-                    <TableCell align="right">{`${job.jobName}`}</TableCell>
-                    <TableCell align="right">{job?.adminCommision || 0}</TableCell>
-                    <TableCell align="right">{job.totalEarnings.toFixed(2)}</TableCell>
-                    <TableCell align="right">{job.totalMinutes}</TableCell>
-                  </TableRow>
+                    <StyledTableCell component="th" scope="row">
+                      {index+1}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{`${job.jobName}`}</StyledTableCell>
+                    <StyledTableCell align="right">{job?.adminCommision || 0}</StyledTableCell>
+                    <StyledTableCell align="right">{job.totalEarnings.toFixed(2)}</StyledTableCell>
+                    <StyledTableCell align="right">{job.totalMinutes}</StyledTableCell>
+                  </StyledTableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
+          <Button sx={{ color: THEME.COLORS.text }} variant="contained" onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
