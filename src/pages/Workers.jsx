@@ -2,7 +2,9 @@ import {
   Box,
   CircularProgress,
   Divider,
+  InputAdornment,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
@@ -23,6 +25,7 @@ import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
+import SearchIcon from "@mui/icons-material/Search";
 import { dahboardTable, workerTAble } from "../utils/dummyData";
 const useStyles = makeStyles({
   table: {
@@ -37,6 +40,8 @@ const useStyles = makeStyles({
 const Workers = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
+	let debounce = '';
   const { getWorker_isLoading, getWorker_Data, getWorker_isError } =
     useSelector((store) => store.workerStore);
   const [state, setState] = useState(1);
@@ -47,6 +52,7 @@ const Workers = () => {
     const body = {
       page: value,
       limit: 10,
+      search
     };
     setState(value);
     dispatch(getAllWorker(body));
@@ -58,6 +64,7 @@ const Workers = () => {
       const body = {
         page: state,
         limit: 10,
+        search
       };
       dispatch(getAllWorker(body));
     }
@@ -104,6 +111,18 @@ const Workers = () => {
       border: 0,
     },
   }));
+  const searchQuery = (searchVal) => {
+		clearTimeout(debounce);
+		debounce = setTimeout(() => {
+			const body = {
+				page: 1,
+				limit: 10,
+				search: searchVal
+			};
+			setSearch(searchVal)
+			dispatch(getAllWorker(body));
+		}, 500)
+	}
 
   return (
     <div>
@@ -129,7 +148,33 @@ const Workers = () => {
             Workers
           </Typography>
         </Stack>
-
+        <Stack direction="row" sx={{ mb: 1 }}>
+          <TextField
+            id="search-bar"
+            className="text"
+            onInput={(e) => {
+              searchQuery(e.target.value);
+            }}
+            variant="outlined"
+            placeholder="Search..."
+            size="small"
+            sx={{
+              input: {
+                color: THEME.COLORS.text
+              },
+              fieldset: {
+                borderColor: THEME.COLORS.text
+              }
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment>
+                  <SearchIcon style={{ fill: THEME.COLORS.text }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Stack>
         <TableContainer component={Paper}>
           <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
             <WorkerTableHeading />

@@ -27,6 +27,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
 import { THEME } from "../utils/constants";
+import SearchIcon from "@mui/icons-material/Search";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -40,6 +41,8 @@ const useStyles = makeStyles({
 const Booking = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('')
+  let debounce = '';
   const [state, setState] = useState({
     dialog: false,
     originalPrice: "",
@@ -142,6 +145,7 @@ const Booking = () => {
     const body = {
       jobId: id,
       status: "REJECTED",
+      search
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
@@ -151,6 +155,7 @@ const Booking = () => {
     const body = {
       jobId: id,
       status: "CANCELLED",
+      search
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
@@ -165,6 +170,7 @@ const Booking = () => {
       const body = {
         limit: 10,
         page: getAllcontractorJobs_Data?.currentPage,
+        search
       };
       dispatch(getAllcontractorJobs(body));
       setState({ ...state, price: "", anchor: null, id: "", dialog: false });
@@ -179,6 +185,7 @@ const Booking = () => {
     const body = {
       limit: 10,
       page: 1,
+      search
     };
     dispatch(getAllcontractorJobs(body));
   }, []);
@@ -209,7 +216,18 @@ const Booking = () => {
       border: 0,
     },
   }));
-
+  const searchQuery = (searchVal) => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      const body = {
+        page: 1,
+        limit: 10,
+        search: searchVal
+      };
+      setSearch(searchVal)
+      dispatch(getAllcontractorJobs(body));
+    }, 500)
+  }
   return (
     <div>
       <Dialog
@@ -351,7 +369,33 @@ const Booking = () => {
             Contractor Jobs
           </Typography>
         </Box>
-
+        <Stack direction="row" sx={{ mb: 1 }}>
+          <TextField
+            id="search-bar"
+            className="text"
+            onInput={(e) => {
+              searchQuery(e.target.value);
+            }}
+            variant="outlined"
+            placeholder="Search..."
+            size="small"
+            sx={{
+              input: {
+                color: THEME.COLORS.text
+              },
+              fieldset: {
+                borderColor: THEME.COLORS.text
+              }
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment>
+                  <SearchIcon style={{ fill: THEME.COLORS.text }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Stack>
 
         <TableContainer component={Paper}>
           <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">

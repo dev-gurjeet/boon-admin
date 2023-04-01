@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
-import { THEME } from "../utils/constants";
+import { PATH, THEME } from "../utils/constants";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axiosInstance from '../api/axiosInstance';
-import { Box, CircularProgress, Stack } from "@mui/material";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -20,6 +20,7 @@ import ContractorViewMore from "./contractorViewMore";
 import { styled } from '@mui/material/styles';
 import { CustomPagination } from "./styledComponent";
 import { makeStyles } from "@mui/styles";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles({
   }
 });
 const ContractorWages = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [contractors, setContractors] = useState([]);
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'day'));
@@ -39,6 +41,7 @@ const ContractorWages = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(10)
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
@@ -68,14 +71,29 @@ const ContractorWages = () => {
       console.log("error", e)
     }
   }
+  const updateUrlParams = () => {
+    setSearchParams({ startDate, endDate })
+  }
+  const checkUrlParams = () => {
+    const start = searchParams.get("startDate");
+    const end = searchParams.get("endDate");
+    if (start && end) {
+      setStartDate(dayjs(start))
+      setEndDate(dayjs(end))
+    }
+  }
   useEffect(() => {
+    checkUrlParams();
+  }, [])
+  useEffect(() => {
+    updateUrlParams();
     getContractorData();
   }, [startDate, endDate, page])
   const handleStart = (date) => {
-    setStartDate(date)
+    setStartDate(dayjs(date))
   }
   const handleEnd = (date) => {
-    setEndDate(date.format('YYYY-MM-DD'))
+    setEndDate(dayjs(date))
   }
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -86,7 +104,7 @@ const ContractorWages = () => {
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
       borderColor: '#333 !important',
-			color: theme.palette.common.white
+      color: theme.palette.common.white
     },
   }));
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -105,22 +123,22 @@ const ContractorWages = () => {
   return (
     <>
       <Box sx={{
-          backgroundColor: THEME.COLORS.backgroundPrimary,
-          color: THEME.COLORS.text,
-          px: 2,
-          py: 2,
-          boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
-          borderRadius: "5px",
-          minHeight: "70vh",
-          m: 2,
-        }}>
+        backgroundColor: THEME.COLORS.backgroundPrimary,
+        color: THEME.COLORS.text,
+        px: 2,
+        py: 2,
+        boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
+        borderRadius: "5px",
+        minHeight: "70vh",
+        m: 2,
+      }}>
         <ContractorViewMore open={open} handleClose={handleClose} data={data} />
         <Stack sx={{ mb: 3 }}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['DatePicker']}>
-              <DatePicker label="Start Date" sx={{ input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text }, fieldset:{borderColor: THEME.COLORS.text}, button:{color: THEME.COLORS.text} }} value={startDate}
+              <DatePicker label="Start Date" sx={{ input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text }, fieldset: { borderColor: THEME.COLORS.text }, button: { color: THEME.COLORS.text } }} value={startDate}
                 onChange={handleStart} />
-              <DatePicker label="End Date" sx={{ input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text }, fieldset:{borderColor: THEME.COLORS.text}, button:{color: THEME.COLORS.text} }} value={endDate}
+              <DatePicker label="End Date" sx={{ input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text }, fieldset: { borderColor: THEME.COLORS.text }, button: { color: THEME.COLORS.text } }} value={endDate}
                 onChange={handleEnd} />
             </DemoContainer>
           </LocalizationProvider>
@@ -144,9 +162,63 @@ const ContractorWages = () => {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <StyledTableCell component="th" scope="row">
-                    {index+1}
+                    {index + 1}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{`${worker.firstName} ${worker.lastName}`}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    <Stack sx={{ flex: 0.7 }} direction="row" alignItems="center" gap={1}>
+                      {worker.profile_pic ? (
+                        <Box>
+                          <img
+                            src={worker.profile_pic}
+                            alt="personimage"
+                            style={{
+                              height: "30px",
+                              width: "30px",
+                              objectFit: "cover",
+                              borderRadius: "50%",
+                              cursor: "pointer",
+                            }}
+                          />
+                        </Box>
+                      ) : (
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          justifyContent="center"
+                          sx={{
+                            height: "30px",
+                            width: "30px",
+                            borderRadius: "50%",
+                            backgroundColor: "primary.main",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              color: "#fff",
+                              textTransform: "capitalize",
+                              fontWeight: 600,
+                              fontSize: "20px",
+                            }}
+                          >
+                            {worker.firstName ? worker.firstName?.slice(0, 1) : "B"}
+                          </Typography>
+                        </Stack>
+                      )}
+                      <Typography
+                        style={{
+                          fontWeight: 400,
+                          letterSpacing: "1px",
+                          fontSize: "14px",
+                          wordWrap: "wrap",
+                          textOverflow: "ellipsis",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => navigate(`${PATH.ContractorDetail}/${worker._id}`)}
+                      >
+                        {worker.firstName} {worker.lastName}
+                      </Typography>
+                    </Stack>
+                  </StyledTableCell>
                   <StyledTableCell align="right">{worker?.jobs?.length || 0}</StyledTableCell>
                   <StyledTableCell align="right">{worker.totalMinutes}</StyledTableCell>
                   <StyledTableCell align="right">{worker.totalContractorEarnings.toFixed(2)}</StyledTableCell>

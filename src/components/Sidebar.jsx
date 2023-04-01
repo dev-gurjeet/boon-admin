@@ -18,16 +18,22 @@ import { Logout } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logOut } from "../redux/AuthReducer";
 import EngineeringIcon from "@mui/icons-material/Engineering";
-import Drawer from '@mui/material/Drawer';
+// import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+// import List from '@mui/material/List';
+// import Divider from '@mui/material/Divider';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemButton from '@mui/material/ListItemButton';
+// import ListItemIcon from '@mui/material/ListItemIcon';
+// import ListItemText from '@mui/material/ListItemText';
+// import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import MailIcon from '@mui/icons-material/Mail';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 
 const CustomLink = ({ path, active, name, icon }) => {
 
@@ -68,6 +74,17 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleLogout = () => {
     dispatch(logOut());
   };
@@ -87,6 +104,7 @@ const Sidebar = () => {
 
   return (
     <>
+      <AlertDialogSlide open={open} handleAction={handleLogout} handleClose={handleClose} />
       {width > 768 && <Box
         sx={{
           backgroundColor: THEME.COLORS.backgroundPrimary,
@@ -190,7 +208,7 @@ const Sidebar = () => {
           direction="row"
           alignItems="center"
           gap={1}
-          onClick={handleLogout}
+          onClick={handleClickOpen}
           sx={{
             px: 3,
             py: 1.3,
@@ -224,3 +242,35 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
+function AlertDialogSlide({ open, handleClose, handleAction }) {
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>Are you sure you want to logout?</DialogTitle>
+        {/* <DialogContent> */}
+          {/* <DialogContentText id="alert-dialog-slide-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText> */}
+        {/* </DialogContent> */}
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" color="error" onClick={handleAction}>Logout</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}

@@ -7,7 +7,7 @@ export const getAllContractors = createAsyncThunk(
   async (body) => {
     try {
       const { data } = await axiosInstance.get(
-        `/admin/getAllContractors?page=${body.page}&limit=${body.limit}`
+        `/admin/getAllContractors?page=${body.page}&limit=${body.limit}&search=${body.search}`
       );
       return { data };
     } catch (error) {
@@ -50,7 +50,7 @@ export const getAllcontractorJobs = createAsyncThunk(
   async (body) => {
     try {
       const { data } = await axiosInstance.get(
-        `/admin/getContractorJobs?limit=${body.limit}&page=${body.page}`
+        `/admin/getContractorJobs?limit=${body.limit}&page=${body.page}&search=${body.search}`
       );
       return { data };
     } catch (error) {

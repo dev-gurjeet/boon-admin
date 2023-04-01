@@ -8,16 +8,33 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell,{tableCellClasses} from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
-import { THEME } from '../utils/constants';
+import { Stack, Typography } from '@mui/material';
+import { PATH, THEME } from '../utils/constants';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
+import { useNavigate } from 'react-router-dom';
 
+const textCsswithDeco = {
+  color: THEME.COLORS.secondary,
+
+  fontWeight: 400,
+  letterSpacing: "1px",
+  textTransform: "capitalize",
+  fontSize: "14px",
+  textDecoration: "underline",
+  cursor: "pointer",
+  "&:hover": {
+    color: THEME.COLORS.secondary,
+  },
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+};
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -29,6 +46,7 @@ const useStyles = makeStyles({
   }
 });
 export default function ContractorViewMore({ open, handleClose, data = [] }) {
+  const navigate = useNavigate();
   const classes = useStyles();
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -70,7 +88,7 @@ export default function ContractorViewMore({ open, handleClose, data = [] }) {
       >
         {/* <DialogTitle>More Info</DialogTitle> */}
         <DialogContent>
-          <DialogContentText sx={{pb : 2}}>
+          <DialogContentText sx={{ pb: 2 }}>
             <Typography sx={{ color: THEME.COLORS.text }}>
               Jobs
             </Typography>
@@ -79,11 +97,11 @@ export default function ContractorViewMore({ open, handleClose, data = [] }) {
             <Table className={classes.table} sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead>
                 <StyledTableRow>
-                  <StyledTableCell>Sr no</StyledTableCell>
-                  <StyledTableCell align="right">Name</StyledTableCell>
-                  <StyledTableCell align="right">Admin Commission</StyledTableCell>
-                  <StyledTableCell align="right">Total Wages</StyledTableCell>
-                  <StyledTableCell align="right">Total Minutes</StyledTableCell>
+                  <StyledTableCell>Job id</StyledTableCell>
+                  <StyledTableCell align="right">Job name</StyledTableCell>
+                  <StyledTableCell align="right">Admin commission</StyledTableCell>
+                  <StyledTableCell align="right">Total wages</StyledTableCell>
+                  <StyledTableCell align="right">Total minutes</StyledTableCell>
                 </StyledTableRow>
               </TableHead>
               <TableBody>
@@ -93,7 +111,14 @@ export default function ContractorViewMore({ open, handleClose, data = [] }) {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
-                      {index+1}
+                      <Stack sx={{ flex: 0.5 }} direction="row" alignItems="center" gap={0.7}>
+                        <Typography
+                          sx={textCsswithDeco}
+                          onClick={() => navigate(`${PATH.BookingDetail}/${job.jobId}`)}
+                        >
+                          #{job.jobId?.slice(0, 6)}
+                        </Typography>
+                      </Stack>
                     </StyledTableCell>
                     <StyledTableCell align="right">{`${job.jobName}`}</StyledTableCell>
                     <StyledTableCell align="right">{job?.adminCommision || 0}</StyledTableCell>

@@ -31,7 +31,7 @@ const Notifications = () => {
     <div>
       <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: THEME.COLORS.backgroundPrimary,
           px: 2,
           py: 1,
           pb: 2,
@@ -41,7 +41,7 @@ const Notifications = () => {
           m: 2,
         }}
       >
-        <Typography sx={{ mb: 3, fontSize: "18px", fontWeight: 500 }}>
+        <Typography sx={{ mb: 3, fontSize: "18px", fontWeight: 500, color: THEME.COLORS.text }}>
           Notifications
         </Typography>
         {getNotification_isLoading ? (
@@ -61,7 +61,7 @@ const Notifications = () => {
                     justifyContent="space-between"
                     gap={3}
                     sx={{
-                      background: "#FFFFFF",
+                      background: THEME.COLORS.secondary,
                       boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: "7px",
                       py: 1,
@@ -84,7 +84,7 @@ const Notifications = () => {
                         <img src={IMAGES.notiIcon} />
                       </Stack>
                       <Box>
-                        <Typography sx={{ color: "#000", fontSize: "16px" }}>
+                        <Typography sx={{ color: THEME.COLORS.text, fontSize: "16px" }}>
                           {item?.title}
                         </Typography>
                         <Typography sx={{ color: "#C8C8C8", fontSize: "14px" }}>

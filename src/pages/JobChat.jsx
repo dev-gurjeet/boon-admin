@@ -41,9 +41,9 @@ const LeftMessageCard = ({ text, img, time, imageType }) => {
         <Box
           sx={{
             flex: 1,
-            py: 0.5,
-            px: 0.7,
-            backgroundColor: "rgba(142, 196, 71, 0.18)",
+            padding: '8px',
+            // backgroundColor: "rgba(142, 196, 71, 0.18)",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
             borderRadius: "7px",
           }}
         >
@@ -78,7 +78,11 @@ const LeftMessageCard = ({ text, img, time, imageType }) => {
               )
             )
           ) : (
-            <p style={{ fontSize: "14px" }}>{text}</p>
+            <p style={{
+              fontSize: "14px",
+              // background: "rgb(255,255,255,0.1)",
+              color: THEME.COLORS.text,
+            }}>{text}</p>
           )}
           <Stack
             direction="row"
@@ -87,7 +91,7 @@ const LeftMessageCard = ({ text, img, time, imageType }) => {
               width: "100%",
             }}
           >
-            <p style={{ color: THEME.COLORS.primary, fontSize: "12px" }}>
+            <p style={{ color: THEME.COLORS.text, fontSize: "12px" }}>
               {time}
             </p>
           </Stack>
@@ -110,7 +114,7 @@ const RightMessageCard = ({ text, img, time, imageType }) => {
             flex: 1,
             py: 0.5,
             px: 0.7,
-            background: "#F6F6F6",
+            background: THEME.COLORS.primary,
             borderRadius: "7px",
           }}
         >
@@ -160,7 +164,7 @@ const RightMessageCard = ({ text, img, time, imageType }) => {
               )
             )
           ) : (
-            <p style={{ fontSize: "14px" }}>{text}</p>
+            <p style={{ fontSize: "14px", color: THEME.COLORS.text }}>{text}</p>
           )}
           <Stack
             direction="row"
@@ -169,7 +173,7 @@ const RightMessageCard = ({ text, img, time, imageType }) => {
               width: "100%",
             }}
           >
-            <p style={{ color: THEME.COLORS.primary, fontSize: "12px" }}>
+            <p style={{ color: THEME.COLORS.text, fontSize: "12px" }}>
               {time}
             </p>
           </Stack>
@@ -315,150 +319,161 @@ const JobChat = () => {
   return (
     <div style={{ position: "relative" }}>
       {/* message section */}
-      <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundSecondary, padding: '10px'}}>
-      <BackNavigate />
-      <Box
-        sx={{
-          pb: 2,
-          pt: 1,
-          width: { md: "70%" },
-          m: "auto",
-          msOverflowStyle: "none",
-          scrollbarWidth: "none",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-          height: "80vh",
-          backgroundColor: THEME.COLORS.backgroundPrimary,
-          overflowY: "scroll",
-        }}
-        id="chatbox"
-      >
-        {getJobChats_isLoading && (
-          <Stack direction="row" justifyContent="center" sx={{ mt: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.primary }} />
-          </Stack>
-        )}
-        {!getJobChats_isLoading &&
-          Number(getJobChats_Data?.totalPage) > page && (
-            <Stack direction="row" justifyContent="center" sx={{ pt: 3 }}>
-              <Box
-                onClick={handleMoreChat}
-                sx={{
-                  backgroundColor: THEME.COLORS.backgroundPrimary,
-                  py: 0.6,
-                  px: 2,
-                  borderRadius: "7px",
-                  boxShadow: 1,
-                  cursor: "pointer",
-                  "&:hover": {
-                    opacity: 0.6,
-                  },
-                }}
-              >
-                <Typography>More Chats</Typography>
-              </Box>
-            </Stack>
-          )}{" "}
-        {showData?.map((item, itemIndex) => (
-          <Box key={itemIndex}>
-            {item?.senderId !== getProfile_Data?.data?._id ? (
-              <LeftMessageCard
-                text={item?.message}
-                time={moment(item?.createdAt).format("hh:mm a")}
-                img={item?.attachment?.value}
-                imageType={item?.attachment?.type}
-              />
-            ) : (
-              <RightMessageCard
-                img={item?.attachment?.value}
-                imageType={item?.attachment?.type}
-                text={item?.message}
-                time={moment(item?.createdAt).format("hh:mm a")}
-              />
-            )}
-          </Box>
-        ))}
-        <Box sx={{ backgroundColor: "#f1f1f1" }}></Box>
-      </Box>
-      {/* Bottom Input stuff */}
-      {uploadDocument_isLoading ? (
-        <Stack direction="row" justifyContent="center">
-          <CircularProgress sx={{ color: THEME.COLORS.primary }} />
-        </Stack>
-      ) : (
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{
+      <Grid container columnSpacing={1.5} sx={{ height: "100%", backgroundColor: THEME.COLORS.backgroundSecondary, padding: '10px' }}>
+        <BackNavigate />
+        <Stack sx={{ width: '100%' }}>
+          <Box sx={{
+            pb: 2,
+            pt: 1,
             width: { md: "70%" },
-            m: "auto",  
-            color: THEME.COLORS.text,
-            backgroundColor: THEME.COLORS.secondary,
-            borderRadius: "8px",
-            py: 1,
-            px: 2,
-            marginLeft: '16.6%'
-          }}
-        >
-          <InputBase
-            fullWidth
-            placeholder="message..."
-            inputProps={{
-              style: {
-                color: THEME.COLORS.text
-              }
+            m: "auto",
+            backgroundColor: THEME.COLORS.backgroundSecondary,
+            color: '#fff'
+          }}>
+            <Typography sx={{ fontWeight: 600 }}>User name</Typography>
+          </Box>
+          <Box
+            sx={{
+              pb: 2,
+              pt: 1,
+              width: { md: "70%" },
+              m: "auto",
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+              height: "80vh",
+              backgroundColor: THEME.COLORS.backgroundPrimary,
+              overflowY: "scroll",
             }}
-            value={message}
-            onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <Stack direction="row" gap={1.6}>
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="label"
+            id="chatbox"
+          >
+            {getJobChats_isLoading && (
+              <Stack direction="row" justifyContent="center" sx={{ mt: 2 }}>
+                <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+              </Stack>
+            )}
+            {!getJobChats_isLoading &&
+              Number(getJobChats_Data?.totalPage) > page && (
+                <Stack direction="row" justifyContent="center" sx={{ pt: 3 }}>
+                  <Box
+                    onClick={handleMoreChat}
+                    sx={{
+                      backgroundColor: THEME.COLORS.backgroundPrimary,
+                      py: 0.6,
+                      px: 2,
+                      borderRadius: "7px",
+                      boxShadow: 1,
+                      cursor: "pointer",
+                      "&:hover": {
+                        opacity: 0.6,
+                      },
+                    }}
+                  >
+                    <Typography>More Chats</Typography>
+                  </Box>
+                </Stack>
+              )}{" "}
+            {showData?.map((item, itemIndex) => (
+              <Box key={itemIndex}>
+                {item?.senderId !== getProfile_Data?.data?._id ? (
+                  <LeftMessageCard
+                    text={item?.message}
+                    time={moment(item?.createdAt).format("hh:mm a")}
+                    img={item?.attachment?.value}
+                    imageType={item?.attachment?.type}
+                  />
+                ) : (
+                  <RightMessageCard
+                    img={item?.attachment?.value}
+                    imageType={item?.attachment?.type}
+                    text={item?.message}
+                    time={moment(item?.createdAt).format("hh:mm a")}
+                  />
+                )}
+              </Box>
+            ))}
+            <Box sx={{ backgroundColor: "#f1f1f1" }}></Box>
+          </Box>
+          {/* Bottom Input stuff */}
+          {uploadDocument_isLoading ? (
+            <Stack direction="row" justifyContent="center">
+              <CircularProgress sx={{ color: THEME.COLORS.primary }} />
+            </Stack>
+          ) : (
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
               sx={{
-                p: 0.5,
+                width: { md: "70%" },
+                m: "auto",
+                color: THEME.COLORS.text,
+                backgroundColor: THEME.COLORS.secondary,
+                borderRadius: "8px",
+                py: 1,
+                px: 2,
               }}
             >
-              <input
-                hidden
-                accept="image/*,video/*,application/*,audio/*"
-                type="file"
-                onChange={onFileChange}
-              />
-              <AttachFileIcon
-                sx={{
-                  color: "#B4B4B4",
-                  transform: "rotate(30deg)",
-                  cursor: "pointer",
+              <InputBase
+                fullWidth
+                placeholder="message..."
+                inputProps={{
+                  style: {
+                    color: THEME.COLORS.text
+                  }
                 }}
+                value={message}
+                onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
+                onChange={(e) => setMessage(e.target.value)}
               />
-            </IconButton>
-            <Box
-              sx={{
-                backgroundColor: THEME.COLORS.primary,
-                p: 0.5,
-                pb: 0.7,
-                borderRadius: "7px",
-              }}
-              onClick={() => handleSubmit()}
-            >
-              <Send
-                sx={{
-                  color: "#fff",
-                  mb: "-3px",
-                  ml: "3px",
-                  transform: "rotate(-40deg)",
-                }}
-              />
-            </Box>
-          </Stack>
+              <Stack direction="row" gap={1.6}>
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="label"
+                  sx={{
+                    p: 0.5,
+                  }}
+                >
+                  <input
+                    hidden
+                    accept="image/*,video/*,application/*,audio/*"
+                    type="file"
+                    onChange={onFileChange}
+                  />
+                  <AttachFileIcon
+                    sx={{
+                      color: "#B4B4B4",
+                      transform: "rotate(30deg)",
+                      cursor: "pointer",
+                    }}
+                  />
+                </IconButton>
+                <Box
+                  sx={{
+                    backgroundColor: THEME.COLORS.primary,
+                    p: 0.5,
+                    pb: 0.7,
+                    borderRadius: "7px",
+                  }}
+                  onClick={() => handleSubmit()}
+                >
+                  <Send
+                    sx={{
+                      color: "#fff",
+                      mb: "-3px",
+                      ml: "3px",
+                      transform: "rotate(-40deg)",
+                    }}
+                  />
+                </Box>
+              </Stack>
+            </Stack>
+          )}
         </Stack>
-        )}
-        </Grid>
+      </Grid>
     </div>
   );
 };

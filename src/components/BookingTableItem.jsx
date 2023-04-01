@@ -10,6 +10,12 @@ import { useNavigate } from "react-router-dom";
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { StackedLineChartOutlined } from "@mui/icons-material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 const textCss = {
   color: THEME.COLORS.text,
 
@@ -51,7 +57,14 @@ const BookingTableItem = ({
   deleteJob
 }) => {
   const navigate = useNavigate();
-  const open = Boolean(state.anchor);
+  // const open = Boolean(state.anchor);
+  const [openModal, setOpenModal] = useState(false)
+  const handleDeleteModal = () => {
+    setOpenModal(true)
+  }
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
   const handleClick = (event) => {
     setState({
       ...state,
@@ -223,7 +236,9 @@ const BookingTableItem = ({
       </StyledTableCell>
       <StyledTableCell align="center">
         <Stack className={`${status !== "APPROVED" && status !== "PENDING" && 'btn-disabled'}`}>
-          <Button variant="contained" color="error" onClick={() => deleteJob(jobid)}>Delete</Button>
+          <Button variant="contained" color="error" onClick={handleDeleteModal}>Delete</Button>
+
+          <AlertDialogSlide open={openModal} handleAction={() => deleteJob(jobid)} handleClose={handleCloseModal} />
         </Stack>
       </StyledTableCell>
     </StyledTableRow>
@@ -376,3 +391,37 @@ const BookingTableItem = ({
 };
 
 export default BookingTableItem;
+
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
+function AlertDialogSlide({ open, handleClose, handleAction }) {
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>Are you sure you want to Delete?</DialogTitle>
+        {/* <DialogContent> */}
+        {/* <DialogContentText id="alert-dialog-slide-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText> */}
+        {/* </DialogContent> */}
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" color="error" onClick={handleAction}>Delete</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
