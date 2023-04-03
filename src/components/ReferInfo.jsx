@@ -61,7 +61,7 @@ const ReferInfo = () => {
   const { getWorker_isLoading, getWorker_Data, getWorker_isError } =
     useSelector((store) => store.workerStore);
   useEffect(() => {
-    dispatch(getAllWorker({ page: '', limit: '' }));
+    dispatch(getAllWorker({ page: '', limit: '', type: "ALL" }));
   }, [])
   useEffect(() => {
     if (getWorker_Data.status) {
@@ -76,7 +76,7 @@ const ReferInfo = () => {
       let body = {
         page,
         limit,
-        refferedBy,
+        referralBy: refferedBy,
         referralTo,
         jobId
       }
@@ -138,7 +138,7 @@ const ReferInfo = () => {
           id="combo-box-demo"
           options={workersList}
           sx={{ width: 300, color: THEME.COLORS.text, fieldset: { borderColor: THEME.COLORS.text }, button: { color: THEME.COLORS.text } }}
-          renderInput={(params) => <TextField {...params} label="Refered by" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
+          renderInput={(params) => <TextField {...params} label="Referred by" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
         />
         <Autocomplete
           disablePortal
@@ -147,7 +147,7 @@ const ReferInfo = () => {
           defaultValue={referralTo}
           onChange={(e, val) => setReferralTo(val?.id || '')}
           sx={{ width: 300, color: THEME.COLORS.text, fieldset: { borderColor: THEME.COLORS.text }, button: { color: THEME.COLORS.text } }}
-          renderInput={(params) => <TextField {...params} label="Refered to" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
+          renderInput={(params) => <TextField {...params} label="Referred to" sx={{ color: THEME.COLORS.text, input: { color: THEME.COLORS.text }, label: { color: THEME.COLORS.text } }} />}
         />
         {/* <Autocomplete
         disablePortal

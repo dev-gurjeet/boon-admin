@@ -10,8 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { THEME } from "../utils/constants";
 import { CustomPagination } from "../components/styledComponent";
-import WorkerTableHeading from "../components/WorkerTableHeading";
-import WorkerTableItem from "../components/WorkerTableItem";
 import { clearUpdateuser } from "../redux/commonReducer";
 import { getAllActiveWorker } from "../redux/WorkerReducer";
 import TableBody from '@mui/material/TableBody';
@@ -22,6 +20,8 @@ import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
+import ActiveWorkerTableItem from "../components/ActiveWorkerTableItem";
+import ActiveWorkerTableHeading from "../components/ActiveWorkerTableHeading";
 
 const useStyles = makeStyles({
   table: {
@@ -140,12 +140,12 @@ const ActiveWorkers = () => {
 
         <TableContainer component={Paper}>
           <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
-            <WorkerTableHeading />
+            <ActiveWorkerTableHeading />
             <TableBody>
               {/* <Divider sx={{ mt: 0.5 }} /> */}
               {getAllActiveWorker_isLoading || updateUser_isLoading ? (
                 <StyledTableRow>
-                  <StyledTableCell align="center" colSpan="8">
+                  <StyledTableCell align="center" colSpan="7">
                     <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
                       <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
                     </Stack>
@@ -154,7 +154,7 @@ const ActiveWorkers = () => {
               ) : (
                 workerData?.map((item, itemIndex) => (
                   // <Box key={itemIndex}>
-                  <WorkerTableItem
+                  <ActiveWorkerTableItem
                     id={
                       (getAllActiveWorker_Data?.currentPage - 1) * 10 +
                       itemIndex +

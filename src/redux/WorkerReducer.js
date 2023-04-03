@@ -5,7 +5,7 @@ import axiosInstance from "../api/axiosInstance";
 export const getAllWorker = createAsyncThunk("getAllWorker", async (body) => {
   try {
     const { data } = await axiosInstance.get(
-      `/admin/getAllWorkers?page=${body.page}&limit=${body.limit}&search=${body.search}`
+      `/admin/getAllWorkers?page=${body.page}&limit=${body.limit}&search=${body.search || ''}&type=${body.type || ''}`
     );
     return { data };
   } catch (error) {

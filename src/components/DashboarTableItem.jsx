@@ -60,7 +60,7 @@ const IOSSwitch = styled((props) => (
   },
   "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor:  "#39393D",
+    backgroundColor: "#39393D",
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,
@@ -132,6 +132,14 @@ const DashboarTableItem = ({
         <StyledTableCell align="left">#{id}</StyledTableCell>
         <StyledTableCell align="right">
           <Stack sx={{ flex: 0.7 }} direction="row" alignItems="center" gap={1}>
+            {state.isOpen && (
+              <Box sx={{ zIndex: 500000 }}>
+                <Lightbox
+                  mainSrc={img}
+                  onCloseRequest={() => setState({ ...state, isOpen: false })}
+                />
+              </Box>
+            )}
             {img ? (
               <Box>
                 <img

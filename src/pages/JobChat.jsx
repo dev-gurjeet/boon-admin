@@ -24,7 +24,7 @@ import {
 import { toast } from "react-toastify";
 import { DownloadFile } from "../utils/Helper";
 
-const LeftMessageCard = ({ text, img, time, imageType }) => {
+/* const LeftMessageCard = ({ text, img, time, imageType }) => {
   return (
     <Stack direction="row" flex={1} sx={{ mx: 1, my: 1 }}>
       <Stack direction="row" flex={0.45}>
@@ -191,6 +191,239 @@ const RightMessageCard = ({ text, img, time, imageType }) => {
       </Stack>
     </Stack>
   );
+}; */
+const LeftMessageCard = ({ text, img, firstName, img2, imageType }) => {
+  return (
+    <Stack direction="row" flex={1} sx={{ py: 0.5 }}>
+      <Stack direction="row" gap={1} flex={0.45}>
+        <Stack sx={{ flex: 0.1 }} direction="row" alignItems="flex-end">
+          {img ? (
+            <Box
+              sx={{
+                height: "30px",
+                width: "30px",
+                borderRadius: "50%",
+              }}
+            >
+              <img
+                src={img}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+              />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                height: "30px",
+                width: "30px",
+                borderRadius: "50%",
+                backgroundColor: "primary.main",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "20px",
+                  marginTop: "-3px",
+                  textTransform: "capitalize",
+                  color: "#fff",
+                }}
+              >
+                {firstName?.slice(0, 1)}
+              </p>
+            </Box>
+          )}
+        </Stack>
+        <Box
+          sx={{
+            flex: 1,
+          }}
+        >
+          {img2 ? (
+            imageType?.split("/")[0] === "image" ? (
+              <Box
+                sx={{ backgroundColor: "#f5f5f5", p: 1, borderRadius: "5px" }}
+              >
+                <img
+                  src={img2}
+                  style={{
+                    height: "120px",
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+                <IconButton onClick={() => DownloadFile(img2)}>
+                  <Download sx={{ color: THEME.COLORS.primary }} />
+                </IconButton>
+              </Box>
+            ) : imageType?.split("/")[0] === "video" ? (
+              <video style={{ height: "120px", width: "100%" }} controls>
+                <source src={img2} type={imageType} />
+              </video>
+            ) : imageType?.split("/")[0] === "audio" ? (
+              <audio controls>
+                <source src={img2} type={imageType} />
+              </audio>
+            ) : (
+              imageType?.split("/")[0] === "application" && (
+                <Stack direction="row" justifyContent="flex-start">
+                  <Box>
+                    <img
+                      src={IMAGES.pdfImage}
+                      style={{
+                        height: "70px",
+                        marginBottom: "-8px",
+                        marginRight: "2px",
+                      }}
+                    />
+                    <IconButton onClick={() => DownloadFile(img2)}>
+                      <Download sx={{ color: THEME.COLORS.primary }} />
+                    </IconButton>
+                  </Box>
+                </Stack>
+              )
+            )
+          ) : (
+            <Box
+              sx={{
+                background: "rgb(255,255,255,0.1)",
+                color: THEME.COLORS.text,
+                // border: "1px solid #AEAEAE",
+                borderRadius: "5px",
+                py: 1,
+                px: 1,
+              }}
+            >
+              <Typography style={{ fontSize: "14px" }}>{text}</Typography>
+            </Box>
+          )}
+        </Box>
+      </Stack>
+    </Stack>
+  );
+};
+const RightMessageCard = ({ text, img, firstName, img2, imageType }) => {
+  return (
+    <Stack direction="row" flex={1} justifyContent="flex-end" sx={{ py: 0.5 }}>
+      <Stack direction="row" gap={1} flex={0.45}>
+        <Box sx={{ flex: 1 }}>
+          {img2 ? (
+            imageType?.split("/")[0] === "image" ? (
+              <Box
+                sx={{ backgroundColor: THEME.COLORS.backgroundPrimary, p: 1, borderRadius: "5px" }}
+              >
+                <img
+                  src={img2}
+                  style={{
+                    height: "120px",
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+                <IconButton onClick={() => DownloadFile(img2)}>
+                  <Download sx={{ color: '#f5f5f5' }} />
+                </IconButton>
+              </Box>
+            ) : imageType?.split("/")[0] === "video" ? (
+              <video style={{ height: "120px", width: "100%" }} controls>
+                <source src={img2} type={imageType} />
+              </video>
+            ) : imageType?.split("/")[0] === "audio" ? (
+              <audio controls>
+                <source src={img2} type={imageType} />
+              </audio>
+            ) : (
+              imageType?.split("/")[0] === "application" && (
+                <Stack direction="row" justifyContent="flex-end">
+                  <Box>
+                    <img
+                      src={IMAGES.pdfImage}
+                      style={{
+                        height: "70px",
+                        marginBottom: "-8px",
+                        marginRight: "2px",
+                      }}
+                    />
+
+                    <IconButton onClick={() => DownloadFile(img2)}>
+                      <Download sx={{ color: "#f5f5f5" }} />
+                    </IconButton>
+                  </Box>
+                </Stack>
+              )
+            )
+          ) : (
+            <Box
+              sx={{
+                background: THEME.COLORS.primary,
+                border: "none",
+                borderRadius: "5px",
+                py: 1,
+                px: 1,
+              }}
+            >
+              <Typography
+                style={{ fontSize: "14px", color: "#fff", display: "inline" }}
+              >
+                {text}
+              </Typography>
+            </Box>
+          )}
+        </Box>
+        <Stack sx={{ flex: 0.1 }} direction="row" alignItems="flex-end">
+          {img ? (
+            <Box
+              sx={{
+                height: "30px",
+                width: "30px",
+                borderRadius: "50%",
+              }}
+            >
+              <img
+                src={img}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+              />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                height: "30px",
+                width: "30px",
+                borderRadius: "50%",
+                backgroundColor: "primary.main",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "20px",
+                  textTransform: "capitalize",
+                  color: "#fff",
+                  marginTop: "-3px",
+                  fontWeight: 600,
+                }}
+              >
+                {firstName?.slice(0, 1)}
+              </p>
+            </Box>
+          )}
+        </Stack>
+      </Stack>
+    </Stack>
+  );
 };
 const JobChat = () => {
   const dispatch = useDispatch();
@@ -336,6 +569,7 @@ const JobChat = () => {
             sx={{
               pb: 2,
               pt: 1,
+              px:2,
               width: { md: "70%" },
               m: "auto",
               msOverflowStyle: "none",

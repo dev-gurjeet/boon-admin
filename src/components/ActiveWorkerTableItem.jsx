@@ -77,7 +77,7 @@ const textCss1 = {
   textDecoration: "underline",
   cursor: "pointer",
 };
-const WorkerTableItem = ({
+const ActiveWorkerTableItem = ({
   id,
   name,
   phone,
@@ -209,7 +209,6 @@ const WorkerTableItem = ({
         <StyledTableCell align="center">{categories[0]?.experience ? categories[0]?.experience : 0} year</StyledTableCell>
         <StyledTableCell align="center">{totalJobsMissed == undefined ? 'NA' : totalJobsMissed}</StyledTableCell>
         <StyledTableCell align="center"><IOSSwitch onClick={handleActiveInactive} checked={checked} /></StyledTableCell>
-        <StyledTableCell align="center"><IOSSwitch onClick={handleSuspend} checked={isSuspended} /></StyledTableCell>
       </StyledTableRow>
     </>
   )
@@ -305,4 +304,4 @@ const WorkerTableItem = ({
   );
 };
 
-export default WorkerTableItem;
+export default ActiveWorkerTableItem;
