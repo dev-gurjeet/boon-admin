@@ -205,7 +205,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -213,7 +213,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.firstName}{" "}
                   {workerDetail_Data?.data?.lastName}
@@ -229,7 +229,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -237,7 +237,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.email}
                 </Typography>
@@ -252,7 +252,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -260,7 +260,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   +1 {workerDetail_Data?.data?.phoneNumber}
                 </Typography>
@@ -275,7 +275,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -283,7 +283,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.subLocality}
                 </Typography>
@@ -298,7 +298,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -306,7 +306,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.country}
                 </Typography>
@@ -321,7 +321,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -329,7 +329,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.streetAddress}
                 </Typography>
@@ -344,7 +344,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -352,7 +352,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.locality}
                 </Typography>
@@ -367,7 +367,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -375,7 +375,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.address?.postalCode}
                 </Typography>
@@ -393,7 +393,7 @@ const WorkerDetail = () => {
                       variant="subtitle1"
                       sx={{
                         color: THEME.COLORS.text,
-                        fontSize: "20px",
+                        fontSize: "14px",
                         flex: 1,
                       }}
                     >
@@ -404,7 +404,7 @@ const WorkerDetail = () => {
                       sx={{
                         color: THEME.COLORS.white,
                         flex: 1,
-                        fontWeight: 500,
+                        fontWeight: 500, fontSize: "14px",
                       }}
                     >
                       {res?.categoryName}
@@ -420,7 +420,7 @@ const WorkerDetail = () => {
                       variant="subtitle1"
                       sx={{
                         color: THEME.COLORS.text,
-                        fontSize: "20px",
+                        fontSize: "14px",
                         flex: 1,
                       }}
                     >
@@ -430,7 +430,7 @@ const WorkerDetail = () => {
                       variant="subtitle1"
                       sx={{
                         color: THEME.COLORS.white,
-                        flex: 1,
+                        flex: 1, fontSize: "14px",
                         fontWeight: 500,
                       }}
                     >
@@ -450,7 +450,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -458,7 +458,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.paymentDetails?.instituteName}
                 </Typography>
@@ -473,7 +473,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -481,7 +481,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.paymentDetails?.accountNumber}
                 </Typography>
@@ -496,7 +496,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -504,7 +504,7 @@ const WorkerDetail = () => {
                 </Typography>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: THEME.COLORS.white, flex: 1, fontWeight: 500 }}
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
                 >
                   {workerDetail_Data?.data?.paymentDetails?.transitNumber}
                 </Typography>
@@ -515,7 +515,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                   }}
                 >
@@ -673,7 +673,7 @@ const WorkerDetail = () => {
                   variant="subtitle1"
                   sx={{
                     color: THEME.COLORS.text,
-                    fontSize: "20px",
+                    fontSize: "14px",
                     flex: 1,
                     mb: 2,
                   }}

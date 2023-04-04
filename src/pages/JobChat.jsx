@@ -23,6 +23,7 @@ import {
 } from "../redux/commonReducer";
 import { toast } from "react-toastify";
 import { DownloadFile } from "../utils/Helper";
+import axiosInstance from "../api/axiosInstance";
 
 /* const LeftMessageCard = ({ text, img, time, imageType }) => {
   return (
@@ -433,9 +434,7 @@ const JobChat = () => {
     getJobChats_isLoading,
     getJobChats_Data,
     getJobChats_isError,
-
     getProfile_Data,
-
     uploadDocument_isLoading,
     uploadDocument_Data,
     uploadDocument_isError,
@@ -444,6 +443,7 @@ const JobChat = () => {
   const [showData, setShowData] = useState([]);
   const [page, setPage] = useState(1);
   const [imagetype, setImageype] = useState("");
+  const [sender, setSender] = useState({});
 
   const handleMoreChat = () => {
     if (Number(getJobChats_Data?.totalPage) > page) {
@@ -488,6 +488,11 @@ const JobChat = () => {
       toast.warning("File size more than 50 Mb");
     }
   };
+  const getUserDetails = async () => {
+    const response = await axiosInstance.get(`/admin/getProfile?userId=63ce6f4854018a7a36ae1a44`);
+    console.log("respoim",response.data)
+    setSender(response?.data?.data)
+  }
   useEffect(() => {
     if (uploadDocument_Data) {
       handleSubmit(uploadDocument_Data?.data, imagetype);
@@ -511,6 +516,7 @@ const JobChat = () => {
       jobId: jobid,
       userId: getProfile_Data?.data?._id,
     });
+    getUserDetails();
   }, []);
   useEffect(() => {
     const body = {
@@ -556,28 +562,29 @@ const JobChat = () => {
         <BackNavigate />
         <Stack sx={{ width: '100%' }}>
           <Box sx={{
-            pb: 2,
-            pt: 1,
-            width: { md: "70%" },
+            p: 2,
+            width: "70%",
             m: "auto",
-            backgroundColor: THEME.COLORS.backgroundSecondary,
-            color: '#fff'
+            backgroundColor: THEME.COLORS.backgroundPrimary,
+            color: '#fff',
+            marginTop: "-50px",
+            mb: 1
           }}>
-            <Typography sx={{ fontWeight: 600 }}>User name</Typography>
+            <Typography sx={{ fontWeight: 600 }}>{sender?.firstName} {sender?.lastName}</Typography>
           </Box>
           <Box
             sx={{
               pb: 2,
               pt: 1,
-              px:2,
-              width: { md: "70%" },
+              px: 2,
+              width: "70%",
               m: "auto",
               msOverflowStyle: "none",
               scrollbarWidth: "none",
               "&::-webkit-scrollbar": {
                 display: "none",
               },
-              height: "80vh",
+              height: "65vh",
               backgroundColor: THEME.COLORS.backgroundPrimary,
               overflowY: "scroll",
             }}
@@ -615,15 +622,17 @@ const JobChat = () => {
                   <LeftMessageCard
                     text={item?.message}
                     time={moment(item?.createdAt).format("hh:mm a")}
-                    img={item?.attachment?.value}
+                    firstName={item?.senderDetails?.firstName}
+                    img={item?.senderDetails?.profile_pic}
                     imageType={item?.attachment?.type}
                   />
                 ) : (
                   <RightMessageCard
-                    img={item?.attachment?.value}
                     imageType={item?.attachment?.type}
                     text={item?.message}
                     time={moment(item?.createdAt).format("hh:mm a")}
+                    firstName={getProfile_Data?.data?.firstName}
+                    img={false}
                   />
                 )}
               </Box>
