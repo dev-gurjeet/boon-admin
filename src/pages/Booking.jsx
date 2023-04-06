@@ -68,6 +68,7 @@ const Booking = () => {
     const body = {
       page: value,
       limit: 10,
+      search
     };
     setState({ ...state, page: value });
     dispatch(getAllcontractorJobs(body));
@@ -377,7 +378,7 @@ const Booking = () => {
               searchQuery(e.target.value);
             }}
             variant="outlined"
-            placeholder="Search..."
+            placeholder="Search job..."
             size="small"
             sx={{
               input: {

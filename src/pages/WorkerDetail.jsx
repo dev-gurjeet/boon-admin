@@ -21,6 +21,7 @@ import Lightbox from "react-18-image-lightbox";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import SmsIcon from "@mui/icons-material/Sms";
+import dayjs from "dayjs";
 const WorkerDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ const WorkerDetail = () => {
       dispatch(clearWorkeDetail());
     };
   }, []);
-
+  
   return (
     <>
       {state.isOpen && (
@@ -109,8 +110,8 @@ const WorkerDetail = () => {
             nextSrc={state.images[(state.photoIndex + 1) % state.images.length]}
             prevSrc={
               state.images[
-                (state.photoIndex + state.images.length - 1) %
-                  state.images.length
+              (state.photoIndex + state.images.length - 1) %
+              state.images.length
               ]
             }
             onCloseRequest={() => setState({ ...state, isOpen: false })}
@@ -141,8 +142,8 @@ const WorkerDetail = () => {
             }
             prevSrc={
               state.images1[
-                (state.photoIndex1 + state.images1.length - 1) %
-                  state.images1.length
+              (state.photoIndex1 + state.images1.length - 1) %
+              state.images1.length
               ]
             }
             onCloseRequest={() => setState({ ...state, isOpen1: false })}
@@ -380,6 +381,28 @@ const WorkerDetail = () => {
                   {workerDetail_Data?.data?.address?.postalCode}
                 </Typography>
               </Stack>
+              <Stack
+                direction="row"
+                sx={{ flex: 1, my: 1 }}
+                alignItems="center"
+              >
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    color: THEME.COLORS.text,
+                    fontSize: "14px",
+                    flex: 1,
+                  }}
+                >
+                  Registeration date
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ color: THEME.COLORS.white, flex: 1, fontSize: "14px", fontWeight: 500 }}
+                >
+                  {dayjs(workerDetail_Data?.data?.createdAt).format('DD MMM, YYYY hh:mm A')}
+                </Typography>
+              </Stack>
             </Box>
             <Box sx={{ flex: 1 }}>
               {workerDetail_Data?.data?.categories?.map((res, resIndex) => (
@@ -437,7 +460,33 @@ const WorkerDetail = () => {
                       {res?.experience ? res?.experience : 0}
                     </Typography>
                   </Stack>
-                  <Divider sx={{borderBottomColor:"#333"}} />
+                  <Stack
+                    direction="row"
+                    sx={{ flex: 1, my: 1 }}
+                    alignItems="center"
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: THEME.COLORS.text,
+                        fontSize: "14px",
+                        flex: 1,
+                      }}
+                    >
+                      Rating
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        color: THEME.COLORS.white,
+                        flex: 1, fontSize: "14px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {workerDetail_Data?.data?.rating || 'NA'}
+                    </Typography>
+                  </Stack>
+                  <Divider sx={{ borderBottomColor: "#333" }} />
                 </Box>
               ))}
               <Typography variant="h6" sx={{color:THEME.COLORS.text}}>Payment Details</Typography>
@@ -543,30 +592,75 @@ const WorkerDetail = () => {
           ) : (
             <>
               <Stack alignItems={"end"} gap={3} >
-                
+
                 <Stack gap={2} direction="row" >
                   {workerDetail_Data?.data?.isDocumentApproved !==
                     "PENDING" && (
-                    <>
-                      {workerDetail_Data?.data?.isDocumentApproved ===
-                      "APPROVED" ? (
-                        <Stack direction="row" gap={0.5}>
-                          <CheckCircleOutlineIcon
-                            sx={{
-                              color: THEME.COLORS.green,
-                              fontWeight: 700,
-                            }}
-                          />
-                          <Typography
-                            sx={{
-                              color: THEME.COLORS.white,
-                              fontWeight: 700,
-                            }}
-                          >
-                            Document Verified
-                          </Typography>
-                        </Stack>
-                      ) : (
+                      <>
+                        {workerDetail_Data?.data?.isDocumentApproved ===
+                          "APPROVED" ? (
+                          <Stack direction="row" gap={0.5}>
+                            <CheckCircleOutlineIcon
+                              sx={{
+                                color: THEME.COLORS.green,
+                                fontWeight: 700,
+                              }}
+                            />
+                            <Typography
+                              sx={{
+                                color: THEME.COLORS.white,
+                                fontWeight: 700,
+                              }}
+                            >
+                              Document Verified
+                            </Typography>
+                          </Stack>
+                        ) : (
+                          <Box>
+                            <Button
+                              onClick={handleApprove}
+                              sx={{
+                                backgroundColor: THEME.COLORS.primary,
+                                "&:hover": {
+                                  backgroundColor: THEME.COLORS.primary,
+                                },
+                              }}
+                              size="small"
+                              variant="contained"
+                            >
+                              verify
+                            </Button>
+                          </Box>
+                        )}
+                        {workerDetail_Data?.data?.isDocumentApproved ===
+                          "REJECTED" ? (
+                          <Stack direction="row" gap={0.5}>
+                            <HighlightOffIcon
+                              color="error"
+                              sx={{ fontWeight: 700 }}
+                            />
+                            <Typography color="error" sx={{ fontWeight: 700 }}>
+                              Document Rejected
+                            </Typography>
+                          </Stack>
+                        ) : (
+                          <Box>
+                            <Button
+                              onClick={handleRejected}
+                              color="error"
+                              size="small"
+                              variant="contained"
+                            >
+                              Reject
+                            </Button>
+                          </Box>
+                        )}
+                      </>
+                    )}
+
+                  {workerDetail_Data?.data?.isDocumentApproved ===
+                    "PENDING" && (
+                      <Stack direction="row" gap={2}>
                         <Box>
                           <Button
                             onClick={handleApprove}
@@ -582,19 +676,6 @@ const WorkerDetail = () => {
                             verify
                           </Button>
                         </Box>
-                      )}
-                      {workerDetail_Data?.data?.isDocumentApproved ===
-                      "REJECTED" ? (
-                        <Stack direction="row" gap={0.5}>
-                          <HighlightOffIcon
-                            color="error"
-                            sx={{ fontWeight: 700 }}
-                          />
-                          <Typography color="error" sx={{ fontWeight: 700 }}>
-                            Document Rejected
-                          </Typography>
-                        </Stack>
-                      ) : (
                         <Box>
                           <Button
                             onClick={handleRejected}
@@ -605,40 +686,8 @@ const WorkerDetail = () => {
                             Reject
                           </Button>
                         </Box>
-                      )}
-                    </>
-                  )}
-
-                  {workerDetail_Data?.data?.isDocumentApproved ===
-                    "PENDING" && (
-                    <Stack direction="row" gap={2}>
-                      <Box>
-                        <Button
-                          onClick={handleApprove}
-                          sx={{
-                            backgroundColor: THEME.COLORS.primary,
-                            "&:hover": {
-                              backgroundColor: THEME.COLORS.primary,
-                            },
-                          }}
-                          size="small"
-                          variant="contained"
-                        >
-                          verify
-                        </Button>
-                      </Box>
-                      <Box>
-                        <Button
-                          onClick={handleRejected}
-                          color="error"
-                          size="small"
-                          variant="contained"
-                        >
-                          Reject
-                        </Button>
-                      </Box>
-                    </Stack>
-                  )}
+                      </Stack>
+                    )}
                 </Stack>
               </Stack>
               {/* license Document */}

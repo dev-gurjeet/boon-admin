@@ -18,6 +18,7 @@ import { PATH, THEME } from '../utils/constants';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from 'react-router-dom';
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
 
 const textCsswithDeco = {
   color: THEME.COLORS.secondary,
@@ -120,7 +121,7 @@ export default function ContractorViewMore({ open, handleClose, data = [] }) {
                         </Typography>
                       </Stack>
                     </StyledTableCell>
-                    <StyledTableCell align="right">{`${job.jobName}`}</StyledTableCell>
+                    <StyledTableCell align="right"><Stack direction="row" justifyContent="space-between"><PriceCheckIcon sx={{backgroundColor:job.isPaidByContractor ? 'green': '#333', padding: '1px', borderRadius:'5px'}} />{`${job.jobName}`}</Stack></StyledTableCell>
                     <StyledTableCell align="right">{job?.adminCommision || 0}</StyledTableCell>
                     <StyledTableCell align="right">{job.totalEarnings.toFixed(2)}</StyledTableCell>
                     <StyledTableCell align="right">{job.totalMinutes}</StyledTableCell>

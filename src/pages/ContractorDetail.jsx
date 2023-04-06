@@ -10,6 +10,8 @@ import {
   Typography,
   InputAdornment,
   IconButton,
+  TableCell,
+  TableRow,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +37,7 @@ import { memo } from "react";
 import { makeStyles } from "@mui/styles";
 import SmsIcon from "@mui/icons-material/Sms";
 import { CustomPagination } from "../components/styledComponent";
+import dayjs from "dayjs";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -87,7 +90,7 @@ const ContractorDetail = () => {
       const totalPrice = Math.floor(
         (Number(state.price ? state.price : state.originalPrice) *
           Number(state.percentage)) /
-          100
+        100
       );
 
       const body = {
@@ -104,7 +107,7 @@ const ContractorDetail = () => {
       const totalPrice = Math.floor(
         (Number(state.price ? state.price : state.originalPrice) *
           Number(state.percentage)) /
-          100
+        100
       );
       const body = {
         jobId: state.id,
@@ -171,7 +174,7 @@ const ContractorDetail = () => {
       dispatch(clearContractorDetail());
     };
   }, []);
-
+  console.log("contractorDetail_Data", contractorDetail_Data);
   return (
     <>
       <Dialog
@@ -302,9 +305,9 @@ const ContractorDetail = () => {
           px: 5,
         }}
       >
-     
+
         <Stack direction="row" gap={2} alignItems="center">
-          <Typography sx={{ fontSize: "18px", fontWeight: 500 ,color:THEME.COLORS.text}}>
+          <Typography sx={{ fontSize: "18px", fontWeight: 500, color: THEME.COLORS.text }}>
             Contractor Details
           </Typography>
           <IconButton
@@ -316,7 +319,7 @@ const ContractorDetail = () => {
         <Divider sx={{ my: 2 }} />
         {contractorDetail_isLoading ? (
           <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.white }} size={40} />
+            <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
           </Stack>
         ) : (
           <>
@@ -325,7 +328,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     Name
                   </Typography>
@@ -333,7 +336,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     {contractorDetail_Data?.data?.firstName}
                     {contractorDetail_Data?.data?.lastName}
@@ -344,7 +347,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     Company Name
                   </Typography>
@@ -352,7 +355,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     {contractorDetail_Data?.data?.companyName}
                   </Typography>
@@ -365,7 +368,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     Email
                   </Typography>
@@ -373,14 +376,9 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ color: THEME.COLORS.white }}
-                    >
-                      {contractorDetail_Data?.data?.email}
-                    </Typography>
+                    {contractorDetail_Data?.data?.email}
                   </Typography>
                 </Grid>
               </Grid>
@@ -389,7 +387,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     City
                   </Typography>
@@ -397,7 +395,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     {contractorDetail_Data?.data?.address?.subLocality}
                   </Typography>
@@ -410,7 +408,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     Phone
                   </Typography>
@@ -418,14 +416,9 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ color: THEME.COLORS.white }}
-                    >
-                      +1 {contractorDetail_Data?.data?.phoneNumber}
-                    </Typography>
+                    +1 {contractorDetail_Data?.data?.phoneNumber}
                   </Typography>
                 </Grid>
               </Grid>
@@ -435,7 +428,7 @@ const ContractorDetail = () => {
                   <Typography
                     variant="subtitle1"
                     sx={{
-                      color: THEME.COLORS.text,
+                      color: THEME.COLORS.text, fontSize: '14px'
                     }}
                   >
                     Country
@@ -444,7 +437,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     {contractorDetail_Data?.data?.address?.country}
                   </Typography>
@@ -457,7 +450,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     Address Line 1
                   </Typography>
@@ -465,11 +458,11 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: THEME.COLORS.white }}
+                      sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                     >
                       {contractorDetail_Data?.data?.address?.streetAddress}
                     </Typography>
@@ -482,7 +475,7 @@ const ContractorDetail = () => {
                   <Typography
                     variant="subtitle1"
                     sx={{
-                      color: THEME.COLORS.text,
+                      color: THEME.COLORS.text, fontSize: '14px'
                     }}
                   >
                     Address Line 2
@@ -491,7 +484,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     {contractorDetail_Data?.data?.address?.region}
                   </Typography>
@@ -503,7 +496,7 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.text }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     Postal Code
                   </Typography>
@@ -511,14 +504,34 @@ const ContractorDetail = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: THEME.COLORS.white }}
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                   >
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: THEME.COLORS.white }}
+                      sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
                     >
                       {contractorDetail_Data?.data?.address?.postalCode}
                     </Typography>
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={6} container>
+                <Grid item xs={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      color: THEME.COLORS.text, fontSize: '14px'
+                    }}
+                  >
+                    Registration date
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ color: THEME.COLORS.text, fontSize: '14px' }}
+                  >
+                    {dayjs(contractorDetail_Data?.data?.createdAt).format('DD MMM, YYYY hh:mm A')}
                   </Typography>
                 </Grid>
               </Grid>
@@ -537,41 +550,45 @@ const ContractorDetail = () => {
           mt: 2,
         }}
       >
-         <TableContainer component={Paper}>
+        <TableContainer component={Paper}>
           <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
             <BookingTableTableHeading />
 
             <TableBody>
-        {/* <Divider sx={{ my: 2 }} /> */}
-        {contractorJobById_isLoading || updateJobDetail_isLoading ? (
-          <Stack direction="row" justifyContent="center" sx={{ my: 2 }}>
-            <CircularProgress sx={{ color: THEME.COLORS.white }} size={40} />
-          </Stack>
-        ) : (
-          contractorJobById_Data?.data?.map((item, itemIndex) => (
-            // <Box key={itemIndex}>
-              <BookingTableItem
-                address={item?.jobName}
-                company={item?.companyName}
-                id={itemIndex + 1}
-                jobid={item?._id}
-                phone={item?.phone}
-                price={item?.price}
-                status={item?.status}
-                state={state}
-                setState={setState}
-                handleRejected={handleRejected}
-                modifiedPrice={item?.modifiedPrice}
-                adminCommision={item?.adminCommision}
-              />
-            //   <Divider sx={{ my: 1 }} />
-            // </Box>
-          ))
-        )}    </TableBody>
-        </Table>
-      </TableContainer>
+              {/* <Divider sx={{ my: 2 }} /> */}
+              {contractorJobById_isLoading || updateJobDetail_isLoading ? (
+                <TableRow sx={{ backgroundColor: THEME.COLORS.backgroundSecondary }}>
+                  <TableCell colSpan={8}>
+                    <Stack direction="row" justifyContent="center" sx={{ my: 2, backgroundColor: THEME.COLORS.backgroundSecondary }}>
+                      <CircularProgress sx={{ color: THEME.COLORS.text }} size={40} />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ) : (
+                contractorJobById_Data?.data?.map((item, itemIndex) => (
+                  // <Box key={itemIndex}>
+                  <BookingTableItem
+                    address={item?.jobName}
+                    company={item?.companyName}
+                    id={itemIndex + 1}
+                    jobid={item?._id}
+                    phone={item?.phone}
+                    price={item?.price}
+                    status={item?.status}
+                    state={state}
+                    setState={setState}
+                    handleRejected={handleRejected}
+                    modifiedPrice={item?.modifiedPrice}
+                    adminCommision={item?.adminCommision}
+                  />
+                  //   <Divider sx={{ my: 1 }} />
+                  // </Box>
+                ))
+              )}    </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
-            
+
       <Stack direction="row" justifyContent="flex-end" sx={{ px: 5, my: 2 }}>
         <CustomPagination
           count={contractorJobById_Data?.totalPage}
@@ -580,8 +597,8 @@ const ContractorDetail = () => {
           variant="outlined"
           onChange={onChangePage}
         />
-        </Stack>
-       
+      </Stack>
+
     </>
   );
 };

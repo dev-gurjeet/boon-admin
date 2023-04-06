@@ -112,11 +112,12 @@ const BookingDetail = () => {
     dispatch(jobRequest(body));
     setState({ ...state, anchor: null, id: "" });
   };
-  const handleAccept = () => {
+  const handleAccept = (workerId) => {
     const body = {
       jobId: jobid,
       status: "APPROVED",
       bookingId: state.id,
+      workerId
     };
     dispatch(jobRequest(body));
     setState({ ...state, anchor: null, id: "" });

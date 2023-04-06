@@ -90,7 +90,7 @@ const BookingDetailTableItem = ({
             >
               <Typography
                 sx={{
-                  color: "#000",
+                  color: THEME.COLORS.text,
                   fontFamily: "Roboto",
                   fontSize: "16px",
                   fontWeight: 400,
@@ -110,7 +110,7 @@ const BookingDetailTableItem = ({
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleAccept}>Accept</MenuItem>
+                <MenuItem onClick={() => handleAccept(workerId)}>Accept</MenuItem>
                 <MenuItem onClick={handleReject}>Reject</MenuItem>
               </Menu>
             </Box>

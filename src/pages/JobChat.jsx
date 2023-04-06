@@ -490,7 +490,6 @@ const JobChat = () => {
   };
   const getUserDetails = async () => {
     const response = await axiosInstance.get(`/admin/getProfile?userId=63ce6f4854018a7a36ae1a44`);
-    console.log("respoim",response.data)
     setSender(response?.data?.data)
   }
   useEffect(() => {
