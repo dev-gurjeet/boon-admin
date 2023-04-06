@@ -169,7 +169,10 @@ const BookingDetail = () => {
       dispatch(jobDetail(jobid));
     }
     if (jobRequest_isError) {
-      toast.error("something went wrong");
+      console.log(jobRequest_isError,"assignJob_isError")
+      toast.error(jobRequest_isError?.message
+        ? jobRequest_isError?.message
+        : "something went wrong");
       dispatch(clearJobRequest());
     }
   }, [jobRequest_Data, jobRequest_isError]);
