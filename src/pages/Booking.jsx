@@ -146,7 +146,6 @@ const Booking = () => {
     const body = {
       jobId: id,
       status: "REJECTED",
-      search
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });
@@ -156,7 +155,6 @@ const Booking = () => {
     const body = {
       jobId: id,
       status: "CANCELLED",
-      search
     };
     dispatch(updateJobPrice(body));
     setState({ ...state, anchor: null });

@@ -103,11 +103,12 @@ const BookingDetail = () => {
     markPaymentDone_isError,
   } = useSelector((store) => store.commonStore);
   const navigate = useNavigate();
-  const handleReject = () => {
+  const handleReject = (workerId) => {
     const body = {
       jobId: jobid,
       status: "REJECTED",
       bookingId: state.id,
+      workerId
     };
     dispatch(jobRequest(body));
     setState({ ...state, anchor: null, id: "" });

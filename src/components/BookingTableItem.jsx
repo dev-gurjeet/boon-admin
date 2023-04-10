@@ -60,7 +60,12 @@ const BookingTableItem = ({
   // const open = Boolean(state.anchor);
   const [openModal, setOpenModal] = useState(false)
   const handleDeleteModal = () => {
+    console.log("here");
     setOpenModal(true)
+  }
+  const handleDeleteJob = (jobid) => {
+    deleteJob(jobid);
+    handleCloseModal();
   }
   const handleCloseModal = () => {
     setOpenModal(false)
@@ -238,7 +243,7 @@ const BookingTableItem = ({
         <Stack className={`${status !== "APPROVED" && status !== "PENDING" && 'btn-disabled'}`}>
           <Button variant="contained" color="error" onClick={handleDeleteModal}>Delete</Button>
 
-          <AlertDialogSlide open={openModal} handleAction={() => deleteJob(jobid)} handleClose={handleCloseModal} />
+          <AlertDialogSlide open={openModal} handleAction={() => handleDeleteJob(jobid)} handleClose={handleCloseModal} />
         </Stack>
       </StyledTableCell>
     </StyledTableRow>

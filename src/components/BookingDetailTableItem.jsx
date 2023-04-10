@@ -111,7 +111,7 @@ const BookingDetailTableItem = ({
                 }}
               >
                 <MenuItem onClick={() => handleAccept(workerId)}>Accept</MenuItem>
-                <MenuItem onClick={handleReject}>Reject</MenuItem>
+                <MenuItem onClick={() => handleReject(workerId)}>Reject</MenuItem>
               </Menu>
             </Box>
           </>
