@@ -883,6 +883,11 @@ const Chats = () => {
                                 classes={{
                                   input: classes.input,
                                 }}
+                                inputProps={{
+                                  style: {
+                                    color: THEME.COLORS.text
+                                  }
+                                }}
                                 fullWidth
                                 value={message}
                                 onKeyPress={(e) =>

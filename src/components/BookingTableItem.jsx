@@ -131,11 +131,11 @@ const BookingTableItem = ({
       <StyledTableCell align="center">
         <Typography style={textCss}>{address}</Typography></StyledTableCell>
       <StyledTableCell align="center">  <Typography style={textCss}>
-        ${modifiedPrice ? modifiedPrice : 0}
+        ${modifiedPrice ? modifiedPrice.toFixed(2) : 0}
       </Typography></StyledTableCell>
       <StyledTableCell align="center">
         <Typography style={textCss}>
-          ${Number(adminCommision ? adminCommision : 0)}
+          ${adminCommision ? adminCommision.toFixed(2) : 0}
         </Typography></StyledTableCell>
       <StyledTableCell align="center">
         {status === "APPROVED" && (

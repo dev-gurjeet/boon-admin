@@ -207,7 +207,7 @@ const WorkerTableItem = ({
         <StyledTableCell align="center">+1 {phone}</StyledTableCell>
         <StyledTableCell align="center">{categories[0]?.categoryName}</StyledTableCell>
         <StyledTableCell align="center">{categories[0]?.experience ? categories[0]?.experience : 0} year</StyledTableCell>
-        <StyledTableCell align="center">{totalJobsMissed == undefined ? 'NA' : totalJobsMissed}</StyledTableCell>
+        <StyledTableCell align="center">{totalJobsMissed == undefined ? '0' : totalJobsMissed}</StyledTableCell>
         <StyledTableCell align="center"><IOSSwitch onClick={handleActiveInactive} checked={checked} /></StyledTableCell>
         <StyledTableCell align="center"><IOSSwitch onClick={handleSuspend} checked={isSuspended} /></StyledTableCell>
       </StyledTableRow>

@@ -34,10 +34,10 @@ const Navbar = () => {
       .off("sendUnreadNotificationCount")
       .on("sendUnreadNotificationCount", (args) => {
         console.log(args, "in second argsss");
-       if (args > 0) {
-        toast.success("New Notification");
-        playAudio();
-       }
+        if (args > 0) {
+          toast.success("New Notification");
+          playAudio();
+        }
         setState(args);
       });
     return () => socket.emit("end");
@@ -80,15 +80,17 @@ const Navbar = () => {
       }}
     >
       <Box>
-        <img
-          alt="logo"
-          src={IMAGES.whiteLogo}
-          style={{
-            height: "auto",
-            width: "150px",
-            objectFit: "contain",
-          }}
-        />
+        <Link to={PATH.Dashboard}>
+          <img
+            alt="logo"
+            src={IMAGES.whiteLogo}
+            style={{
+              height: "auto",
+              width: "150px",
+              objectFit: "contain",
+            }}
+          />
+        </Link>
       </Box>
 
       <Stack direction="row" alignItems="center" gap={5}>
@@ -96,7 +98,7 @@ const Navbar = () => {
           <Badge
             color="error"
             badgeContent={state}
-            // onClick={() => navigate(PATH.Notification)}
+          // onClick={() => navigate(PATH.Notification)}
           >
             <NotificationsIcon
               sx={{ color: THEME.COLORS.text, fontSize: "1.8rem" }}

@@ -535,6 +535,9 @@ const JobChat = () => {
         setShowData(getJobChats_Data?.data);
       }
     }
+    else{
+      setShowData([]);
+    }
   }, [getJobChats_Data]);
 
   useEffect(() => {

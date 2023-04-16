@@ -79,11 +79,9 @@ const Booking = () => {
       return;
     }
     if (state.price && state.percentage) {
-      const totalPrice = Math.floor(
-        (Number(state.price ? state.price : state.originalPrice) *
-          Number(state.percentage)) /
-        100
-      );
+      const totalPrice = (Number(state.price ? state.price : state.originalPrice) *
+        Number(state.percentage)) /
+        100;
 
       const body = {
         jobId: state.id,
