@@ -147,8 +147,7 @@ const WorkerEarnings = () => {
 						<TableHead>
 							<StyledTableRow>
 								<StyledTableCell>Sr no</StyledTableCell>
-								<StyledTableCell align="right">Name</StyledTableCell>
-								<StyledTableCell align="right">Total jobs</StyledTableCell>
+								<StyledTableCell align="center">Name</StyledTableCell>
 								<StyledTableCell align="right">Total minutes</StyledTableCell>
 								<StyledTableCell align="right">Total earnings</StyledTableCell>
 								<StyledTableCell align="right">View more</StyledTableCell>
@@ -218,7 +217,6 @@ const WorkerEarnings = () => {
 											</Typography>
 										</Stack>
 									</StyledTableCell>
-									<StyledTableCell align="right">{worker?.jobs?.length || 0}</StyledTableCell>
 									<StyledTableCell align="right">{worker.totalMinutes}</StyledTableCell>
 									<StyledTableCell align="right">{worker?.totalEarnings?.toFixed(2)}</StyledTableCell>
 									<StyledTableCell align="right">

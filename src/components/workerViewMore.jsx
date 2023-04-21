@@ -19,6 +19,7 @@ import { styled } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from 'react-router-dom';
 import PriceCheckIcon from '@mui/icons-material/PriceCheck';
+import dayjs from 'dayjs';
 
 const textCsswithDeco = {
   color: THEME.COLORS.secondary,
@@ -101,9 +102,10 @@ export default function WorkerViewMore({ open, handleClose, data = [] }) {
                 <StyledTableRow>
                   <StyledTableCell>Job id</StyledTableCell>
                   <StyledTableCell align="right">Job name</StyledTableCell>
-                  <StyledTableCell align="right">Admin commission</StyledTableCell>
+                  {/* <StyledTableCell align="right">Admin commission</StyledTableCell> */}
                   <StyledTableCell align="right">Total earning</StyledTableCell>
                   <StyledTableCell align="right">Total minutes</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
                 </StyledTableRow>
               </TableHead>
               <TableBody>
@@ -123,9 +125,10 @@ export default function WorkerViewMore({ open, handleClose, data = [] }) {
                       </Stack>
                     </StyledTableCell>
                     <StyledTableCell align="right"><Stack direction="row" justifyContent="space-between"><PriceCheckIcon sx={{backgroundColor:job.isPaidByAdmin ? 'green': '#333', padding: '1px', borderRadius:'5px'}} />{`${job.jobName}`}</Stack></StyledTableCell>
-                    <StyledTableCell align="right">{job?.adminCommision || 0}</StyledTableCell>
+                    {/* <StyledTableCell align="right">{job?.adminCommision || 0}</StyledTableCell> */}
                     <StyledTableCell align="right">{job.totalEarnings.toFixed(2)}</StyledTableCell>
                     <StyledTableCell align="right">{job.totalMinutes}</StyledTableCell>
+                    <StyledTableCell align="right">{dayjs(job.earningDate).format('DD MMM, YYYY')}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
