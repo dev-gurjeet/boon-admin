@@ -94,11 +94,10 @@ const Booking = () => {
       dispatch(updateJobPrice(body));
     }
     if (!state.price && state.percentage) {
-      const totalPrice = Math.floor(
+      const totalPrice =
         (Number(state.price ? state.price : state.originalPrice) *
           Number(state.percentage)) /
         100
-      );
       const body = {
         jobId: state.id,
         adminCommision: Number(totalPrice),
