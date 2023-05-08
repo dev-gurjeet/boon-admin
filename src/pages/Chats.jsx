@@ -381,9 +381,6 @@ const Chats = () => {
     }
   };
 
-  socket.emit("join", { userId: getProfile_Data?.data?._id }, (args) => {
-    console.log(args);
-  });
 
   socket.off("sendMessageListen").on("sendMessageListen", (args) => {
     console.log(args, "in chat callback");
@@ -418,6 +415,9 @@ const Chats = () => {
     }
   }, [uploadDocument_Data, uploadDocument_Data]);
   useEffect(() => {
+    socket.emit("join", { userId: getProfile_Data?.data?._id }, (args) => {
+      console.log(args);
+    });
     return () => socket.emit("end");
   }, []);
   useEffect(() => {

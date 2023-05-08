@@ -6,6 +6,6 @@ const connectionSocket = {
   reConnect: true,
 };
 export const socket = io.connect(
-  "https://apis.booncontracting.com",
+  "https://api.booncontracting.com",
   connectionSocket
 );

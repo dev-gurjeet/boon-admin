@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "https://apis.booncontracting.com/api";
+const baseURL = "https://api.booncontracting.com/api";
 const axiosInstance = axios.create({
   baseURL,
 });
