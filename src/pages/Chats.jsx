@@ -423,28 +423,30 @@ const Chats = () => {
   useEffect(() => {
     const searchId = searchParams.get("id");
     const searchRole = searchParams.get("role");
-    if (searchId) {
-      const body = {
-        message: "Hi, This is Admin",
-        recipientId: searchId,
-        type: "SMS",
-        senderId: getProfile_Data?.data?._id,
-        createdAt: new Date(),
-        directChat: true,
-        attachment: {
-          type: "",
-          value: "",
-        },
-        senderDetails: {
-          profile_pic: "",
-          lastName: getProfile_Data?.data?.firstName,
-          firstName: getProfile_Data?.data?.lastName,
-        },
-      };
+    setShowData([])
 
-      socket.emit("sendMessageEmit", body, (args) => {
-        setShowData((prev) => [...prev, args]);
-      });
+    if (searchId) {
+      // const body = {
+      //   message: "Hi, This is Admin",
+      //   recipientId: searchId,
+      //   type: "SMS",
+      //   senderId: getProfile_Data?.data?._id,
+      //   createdAt: new Date(),
+      //   directChat: true,
+      //   attachment: {
+      //     type: "",
+      //     value: "",
+      //   },
+      //   senderDetails: {
+      //     profile_pic: "",
+      //     lastName: getProfile_Data?.data?.firstName,
+      //     firstName: getProfile_Data?.data?.lastName,
+      //   },
+      // };
+
+      // socket.emit("sendMessageEmit", body, (args) => {
+      //   setShowData((prev) => [...prev, args]);
+      // });
       setState((prev) => ({ ...prev, role: searchRole, userId: searchId }));
     }
   }, []);

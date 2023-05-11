@@ -158,7 +158,7 @@ const Profile = () => {
           <Divider sx={{ my: 2 }} />
           <Stack alignItems="center">
             <Box>
-              <img alt="profile" src={IMAGES.adminImage} />
+              <img alt="profile" src={IMAGES.adminImage2} style={{maxWidth: '140px', borderRadius: '50%'}} />
             </Box>
             <Stack direction="row" gap={4}>
               <Box sx={{ mt: 3 }}>

@@ -3,6 +3,7 @@ import whiteLogo from "../assets/images/boon-white.png";
 import shortLogo from "../assets/images/boon-logo.png";
 import notiIcon from "../assets/images/notiIcon.png";
 import adminImage from "../assets/images/admin.png";
+import adminImage2 from "../assets/images/profile.jpeg";
 import pdfImage from "../assets/images/pdfimage.png";
 import placeholderImage from "../assets/images/placeholder-image.png";
 
@@ -48,6 +49,7 @@ export const IMAGES = {
   logo,
   shortLogo,
   adminImage,
+  adminImage2,
   notiIcon,
   placeholderImage,
   pdfImage,
