@@ -22,6 +22,8 @@ import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
 import ActiveWorkerTableItem from "../components/ActiveWorkerTableItem";
 import ActiveWorkerTableHeading from "../components/ActiveWorkerTableHeading";
+import ActiveWorkerJobTableHeading from "../components/ActiveWorkerJobTableHeading";
+import ActiveWorkerJobTableItem from "../components/ActiveWorkerJobTableItem";
 
 const useStyles = makeStyles({
   table: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ActiveWorkers = () => {
+const ActiveWorkers = ({ screen, jobId, handleReassignClick }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const {
@@ -51,6 +53,7 @@ const ActiveWorkers = () => {
     const body = {
       page: value,
       limit: 10,
+      jobId
     };
     setState(value);
     dispatch(getAllActiveWorker(body));
@@ -62,6 +65,7 @@ const ActiveWorkers = () => {
       const body = {
         page: state,
         limit: 10,
+        jobId
       };
       dispatch(getAllActiveWorker(body));
     }
@@ -78,6 +82,7 @@ const ActiveWorkers = () => {
     const body = {
       page: state,
       limit: 10,
+      jobId
     };
     dispatch(getAllActiveWorker(body));
   }, [updateUser_Data]);
@@ -124,7 +129,8 @@ const ActiveWorkers = () => {
           boxShadow: "0.5px 3px 10px rgba(119, 119, 119, 0.1)",
           borderRadius: "5px",
           minHeight: "70vh",
-          m: 2,
+          my: 2,
+          mx: screen ? 0 : 2
         }}
       >
         <Stack
@@ -140,7 +146,7 @@ const ActiveWorkers = () => {
 
         <TableContainer component={Paper}>
           <Table className={classes.table} sx={{ minWidth: 700 }} aria-label="customized table">
-            <ActiveWorkerTableHeading />
+            {screen ? <ActiveWorkerJobTableHeading /> : <ActiveWorkerTableHeading />}
             <TableBody>
               {/* <Divider sx={{ mt: 0.5 }} /> */}
               {getAllActiveWorker_isLoading || updateUser_isLoading ? (
@@ -154,22 +160,42 @@ const ActiveWorkers = () => {
               ) : (
                 workerData?.map((item, itemIndex) => (
                   // <Box key={itemIndex}>
-                  <ActiveWorkerTableItem
-                    id={
-                      (getAllActiveWorker_Data?.currentPage - 1) * 10 +
-                      itemIndex +
-                      1
-                    }
-                    dbId={item?._id}
-                    address={item?.address?.formattedAddress}
-                    jobid={item?.jobid}
-                    name={item?.firstName}
-                    phone={item?.phoneNumber}
-                    totalHours={item?.totalHours}
-                    img={item?.profile_pic}
-                    checked={item?.isActive}
-                    categories={item?.categories}
-                  />
+                  screen ?
+                    <ActiveWorkerJobTableItem
+                      id={
+                        (getAllActiveWorker_Data?.currentPage - 1) * 10 +
+                        itemIndex +
+                        1
+                      }
+                      dbId={item?._id}
+                      address={item?.address?.formattedAddress}
+                      jobid={item?.jobid}
+                      email={item ?.email}
+                      name={item?.firstName}
+                      phone={item?.phoneNumber}
+                      totalHours={item?.totalHours}
+                      img={item?.profile_pic}
+                      checked={item?.isActive}
+                      categories={item?.categories}
+                      handleReassignClick={handleReassignClick}
+                    />
+                    :
+                    <ActiveWorkerTableItem
+                      id={
+                        (getAllActiveWorker_Data?.currentPage - 1) * 10 +
+                        itemIndex +
+                        1
+                      }
+                      dbId={item?._id}
+                      address={item?.address?.formattedAddress}
+                      jobid={item?.jobid}
+                      name={item?.firstName}
+                      phone={item?.phoneNumber}
+                      totalHours={item?.totalHours}
+                      img={item?.profile_pic}
+                      checked={item?.isActive}
+                      categories={item?.categories}
+                    />
                   // <Divider sx={{ mt: 0.5 }} />
                   // </Box>
                 ))

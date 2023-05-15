@@ -31,6 +31,7 @@ import { PATH, THEME } from "../utils/constants";
 import SmsIcon from "@mui/icons-material/Sms";
 import moment from "moment";
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
+import ActiveWorkers from "./ActiveWorkers";
 const ShowingData = ({ title, text }) => {
   return (
     <>
@@ -637,6 +638,10 @@ const BookingDetail = () => {
             ))
           )}
         </Box>
+      )}
+      {jobDetail_Data?.data?.length > 0 && (
+      <ActiveWorkers screen="booking_detail" jobId={jobDetail_Data?.data[0]?._id} 
+      handleReassignClick={handleReassignClick} />
       )}
     </>
   );

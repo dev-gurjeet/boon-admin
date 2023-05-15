@@ -18,7 +18,7 @@ export const getAllActiveWorker = createAsyncThunk(
   async (body) => {
     try {
       const { data } = await axiosInstance.get(
-        `/admin/getAllActiveWorkers?page=${body.page}&limit=${body.limit}`
+        `/admin/getAllActiveWorkers?page=${body.page}&limit=${body.limit}${body.jobId ? '&jobId=' + body.jobId : ""}`
       );
       return { data };
     } catch (error) {

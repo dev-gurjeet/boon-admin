@@ -183,7 +183,7 @@ const BookingTableItem = ({
               fontWeight: 400,
             }}
           >
-            Cancelled
+            Not Approved
           </Typography>
         )}
         {status === "REJECTED" && (
@@ -234,7 +234,7 @@ const BookingTableItem = ({
             >
               <MenuItem value={"Reject"}>Reject</MenuItem>
               <MenuItem value={"Modify"}>Modify</MenuItem>
-              <MenuItem value={"Cancel"}>Cancel</MenuItem>
+              {/* <MenuItem value={"Cancel"}>Cancel</MenuItem> */}
             </Select>
           </FormControl>)
         }
